@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dte87ivcbe5y7"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_fjuqp"]
+[ext_resource type="Material" uid="uid://c7tqnor3stnx1" path="res://Materials/bullet_material.tres" id="2_d1704"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5dl0n"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ogn0w"]
+radius = 0.137396
+
+[node name="Bullet" type="RigidBody3D"]
+mass = 0.1
+script = ExtResource("1_fjuqp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = ExtResource("2_d1704")
+mesh = SubResource("SphereMesh_5dl0n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ogn0w")

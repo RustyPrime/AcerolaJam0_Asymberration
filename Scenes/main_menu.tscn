@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://tcaf37rxrs7o"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 126.0
+offset_right = 161.0
+offset_bottom = 152.0
+text = "HOST"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 167.0
+offset_right = 161.0
+offset_bottom = 198.0
+text = "JOIN"
+
+[node name="Offline" type="Button" parent="."]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 205.0
+offset_right = 170.0
+offset_bottom = 236.0
+text = "OFFLINE"
