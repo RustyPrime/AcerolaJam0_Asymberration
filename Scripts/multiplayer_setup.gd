@@ -1,35 +1,74 @@
-extends Node3D
+extends Control
 
-var peer = ENetMultiplayerPeer.new()
+var peer : ENetMultiplayerPeer
 
-@export var player1_scene : PackedScene
-@export var player2_scene : PackedScene
 
+var address = "localhost"
+var port = 8910
+var compression : ENetConnection.CompressionMode = ENetConnection.COMPRESS_RANGE_CODER
+
+func _ready():
+	multiplayer.peer_connected.connect(peer_connected)
+	multiplayer.peer_disconnected.connect(peer_disconnected)
+	multiplayer.connected_to_server.connect(connected_to_server)
+	multiplayer.connection_failed.connect(connection_failed)
 
 func _on_host_pressed():
-	peer.create_server(135)
+	peer = ENetMultiplayerPeer.new()
+	var error = peer.create_server(port)
+	if error != OK:
+		print("Cannot Host: " + error)
+		return
+
+	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
-	multiplayer.peer_connected.connect(_spawn_remote_player)
-	spawn_player()
+	print("Waiting for players!")
+	SendPlayerInformation($Username.text, multiplayer.get_unique_id(), true)
+
 
 func _on_join_pressed():
-	peer.create_client("localhost", 135)
+	peer = ENetMultiplayerPeer.new()
+	peer.create_client(address, port)
+	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
-	
 
+func _on_start_pressed():
+	StartGame.rpc()
+	
 
 func _on_offline_pressed():
 	pass # Replace with function body.
 
+@rpc("any_peer", "call_local")
+func StartGame():
+	var gameScene = load("res://Scenes/level.tscn").instantiate()
+	get_tree().root.add_child(gameScene)
+	self.hide()
+
+@rpc("any_peer")
+func SendPlayerInformation(player_name, id, is_fps):
+	if !GameManager.Players.has(id):
+		GameManager.Players[id] = {
+			"name" : player_name,
+			"is_fps" : is_fps
+			# todo: add score?
+		}
+	if multiplayer.is_server():
+		for identifier in GameManager.Players:
+			SendPlayerInformation.rpc(GameManager.Players[identifier].name, identifier, GameManager.Players[identifier].is_fps)
 
 
-func spawn_player(id = 1):
-	var player1 = player1_scene.instantiate()
-	player1.name = "player" + str(id)
-	get_parent().add_child(player1)
 
 
-func _spawn_remote_player(id):
-	var player2 = player2_scene.instantiate()
-	player2.name = "player" + str(id)
-	get_parent().add_child(player2)
+func peer_connected(id):
+	print("player connected" + str(id))
+
+func peer_disconnected(id):
+	print("player disconnected" + str(id))
+
+func connected_to_server():
+	print("connected to server")
+	SendPlayerInformation.rpc_id(1, $Username.text, multiplayer.get_unique_id(), false)
+
+func connection_failed():
+	print("connection failed")

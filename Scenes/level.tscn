@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cqupai8j3ftri"]
 
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="1_3uona"]
-[ext_resource type="Script" path="res://Scripts/multiplayer_setup.gd" id="2_ckh85"]
-[ext_resource type="PackedScene" uid="uid://tcaf37rxrs7o" path="res://Scenes/main_menu.tscn" id="3_akyd3"]
+[ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_eka7w"]
+[ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="3_uib1h"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o4il2"]
 
@@ -17,6 +17,9 @@ background_mode = 1
 background_color = Color(1, 1, 1, 1)
 
 [node name="Level" type="Node3D"]
+script = ExtResource("1_eka7w")
+player1_scene = ExtResource("1_3uona")
+player2_scene = ExtResource("3_uib1h")
 
 [node name="World" type="Node3D" parent="."]
 
@@ -91,18 +94,9 @@ environment = SubResource("Environment_b8vhw")
 transform = Transform3D(0.100778, 0.782521, -0.614414, 0, 0.617558, 0.786526, 0.994909, -0.0792648, 0.0622365, -19.7503, 7.62638, 5.56625)
 
 [node name="Multiplayer" type="Node3D" parent="."]
-script = ExtResource("2_ckh85")
-player1_scene = ExtResource("1_3uona")
-player2_scene = ExtResource("1_3uona")
 
-[node name="MainMenu" parent="Multiplayer" instance=ExtResource("3_akyd3")]
+[node name="SpawnPoint1" type="Node3D" parent="Multiplayer"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.5088, 3.49174, 0)
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Multiplayer"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Subscenes/player_1.tscn")
-spawn_path = NodePath("..")
-
-[connection signal="pressed" from="Multiplayer/MainMenu/Host" to="Multiplayer" method="_on_host_pressed"]
-[connection signal="pressed" from="Multiplayer/MainMenu/Join" to="Multiplayer" method="_on_join_pressed"]
-[connection signal="pressed" from="Multiplayer/MainMenu/Offline" to="Multiplayer" method="_on_offline_pressed"]
-
-[editable path="Multiplayer/MainMenu"]
+[node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 0.400461, -0.916314, 0, 0.916314, 0.400461, 0, 24.43, -13.126)

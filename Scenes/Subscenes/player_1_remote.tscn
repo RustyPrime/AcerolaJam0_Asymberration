@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cx4n3fgv54r1a"]
+
+[ext_resource type="Script" path="res://Scripts/Player1.gd" id="1_rdjtu"]
+[ext_resource type="Material" uid="uid://b3aluapbncj1v" path="res://Materials/player1_material.tres" id="2_sjo4x"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pxubv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nwete"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uj8jy"]
+
+[node name="Player1" type="CharacterBody3D"]
+top_level = true
+script = ExtResource("1_rdjtu")
+BULLET_SPEED = 300.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997871, 0)
+mesh = SubResource("CapsuleMesh_pxubv")
+surface_material_override/0 = ExtResource("2_sjo4x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997871, 0)
+shape = SubResource("CapsuleShape3D_nwete")
+
+[node name="Shotgun" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.131105, 0, 0.125299, 0, 0.194929, 0, -0.0165578, 0, 0.992119, 0.429216, 1.10194, -1.02108)
+material_override = ExtResource("2_sjo4x")
+mesh = SubResource("BoxMesh_uj8jy")
+
+[node name="Barrel" type="Node3D" parent="."]
+transform = Transform3D(-0.987705, 0, -0.156331, 0, 1, 0, 0.156331, 0, -0.987705, 0.355443, 1.12474, -1.61139)

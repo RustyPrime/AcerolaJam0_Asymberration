@@ -14,6 +14,10 @@ config/name="Acerola Game Jam 0 Abberation"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://Scripts/GameManager.gd"
+
 [input]
 
 forward={
