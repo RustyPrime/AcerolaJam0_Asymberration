@@ -1,0 +1,97 @@
+name: "Godot 4.2.1 CI/CD"
+
+env:
+  GODOT_VERSION: 4.2.1
+  REPO_NAME: ${{ github.event.repository.name }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  windows:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    container:
+      image: barichello/godot-ci:4.2.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Move export templates into position
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Create staging directory
+        run: mkdir -v -p build/windows
+
+      - name: Build for windows
+        run: godot -v --export-release --headless "Windows Desktop" --path . --output "build/windows/${REPO_NAME}.exe"
+
+      - name: Zip Windows artifacts
+        run: zip -r game_windows.zip build/windows
+
+      - name: Upload windows artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: game_windows
+          path: game_windows.zip
+  release:
+    needs: [windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.15
+        with:
+          versionSpec: '5.x'
+
+      - name: Execute GitVersion
+        uses: gittools/actions/gitversion/execute@v0.9.15
+        with:
+          useConfigFile: true
+          configFilePath: GitVersion.yml
+
+      - name: Get branch name
+        id: get_branch
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+
+      - name: Download Windows artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: game_windows
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{env.GitVersion_MajorMinorPatch}}
+          release_name: ${{env.GitVersion_MajorMinorPatch}}
+          body: |
+            Release notes for ${{env.GitVersion_MajorMinorPatch}}
+          draft: false
+          prerelease: true
+
+      - name: Upload Windows Release Asset
+        id: upload-windows-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: game_windows.zip
+          asset_name: ${{env.REPO_NAME}}_${{env.GitVersion_MajorMinorPatch}}.zip
+          asset_content_type: application/zip
