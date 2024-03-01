@@ -13,10 +13,13 @@ func _ready():
 		if id == multiplayer.get_unique_id():
 			if GameManager.Players[id].is_fps == true:
 				spawn_player("player1", player1_scene, player1_spawnPoint)
+				#$WorldEnvironment/WorldEnvironment/DirectionalLight3D.
 			else:
 				spawn_player("player2", player2_scene, player2_spawnPoint)
 				# spawn remote player 1
 				spawn_player("player1", player1_remote_scene, player1_spawnPoint)
+				# make ceiling invisible
+				$World/Ceiling.queue_free()
 
 
 func spawn_player(player_name, player_scene, player_spawn):
@@ -26,3 +29,8 @@ func spawn_player(player_name, player_scene, player_spawn):
 	player.global_position = player_spawn.global_position
 	
 	
+@rpc("any_peer", "call_local")
+func spawn_unit(unit_path, unit_position):
+	var spawned_unit = load(unit_path).instantiate()
+	add_child(spawned_unit)
+	spawned_unit.global_position = unit_position

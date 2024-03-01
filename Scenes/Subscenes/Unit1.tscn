@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk0y6w3ru8xui"]
+
+[ext_resource type="Script" path="res://Scripts/Unit.gd" id="1_bixe1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8kgt7"]
+
+[node name="Unit1" type="RigidBody3D"]
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
+script = ExtResource("1_bixe1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
+shape = SubResource("CapsuleShape3D_7kgye")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
+mesh = SubResource("CapsuleMesh_8kgt7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

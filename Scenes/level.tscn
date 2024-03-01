@@ -36,7 +36,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_4g7w5")
 
 [node name="Ceiling" type="MeshInstance3D" parent="World"]
-transform = Transform3D(29.792, 0, 0, 0, 0.207, 0, 0, 0, 15, -0.177695, 2.22513, -16.0445)
+transform = Transform3D(29.792, 0, 0, 0, 0.207, 0, 0, 0, 15, -0.177695, 2.77794, 0.0857582)
 mesh = SubResource("BoxMesh_o4il2")
 skeleton = NodePath("../..")
 
@@ -90,9 +90,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.96608, 1.44264, 0.00486422
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_b8vhw")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(0.100778, 0.782521, -0.614414, 0, 0.617558, 0.786526, 0.994909, -0.0792648, 0.0622365, -19.7503, 7.62638, 5.56625)
 
 [node name="Multiplayer" type="Node3D" parent="."]
 

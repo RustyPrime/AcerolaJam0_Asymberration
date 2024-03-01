@@ -7,8 +7,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nwete"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_uj8jy"]
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_14xoj"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -16,6 +14,8 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_46vpf"]
 
 [node name="Player1" type="CharacterBody3D"]
 top_level = true
@@ -30,13 +30,23 @@ surface_material_override/0 = ExtResource("2_sjo4x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997871, 0)
 shape = SubResource("CapsuleShape3D_nwete")
 
-[node name="Shotgun" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.131105, 0, 0.125299, 0, 0.194929, 0, -0.0165578, 0, 0.992119, 0.429216, 1.10194, -1.02108)
-material_override = ExtResource("2_sjo4x")
-mesh = SubResource("BoxMesh_uj8jy")
-
-[node name="Barrel" type="Node3D" parent="."]
-transform = Transform3D(-0.987705, 0, -0.156331, 0, 1, 0, 0.156331, 0, -0.987705, 0.355443, 1.12474, -1.61139)
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_14xoj")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70855, 0)
+
+[node name="Shotgun" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(0.131105, 0, 0.125299, 0, 0.194929, 0, -0.0165578, 0, 0.992119, 0.429216, -0.527787, -1.02108)
+material_override = ExtResource("2_sjo4x")
+mesh = SubResource("BoxMesh_46vpf")
+skeleton = NodePath("")
+
+[node name="Muzzle" type="Node3D" parent="Head/Shotgun"]
+transform = Transform3D(-7.56314, 0, -0.245321, 0, 5.13007, 0, 0.0931199, 0, -0.997539, 0.00585461, 0.116965, -0.594902)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head/Shotgun/Muzzle"]
+transform = Transform3D(-0.998176, 0, 0.0603692, 0, 1, 0, -0.0603692, 0, -0.998176, 0, 0, 0)
+shadow_enabled = true
+spot_range = 26.1329
+spot_angle = 13.642

@@ -9,7 +9,11 @@
 radius = 0.137396
 
 [node name="Bullet" type="RigidBody3D"]
+input_ray_pickable = false
 mass = 0.1
+continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_fjuqp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -19,3 +23,10 @@ mesh = SubResource("SphereMesh_5dl0n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_ogn0w")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
