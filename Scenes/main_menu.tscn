@@ -36,6 +36,7 @@ offset_bottom = 236.0
 text = "START"
 
 [node name="Offline" type="Button" parent="."]
+layout_mode = 0
 offset_left = 98.0
 offset_top = 245.0
 offset_right = 171.0

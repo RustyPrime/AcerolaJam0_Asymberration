@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqupai8j3ftri"]
+[gd_scene load_steps=10 format=3 uid="uid://cqupai8j3ftri"]
 
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="1_3uona"]
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_eka7w"]
+[ext_resource type="PackedScene" uid="uid://c5c08p1yp1ah" path="res://Scenes/Subscenes/player_1_remote.tscn" id="3_oiu4u"]
 [ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="3_uib1h"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o4il2"]
@@ -19,6 +20,7 @@ background_color = Color(1, 1, 1, 1)
 [node name="Level" type="Node3D"]
 script = ExtResource("1_eka7w")
 player1_scene = ExtResource("1_3uona")
+player1_remote_scene = ExtResource("3_oiu4u")
 player2_scene = ExtResource("3_uib1h")
 
 [node name="World" type="Node3D" parent="."]
@@ -34,8 +36,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_4g7w5")
 
 [node name="Ceiling" type="MeshInstance3D" parent="World"]
-transform = Transform3D(29.792, 0, 0, 0, 0.207, 0, 0, 0, 15, -0.177695, 3.52714, 0)
-visible = false
+transform = Transform3D(29.792, 0, 0, 0, 0.207, 0, 0, 0, 15, -0.177695, 2.22513, -16.0445)
 mesh = SubResource("BoxMesh_o4il2")
 skeleton = NodePath("../..")
 
@@ -96,7 +97,9 @@ transform = Transform3D(0.100778, 0.782521, -0.614414, 0, 0.617558, 0.786526, 0.
 [node name="Multiplayer" type="Node3D" parent="."]
 
 [node name="SpawnPoint1" type="Node3D" parent="Multiplayer"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.5088, 3.49174, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.5088, 1.17551, 0)
+
+[node name="Marker3D" type="Marker3D" parent="Multiplayer/SpawnPoint1"]
 
 [node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
 transform = Transform3D(1, 0, 0, 0, 0.400461, -0.916314, 0, 0.916314, 0.400461, 0, 24.43, -13.126)

@@ -6,21 +6,21 @@ const JUMP_VELOCITY = 4.5
 
 @export var BULLET_SPEED = 150.0
 
-
-	
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var bullet : PackedScene = load("res://Scenes/Subscenes/bullet.tscn")
-
 @onready var barrel = $Barrel
 
 func _process(_delta):
+	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
+		return
 	if Input.is_action_just_pressed("shoot"):
-		shoot()	
+		shoot.rpc()	
 
 func _physics_process(delta):
+	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -40,7 +40,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-
+@rpc("any_peer", "call_local")
 func shoot():
 	var spawned_bullet = bullet.instantiate()
 	var spawned_bullet2 = bullet.instantiate()
