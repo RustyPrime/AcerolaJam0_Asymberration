@@ -1,14 +1,21 @@
 extends Node2D
 
+
+signal try_spawn_unit(unit_path, unit_value, unit_position)
+
+@onready var level = get_node("/root/Level")
+
+
 static var isDragging = false
 var isBeingHovered = false
 var isBeingDragged = false
 var spaceState : PhysicsDirectSpaceState3D
 var originalPosition : Vector2
 var mousePosition
-@onready var level = get_node("/root/Level")
 
 @export var unit : PackedScene
+@export var powerRequirement : float = 10.0
+
 
 func _ready():
 	originalPosition = global_position
@@ -18,18 +25,18 @@ func _physics_process(_delta):
 		spaceState = level.get_world_3d().direct_space_state
 
 	if isBeingHovered:
-		
 		if Input.is_action_pressed("shoot"):
 			global_position = mousePosition
 			isDragging = true
 		elif Input.is_action_just_released("shoot"):
-			isDragging = false
 			print(mousePosition)
 			var screenPointIn3d = ScreenPointToRay()
 			if screenPointIn3d != null:
-				level.spawn_unit.rpc(unit.resource_path, screenPointIn3d)
-			
-			global_position = originalPosition
+				try_spawn_unit.emit(unit.resource_path, powerRequirement, screenPointIn3d)
+			resetDraggable()
+
+	else:
+		resetDraggable()
 
 
 func _input(event):
@@ -47,6 +54,9 @@ func _on_area_2d_mouse_exited():
 	scale = Vector2.ONE
 	isBeingHovered = false
 
+func resetDraggable():
+	isDragging = false
+	global_position = originalPosition
 
 func ScreenPointToRay():
 	var camera = get_tree().root.get_camera_3d()

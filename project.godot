@@ -71,3 +71,5 @@ mouse_capture_exit={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=3
+lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=3

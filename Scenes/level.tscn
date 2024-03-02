@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqupai8j3ftri"]
+[gd_scene load_steps=12 format=3 uid="uid://cqupai8j3ftri"]
 
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="1_3uona"]
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_eka7w"]
 [ext_resource type="PackedScene" uid="uid://c5c08p1yp1ah" path="res://Scenes/Subscenes/player_1_remote.tscn" id="3_oiu4u"]
 [ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="3_uib1h"]
+[ext_resource type="Script" path="res://Scripts/DeathZone.gd" id="5_gq70d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o4il2"]
 
@@ -15,7 +16,10 @@
 
 [sub_resource type="Environment" id="Environment_b8vhw"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
+background_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3qm4j"]
+size = Vector3(91.4402, 2.24133, 74.8353)
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_eka7w")
@@ -86,7 +90,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_4g7w5")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.96608, 1.44264, 0.00486422)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4064, 1.44264, 0.00486422)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_b8vhw")
@@ -100,3 +104,13 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.508
 
 [node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
 transform = Transform3D(1, 0, 0, 0, 0.400461, -0.916314, 0, 0.916314, 0.400461, 0, 24.43, -13.126)
+
+[node name="DeathZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.65203, 0)
+script = ExtResource("5_gq70d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529419, 0.620667, -14.3637)
+shape = SubResource("BoxShape3D_3qm4j")
+
+[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]

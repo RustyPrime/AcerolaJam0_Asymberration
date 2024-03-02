@@ -17,10 +17,13 @@ var camera
 var mouse_input : Vector2
 var rotation_target: Vector3
 var isMouseCaptured = true
+@onready var rng = RandomNumberGenerator.new()
 
 func _ready():
 	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
+
+	rng.randomize()
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -29,7 +32,21 @@ func _process(_delta):
 		return
 	mouse_input = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("shoot"):
-		shoot.rpc()	
+		
+		var spreadData : Dictionary = {	}
+		var index = 0
+		for shots in rng.randi_range(5, 10):
+			spreadData[index] = {"angle" : rng.randf_range(0, 360), "spread": randomSpread()}
+			index += 1
+
+		shoot.rpc(JSON.stringify(spreadData))	
+
+func randomSpread():
+	var randomSpreadRange = rng.randf_range(0, 0.3)
+	if (randomSpreadRange > 0.2):
+		if rng.randf() < 0.9:
+			randomSpreadRange = rng.randf_range(0, 0.1)
+	return randomSpreadRange
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
@@ -79,25 +96,16 @@ func handle_mouse_capture():
 		isMouseCaptured = false
 
 @rpc("any_peer", "call_local")
-func shoot():
-	var spawned_bullet = bullet.instantiate()
-	var spawned_bullet2 = bullet.instantiate()
-	var spawned_bullet3 = bullet.instantiate()
-	var spawned_bullet4 = bullet.instantiate()
-	var spawned_bullet5 = bullet.instantiate()
-	get_parent().add_child(spawned_bullet)
-	get_parent().add_child(spawned_bullet2)
-	get_parent().add_child(spawned_bullet3)
-	get_parent().add_child(spawned_bullet4)
-	get_parent().add_child(spawned_bullet5)
-	spawned_bullet.global_position = muzzle.global_position
-	spawned_bullet2.global_position = muzzle.global_position
-	spawned_bullet3.global_position = muzzle.global_position
-	spawned_bullet4.global_position = muzzle.global_position
-	spawned_bullet5.global_position = muzzle.global_position
-	#spawned_bullet.global_rotation = muzzle.global_rotation
-	spawned_bullet.apply_force(muzzle.get_global_transform().basis.z * BULLET_SPEED)
-	spawned_bullet2.apply_force(muzzle.get_global_transform().basis.z * BULLET_SPEED)
-	spawned_bullet3.apply_force(muzzle.get_global_transform().basis.z * BULLET_SPEED)
-	spawned_bullet4.apply_force(muzzle.get_global_transform().basis.z * BULLET_SPEED)
-	spawned_bullet5.apply_force(muzzle.get_global_transform().basis.z * BULLET_SPEED)
+func shoot(spread_data):
+	var spreadData = JSON.parse_string(spread_data)
+	for index in spreadData.size():
+		var data = spreadData[str(index)]
+
+		var spawned_bullet = bullet.instantiate()
+		get_parent().add_child(spawned_bullet)
+		spawned_bullet.global_position = muzzle.global_position
+		var angle = Vector3.FORWARD.rotated(Vector3.RIGHT, data["angle"])
+		print(angle)
+		var direction = muzzle.get_global_transform().basis.z + (angle * data["spread"])
+		spawned_bullet.apply_force(direction * BULLET_SPEED)
+	
