@@ -5,8 +5,8 @@ extends Node3D
 @export var player1_remote_scene : PackedScene
 @export var player2_scene : PackedScene
 
-@onready var player1_spawnPoint = $Multiplayer/SpawnPoint1
-@onready var player2_spawnPoint = $Multiplayer/SpawnPoint2
+@export var player1_spawnPoint : Node3D
+@export var player2_spawnPoint : Node3D
 
 func _ready():
 	for id in GameManager.Players:
@@ -22,7 +22,7 @@ func _ready():
 				$World/Ceiling.queue_free()
 
 
-func spawn_player(player_name, player_scene, player_spawn):
+func spawn_player(player_name, player_scene, player_spawn : Node3D):
 	var player = player_scene.instantiate()
 	player.name = player_name
 	add_child(player)
