@@ -25,7 +25,6 @@ height = 0.1
 radius = 15.0
 
 [node name="Player1" type="CharacterBody3D"]
-top_level = true
 script = ExtResource("1_rdjtu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
