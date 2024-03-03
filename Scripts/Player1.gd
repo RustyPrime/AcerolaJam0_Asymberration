@@ -20,6 +20,7 @@ var isMouseCaptured = true
 @onready var rng = RandomNumberGenerator.new()
 @onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
 var safeZoneRadius : float
+var shotID = 0
 
 func _ready():
 	safeZoneRadius = safeZone.shape.radius
@@ -45,14 +46,16 @@ func _process(_delta):
 		return
 	mouse_input = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("shoot"):
-		
 		var spreadData : Dictionary = {	}
 		var index = 0
-		for shots in rng.randi_range(5, 10):
+		var shotCount = rng.randi_range(5, 10)
+		for shots in shotCount:
 			spreadData[index] = {"angle" : rng.randf_range(0, 360), "spread": randomSpread()}
 			index += 1
-
+		spreadData["shotID"] = shotID
+		spreadData["shotCount"] = shotCount
 		shoot.rpc(JSON.stringify(spreadData))	
+		shotID += 1
 
 func randomSpread():
 	var randomSpreadRange = rng.randf_range(0, 0.3)
@@ -111,13 +114,15 @@ func handle_mouse_capture():
 @rpc("any_peer", "call_local")
 func shoot(spread_data):
 	var spreadData = JSON.parse_string(spread_data)
-	for index in spreadData.size():
+	for index in spreadData["shotCount"]:
 		var data = spreadData[str(index)]
 
 		var spawned_bullet = bullet.instantiate()
+		spawned_bullet.name = "shot_" + str(spreadData["shotID"]) + "_" + str(index)
 		get_parent().add_child(spawned_bullet)
 		spawned_bullet.global_position = muzzle.global_position
 		var angle = Vector3.FORWARD.rotated(Vector3.RIGHT, data["angle"])
 		var direction = muzzle.get_global_transform().basis.z + (angle * data["spread"])
 		spawned_bullet.apply_force(direction * BULLET_SPEED)
 	
+
