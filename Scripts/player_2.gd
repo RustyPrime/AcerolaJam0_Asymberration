@@ -15,10 +15,12 @@ func _process(delta):
 	slider.value = slider.value + (rechargeSpeed * delta)
 
 
-func _try_spawn_unit(unit_path, unit_value, unit_position):
-	if slider.value < unit_value: 
+func _try_spawn_unit(unitData):
+	if slider.value < unitData.power: 
 		return
-	slider.value -= unit_value
+	slider.value -= unitData.power
 	if slider.value < 0:
 		slider.value = 0
-	level.spawn_unit.rpc(unit_path, unit_position)
+	var unit_name = "unit_" + str(get_tree().get_nodes_in_group("unit").size() + 1)
+	unitData.name = unit_name
+	level.spawn_unit.rpc(unitData.ToJson())

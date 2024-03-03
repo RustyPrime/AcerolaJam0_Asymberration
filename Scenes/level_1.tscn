@@ -1,8 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=28 format=3 uid="uid://cdvveg0cf4cjl"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_xg1sp"]
+[ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_1yba8"]
+[ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="2_qdp4c"]
 [ext_resource type="Script" path="res://Scripts/DeathZone.gd" id="3_6307p"]
+[ext_resource type="PackedScene" uid="uid://c5c08p1yp1ah" path="res://Scenes/Subscenes/player_1_remote.tscn" id="3_fbsae"]
+[ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="4_ax3pg"]
 
 [sub_resource type="Resource" id="Resource_00h46"]
 script = ExtResource("2_1yba8")
@@ -463,7 +467,13 @@ face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_131qf"]
 size = Vector3(123.241, 2.24133, 131.497)
 
-[node name="Level1" type="Node3D"]
+[node name="Level" type="Node3D" node_paths=PackedStringArray("player1_spawnPoint", "player2_spawnPoint")]
+script = ExtResource("1_y2gin")
+player1_scene = ExtResource("2_qdp4c")
+player1_remote_scene = ExtResource("3_fbsae")
+player2_scene = ExtResource("4_ax3pg")
+player1_spawnPoint = NodePath("Multiplayer/SpawnPoint1")
+player2_spawnPoint = NodePath("Multiplayer/SpawnPoint2")
 
 [node name="World" type="Node3D" parent="."]
 
@@ -474,6 +484,7 @@ block_data = SubResource("Resource_00h46")
 
 [node name="Ceiling" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 6, -26)
+visible = false
 script = ExtResource("1_xg1sp")
 block_data = SubResource("Resource_kk63r")
 
@@ -570,6 +581,9 @@ script = ExtResource("1_xg1sp")
 
 [node name="SpawnPoint1" type="Node3D" parent="Multiplayer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.63781, 1.04509, 16.8847)
+
+[node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 0.400461, -0.916314, 0, 0.916314, 0.400461, -6.40579, 44.5043, -24.0904)
 
 [node name="DeathZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.65203, 0)

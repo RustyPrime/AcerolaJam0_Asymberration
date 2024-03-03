@@ -16,9 +16,11 @@ var mousePosition
 @export var unit : PackedScene
 @export var powerRequirement : float = 10.0
 
+var unitData : UnitData
 
 func _ready():
 	originalPosition = global_position
+	unitData = UnitData.new("", powerRequirement, unit.resource_path)
 
 func _physics_process(_delta):
 	if spaceState == null:
@@ -32,7 +34,8 @@ func _physics_process(_delta):
 			print(mousePosition)
 			var screenPointIn3d = ScreenPointToRay()
 			if screenPointIn3d != null:
-				try_spawn_unit.emit(unit.resource_path, powerRequirement, screenPointIn3d)
+				unitData.spawn_position = screenPointIn3d
+				try_spawn_unit.emit(unitData)
 			resetDraggable()
 
 	else:

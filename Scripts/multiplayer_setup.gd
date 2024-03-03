@@ -41,21 +41,21 @@ func _on_offline_pressed():
 
 @rpc("any_peer", "call_local")
 func StartGame():
-	var gameScene = load("res://Scenes/level.tscn").instantiate()
+	var gameScene = load("res://Scenes/level_1.tscn").instantiate()
 	get_tree().root.add_child(gameScene)
 	self.hide()
 
 @rpc("any_peer")
-func SendPlayerInformation(player_name, id, is_fps):
+func SendPlayerInformation(player_name, id, isGroundPlayer):
 	if !GameManager.Players.has(id):
 		GameManager.Players[id] = {
 			"name" : player_name,
-			"is_fps" : is_fps
+			"isGroundPlayer" : isGroundPlayer
 			# todo: add score?
 		}
 	if multiplayer.is_server():
 		for identifier in GameManager.Players:
-			SendPlayerInformation.rpc(GameManager.Players[identifier].name, identifier, GameManager.Players[identifier].is_fps)
+			SendPlayerInformation.rpc(GameManager.Players[identifier].name, identifier, GameManager.Players[identifier].isGroundPlayer)
 
 
 
