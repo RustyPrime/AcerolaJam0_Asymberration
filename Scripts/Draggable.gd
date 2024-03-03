@@ -31,15 +31,22 @@ func _physics_process(_delta):
 			global_position = mousePosition
 			isDragging = true
 		elif Input.is_action_just_released("shoot"):
-			print(mousePosition)
-			var screenPointIn3d = ScreenPointToRay()
-			if screenPointIn3d != null:
-				unitData.spawn_position = screenPointIn3d
+			var rayHitData = ScreenPointToRay()
+			if isValidSpawn(rayHitData):
+				unitData.spawn_position = rayHitData["position"]
 				try_spawn_unit.emit(unitData)
+			
+				
 			resetDraggable()
 
 	else:
 		resetDraggable()
+
+func isValidSpawn(rayHitData):
+	if rayHitData == null:
+		return false
+	return true
+	
 
 
 func _input(event):
@@ -71,7 +78,7 @@ func ScreenPointToRay():
 	rayQuery.exclude = [self]
 	rayQuery.collide_with_bodies = true
 
-	var rayArray = spaceState.intersect_ray(rayQuery)
-	if rayArray.has("position"):
-		return rayArray["position"]
+	var rayHit = spaceState.intersect_ray(rayQuery)
+	if rayHit.has("position"):
+		return rayHit
 	return null

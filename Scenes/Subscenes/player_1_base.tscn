@@ -21,8 +21,8 @@ properties/2/replication_mode = 1
 [sub_resource type="BoxMesh" id="BoxMesh_46vpf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wts2o"]
-height = 0.002
-radius = 19.4442
+height = 0.1
+radius = 15.0
 
 [node name="Player1" type="CharacterBody3D"]
 top_level = true
@@ -62,6 +62,10 @@ spot_angle = 13.642
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21663, 0)
 
 [node name="Area3D" type="Area3D" parent="SafeZone"]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeZone/Area3D"]
 shape = SubResource("CylinderShape3D_wts2o")

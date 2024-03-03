@@ -13,6 +13,5 @@ func SetAuthoritiy(id = 1):
 	multiplayerSynchronizer.set_multiplayer_authority(id)
 
 func _on_body_entered(body:Node):
-	print("body entered unit")
 	if body is Bullet:
 		queue_free()

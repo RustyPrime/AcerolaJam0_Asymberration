@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=29 format=3 uid="uid://cdvveg0cf4cjl"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_xg1sp"]
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
@@ -464,6 +464,10 @@ face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
+[sub_resource type="Environment" id="Environment_it6eh"]
+background_mode = 1
+background_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_131qf"]
 size = Vector3(123.241, 2.24133, 131.497)
 
@@ -577,10 +581,13 @@ block_data = SubResource("Resource_5y4oe")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 1, -26)
 script = ExtResource("1_xg1sp")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_it6eh")
+
 [node name="Multiplayer" type="Node3D" parent="."]
 
 [node name="SpawnPoint1" type="Node3D" parent="Multiplayer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.63781, 1.04509, 16.8847)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.90281, 1.21569, 17.0622)
 
 [node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
 transform = Transform3D(1, 0, 0, 0, 0.400461, -0.916314, 0, 0.916314, 0.400461, -6.40579, 44.5043, -24.0904)

@@ -9,8 +9,6 @@ func _on_body_entered(body:Node):
 	
 
 	if body != owner and !body is Player1 and !body is Bullet:
-		print("body entered bullet" + body.name)
-
 		queue_free()
 
 

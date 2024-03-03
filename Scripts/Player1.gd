@@ -18,13 +18,26 @@ var mouse_input : Vector2
 var rotation_target: Vector3
 var isMouseCaptured = true
 @onready var rng = RandomNumberGenerator.new()
+@onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
+var safeZoneRadius : float
 
 func _ready():
+	safeZoneRadius = safeZone.shape.radius
+
 	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
-
+		
 	rng.randomize()
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
+func IntersectsSafeZone(potentialUnitSpawnPosition):
+	var playerPosition = Vector3(global_position.x, 0, global_position.z)
+	potentialUnitSpawnPosition.y = 0
+	var distanceToPlayer = playerPosition.distance_to(potentialUnitSpawnPosition)
+	if abs(distanceToPlayer) < safeZoneRadius:
+		return true
+	return false
 
 
 func _process(_delta):
@@ -105,7 +118,6 @@ func shoot(spread_data):
 		get_parent().add_child(spawned_bullet)
 		spawned_bullet.global_position = muzzle.global_position
 		var angle = Vector3.FORWARD.rotated(Vector3.RIGHT, data["angle"])
-		print(angle)
 		var direction = muzzle.get_global_transform().basis.z + (angle * data["spread"])
 		spawned_bullet.apply_force(direction * BULLET_SPEED)
 	
