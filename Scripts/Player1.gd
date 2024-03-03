@@ -50,17 +50,17 @@ func _process(_delta):
 		var index = 0
 		var shotCount = rng.randi_range(5, 10)
 		for shots in shotCount:
-			spreadData[index] = {"angle" : rng.randf_range(0, 360), "spread": randomSpread()}
+			spreadData[index] = {"angle" : rng.randi_range(0, 360), "spread": randomSpread()}
 			index += 1
 		spreadData["shotID"] = shotID
-		spreadData["shotCount"] = shotCount
+		spreadData["shotCount"] = 1
 		shoot.rpc(JSON.stringify(spreadData))	
 		shotID += 1
 
 func randomSpread():
 	var randomSpreadRange = rng.randf_range(0, 0.3)
 	if (randomSpreadRange > 0.2):
-		if rng.randf() < 0.9:
+		if rng.randi_range(0, 4) < 3:
 			randomSpreadRange = rng.randf_range(0, 0.1)
 	return randomSpreadRange
 

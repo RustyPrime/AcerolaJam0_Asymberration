@@ -2,26 +2,36 @@ extends RigidBody3D
 class_name Bullet
 
 var damage = 2
-@onready var mpSyncher = $MultiplayerSynchronizer
-
+var destroying = false
 func _ready():
-	mpSyncher.set_multiplayer_authority(GameManager.GetGroundPlayerID())
+	self.set_multiplayer_authority(GameManager.GetGroundPlayerID())
 
 func _on_body_entered(body:Node):
-	if mpSyncher.get_multiplayer_authority() != GameManager.GetGroundPlayerID():
+	if self.get_multiplayer_authority() != GameManager.GetGroundPlayerID():
 		return
 
-	if body.owner is Unit:
-		body.owner.DoDamage.rpc(damage)
-
-	if body != owner and !body is Player1 and !body is Bullet:
+	if body is Unit:
+		body.DoDamage.rpc(damage)
 		destroyBullet.rpc()
+	else: 
+		destroyBullet.rpc()
+
+	
 
 
 @rpc("any_peer", "call_local")
 func destroyBullet():
-	print("destroyBullet rpc")
-	queue_free()
+	print(str(multiplayer.get_unique_id()) + ": destroyBullet rpc")
+	print(str(multiplayer.get_unique_id()) + str(self.get_path()))
+	get_parent().call_deferred("remove_child", self)
+	call_deferred("queue_free")
+	destroying = true
 
 func _on_timer_timeout():
+	if self.get_multiplayer_authority() != GameManager.GetGroundPlayerID():
+		return
+
+	if destroying:
+		return
+		
 	destroyBullet.rpc()
