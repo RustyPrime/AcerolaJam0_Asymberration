@@ -11,7 +11,9 @@ const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var bullet : PackedScene = load("res://Scenes/Subscenes/bullet.tscn")
-@onready var muzzle = $Head/Shotgun/Muzzle
+@onready var muzzle : Node3D = %Muzzle
+@onready var level = get_node("/root/Level")
+
 var camera
 
 var mouse_input : Vector2
@@ -21,6 +23,7 @@ var isMouseCaptured = true
 @onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
 var safeZoneRadius : float
 var shotID = 0
+var spaceState : PhysicsDirectSpaceState3D
 
 func _ready():
 	safeZoneRadius = safeZone.shape.radius
@@ -50,21 +53,27 @@ func _process(_delta):
 		var index = 0
 		var shotCount = rng.randi_range(5, 10)
 		for shots in shotCount:
-			spreadData[index] = {"angle" : rng.randi_range(0, 360), "spread": randomSpread()}
+			spreadData[index] = {
+				"angle" : rng.randi_range(0, 360), 
+				"spread": randomSpread()}
 			index += 1
 		spreadData["shotID"] = shotID
-		spreadData["shotCount"] = 1
+		spreadData["shotCount"] = shotCount
 		shoot.rpc(JSON.stringify(spreadData))	
 		shotID += 1
 
 func randomSpread():
-	var randomSpreadRange = rng.randf_range(0, 0.3)
-	if (randomSpreadRange > 0.2):
-		if rng.randi_range(0, 4) < 3:
-			randomSpreadRange = rng.randf_range(0, 0.1)
+	var randomSpreadRange = rng.randf_range(0, 0.1)
+	if (randomSpreadRange > 0.05):
+		if rng.randi_range(0, 4) <= 3:
+			randomSpreadRange = rng.randf_range(0, 0.05)
 	return randomSpreadRange
 
+
 func _physics_process(delta):
+	if spaceState == null:
+		spaceState = level.get_world_3d().direct_space_state
+
 	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
@@ -118,11 +127,19 @@ func shoot(spread_data):
 		var data = spreadData[str(index)]
 
 		var spawned_bullet = bullet.instantiate()
+		get_tree().root.add_child(spawned_bullet, true)
 		spawned_bullet.name = "shot_" + str(spreadData["shotID"]) + "_" + str(index)
-		get_parent().add_child(spawned_bullet)
 		spawned_bullet.global_position = muzzle.global_position
-		var angle = Vector3.FORWARD.rotated(Vector3.RIGHT, data["angle"])
-		var direction = muzzle.get_global_transform().basis.z + (angle * data["spread"])
-		spawned_bullet.apply_force(direction * BULLET_SPEED)
+
+		var randomAngle = data["angle"]
+		var forward = muzzle.global_transform.basis.z
+		var right = muzzle.global_transform.basis.x
+		var right_rotated = right.rotated(forward.normalized(), deg_to_rad(randomAngle))
+		
+		var direction = (forward + (right_rotated * data["spread"]))
+	
+		spawned_bullet.apply_force((direction) * BULLET_SPEED)
+
+	
 	
 

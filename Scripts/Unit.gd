@@ -5,11 +5,13 @@ class_name Unit
 @onready var multiplayerSynchronizer : MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var navMesh: NavigationAgent3D = $NavigationAgent3D
 @onready var healthDisplay: Label3D = $HealthDisplay
+@onready var destroyTimer : Timer = $Timer
 
 var movementSpeed = 2
 var acceleration = 10
 var health = 2
 var playerToChase : Player1
+var destroying = false
 
 func _ready():
 	healthDisplay.text = str(health)
@@ -28,8 +30,8 @@ func SetAuthoritiy(id = 1):
 	multiplayerSynchronizer.set_multiplayer_authority(id)
 
 func _on_body_entered(body:Node):
-	print("something touched unit: " + body.name)
-	print("owner: " + body.owner.name)
+	#print("something touched unit: " + body.name)
+	#print("owner: " + body.owner.name)
 	if body is Bullet:
 		queue_free()
 
@@ -45,7 +47,7 @@ func _physics_process(delta):
 
 @rpc("any_peer", "call_local")
 func DoDamage(damage):
-	print("DoDamage rpc")
+	#print("DoDamage rpc")
 	health -= damage
 	if health < 0:
 		health = 0
@@ -54,5 +56,12 @@ func DoDamage(damage):
 		Die()
 
 func Die():
-	queue_free()
+	if destroying: 
+		return
+
+	destroying = true
+	hide()
+	
+	global_position.y -= 50
+	destroyTimer.start()
  	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx4n3fgv54r1a"]
+[gd_scene load_steps=9 format=3 uid="uid://cx4n3fgv54r1a"]
 
 [ext_resource type="Script" path="res://Scripts/Player1.gd" id="1_rdjtu"]
 [ext_resource type="Material" uid="uid://b3aluapbncj1v" path="res://Materials/player1_material.tres" id="2_sjo4x"]
+[ext_resource type="PackedScene" uid="uid://di8ig28xvkftd" path="res://Scenes/Subscenes/shotgun.tscn" id="3_s1s4l"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pxubv"]
 
@@ -44,15 +45,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70855, 0)
 
 [node name="Shotgun" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(0.131105, 0, 0.125299, 0, 0.194929, 0, -0.0165578, 0, 0.992119, 0.429216, -0.527787, -1.02108)
+visible = false
 material_override = ExtResource("2_sjo4x")
 mesh = SubResource("BoxMesh_46vpf")
 skeleton = NodePath("")
 
-[node name="Muzzle" type="Node3D" parent="Head/Shotgun"]
-transform = Transform3D(-7.56314, 0, -0.245321, 0, 5.13007, 0, 0.0931199, 0, -0.997539, 0.00585461, 0.116965, -0.594902)
+[node name="shotgun" parent="Head" instance=ExtResource("3_s1s4l")]
+transform = Transform3D(0.999396, 0.03476, 0, 1.51941e-09, -4.3685e-08, -1, -0.03476, 0.999396, -4.37114e-08, 0.429216, -0.815884, -0.319143)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Head/Shotgun/Muzzle"]
-transform = Transform3D(-0.998176, 0, 0.0603692, 0, 1, 0, -0.0603692, 0, -0.998176, 0, 0, 0)
+[node name="Muzzle" type="Node3D" parent="Head/shotgun"]
+unique_name_in_owner = true
+transform = Transform3D(-1.00377, 8.74227e-08, 4.36268e-08, -4.38762e-08, 1.91068e-15, -0.998066, -8.77524e-08, -0.999999, 1.90699e-15, 0.0404942, -1.76281, -0.310897)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head"]
+transform = Transform3D(0.999976, 2.20883e-17, -0.00686962, -2.30379e-17, 1, -1.38158e-16, 0.00686962, 1.38313e-16, 0.999976, -0.455009, -0.244651, -1.24168)
 shadow_enabled = true
 spot_range = 26.1329
 spot_angle = 13.642

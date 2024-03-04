@@ -3,8 +3,11 @@ class_name Bullet
 
 var damage = 2
 var destroying = false
+@onready var destroyTimer : Timer = $Timer
+
 func _ready():
 	self.set_multiplayer_authority(GameManager.GetGroundPlayerID())
+
 
 func _on_body_entered(body:Node):
 	if self.get_multiplayer_authority() != GameManager.GetGroundPlayerID():
@@ -12,26 +15,28 @@ func _on_body_entered(body:Node):
 
 	if body is Unit:
 		body.DoDamage.rpc(damage)
-		destroyBullet.rpc()
+		#print("destroy on hit unit")
+		if !destroying:
+			destroyBullet.rpc()
 	else: 
-		destroyBullet.rpc()
-
-	
+		#print("destroy on hit other than unit")
+		if !destroying:
+			destroyBullet.rpc()
 
 
 @rpc("any_peer", "call_local")
 func destroyBullet():
-	print(str(multiplayer.get_unique_id()) + ": destroyBullet rpc")
-	print(str(multiplayer.get_unique_id()) + str(self.get_path()))
-	get_parent().call_deferred("remove_child", self)
-	call_deferred("queue_free")
+	if destroying: 
+		return
+
 	destroying = true
+	hide()
+	
+	linear_velocity = Vector3.ZERO
+	global_position.y -= 50
+	destroyTimer.start()
+
 
 func _on_timer_timeout():
-	if self.get_multiplayer_authority() != GameManager.GetGroundPlayerID():
-		return
-
-	if destroying:
-		return
-		
-	destroyBullet.rpc()
+	if !visible:
+		queue_free()

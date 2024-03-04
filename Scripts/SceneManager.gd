@@ -41,12 +41,13 @@ func spawn_player(player_name, player_scene, player_spawn : Node3D):
 func spawn_unit(unitDataJSON):
 	var unitData = UnitData.FromJSON(unitDataJSON)
 	var spawned_unit = load(unitData.path).instantiate()
+	add_child(spawned_unit)
 	
 	spawned_unit.global_position = unitData.spawn_position
 	spawned_unit.name = unitData.name
 	spawned_unit.SetHealth(unitData.power)
 	
-	add_child(spawned_unit)
+	
 	
 	if playerID != -1:
 		spawned_unit.SetPlayer(player1)
