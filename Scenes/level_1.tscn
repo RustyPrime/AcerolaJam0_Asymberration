@@ -596,7 +596,7 @@ environment = SubResource("Environment_it6eh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.78378, 1.58866, 17.0622)
 
 [node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
-transform = Transform3D(1, 0, 0, 0, 0.400461, -0.916314, 0, 0.916314, 0.400461, -6.40579, 44.5043, -24.0904)
+transform = Transform3D(1, 0, 0, 0, 0.305496, -0.952194, 0, 0.952194, 0.305496, -6.40579, 39.1607, -26.551)
 
 [node name="DeathZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.65203, 0)

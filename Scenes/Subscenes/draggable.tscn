@@ -1,31 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1rx6o2kylhf3"]
+[gd_scene load_steps=4 format=3 uid="uid://c1rx6o2kylhf3"]
 
 [ext_resource type="Script" path="res://Scripts/Draggable.gd" id="1_282gm"]
 [ext_resource type="PackedScene" uid="uid://bk0y6w3ru8xui" path="res://Scenes/Subscenes/Unit1.tscn" id="2_8a64i"]
 [ext_resource type="Texture2D" uid="uid://mk0vqvaoio6r" path="res://icon.svg" id="3_tlh15"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wns2"]
-size = Vector2(50, 51)
-
-[node name="Draggable" type="Node2D"]
-position = Vector2(476, 549)
+[node name="Draggable" type="TextureButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.5
+offset_top = -26.0
+offset_right = 25.5
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 25)
+keep_pressed_outside = true
+texture_normal = ExtResource("3_tlh15")
+texture_pressed = ExtResource("3_tlh15")
+texture_hover = ExtResource("3_tlh15")
+texture_disabled = ExtResource("3_tlh15")
+texture_focused = ExtResource("3_tlh15")
+ignore_texture_size = true
+stretch_mode = 0
 script = ExtResource("1_282gm")
 unit = ExtResource("2_8a64i")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.84774e-06, -1.84774e-06)
-scale = Vector2(0.390625, 0.390625)
-texture = ExtResource("3_tlh15")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_5wns2")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -65,3 +65,7 @@ func Die():
 	global_position.y -= 50
 	destroyTimer.start()
  	
+
+func _on_timer_timeout():
+	if !visible:
+		queue_free()

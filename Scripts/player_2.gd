@@ -1,15 +1,15 @@
 extends Node3D
 
 
-@onready var slider :HSlider = $UI/Control/HSlider
+@onready var slider : HSlider = $UI/Panel/HSlider
+@onready var dragHandler : Control = $UI/Panel/DragHandler
 @onready var level = get_node("/root/Level")
 @export var rechargeSpeed = 10
 
 var remotePlayer1 : Player1
 
 func _ready():
-	for node in get_tree().get_nodes_in_group("draggable"):
-		node.try_spawn_unit.connect(_try_spawn_unit)
+	dragHandler.try_spawn_unit.connect(_try_spawn_unit)
 
 func _process(delta):
 	slider.value = slider.value + (rechargeSpeed * delta)
