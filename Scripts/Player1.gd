@@ -35,13 +35,13 @@ var shotID : int = 0
 
 func _ready():
 	safeZoneRadius = safeZone.shape.radius
-	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
+	
+	if !hasAuthority():
 		return
 		
 	rng.randomize()
 
 	playerHeight = collisionShape.shape.height
-	print("playerHeight: " + str(playerHeight))
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -55,8 +55,9 @@ func IntersectsSafeZone(potentialUnitSpawnPosition):
 
 
 func _process(_delta):
-	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
+	if !hasAuthority():
 		return
+
 	mouse_input = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("shoot"):
 		var spreadData : Dictionary = {	}
@@ -84,7 +85,7 @@ func _physics_process(delta):
 	if spaceState == null:
 		spaceState = level.get_world_3d().direct_space_state
 
-	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
+	if !hasAuthority():
 		return
 
 	handle_mouse_capture()
@@ -92,7 +93,6 @@ func _physics_process(delta):
 	if not is_on_floor() :
 		velocity.y -= gravity * delta
 
-	
 	handle_camera_rotation(delta)
 	
 	# Handle jump.
@@ -101,7 +101,6 @@ func _physics_process(delta):
 
 	handle_movement()
 	
-
 	move_and_slide()
 
 func _input(event):
@@ -167,6 +166,9 @@ func handle_mouse_capture():
 		mouse_input = Vector2.ZERO
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		isMouseCaptured = false
+
+func hasAuthority():
+	return $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 
 @rpc("any_peer", "call_local")
 func shoot(spread_data):
