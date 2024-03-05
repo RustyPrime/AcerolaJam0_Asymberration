@@ -26,6 +26,7 @@ height = 0.1
 radius = 15.0
 
 [node name="Player1" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.999952, 0.0098435, 0, -0.0098435, 0.999952, 0, 0.01548, 0)
 script = ExtResource("1_rdjtu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

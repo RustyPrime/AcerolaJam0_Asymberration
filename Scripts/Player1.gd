@@ -8,30 +8,40 @@ const JUMP_VELOCITY = 4.5
 @export var sensitivity = 700.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
+var original_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var bullet : PackedScene = load("res://Scenes/Subscenes/bullet.tscn")
 @onready var muzzle : Node3D = %Muzzle
+@onready var collisionShape : CollisionShape3D = $CollisionShape3D
 @onready var level = get_node("/root/Level")
+@onready var rng = RandomNumberGenerator.new()
+@onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
+@onready var camera : Node3D = $Head
 
-var camera
+var spaceState : PhysicsDirectSpaceState3D
 
 var mouse_input : Vector2
 var rotation_target: Vector3
+
 var isMouseCaptured = true
-@onready var rng = RandomNumberGenerator.new()
-@onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
+var isInverted = false
+var wasInverted = false
+
 var safeZoneRadius : float
-var shotID = 0
-var spaceState : PhysicsDirectSpaceState3D
+var playerHeight : float
+var shotID : int = 0
+
 
 func _ready():
 	safeZoneRadius = safeZone.shape.radius
-
 	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 		
 	rng.randomize()
+
+	playerHeight = collisionShape.shape.height
+	print("playerHeight: " + str(playerHeight))
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -79,29 +89,18 @@ func _physics_process(delta):
 
 	handle_mouse_capture()
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() :
 		velocity.y -= gravity * delta
 
-	# Handle Camera Rotation
-	camera = $Head
-	if camera != null:
-		#camera.rotation.z = lerp_angle(camera.rotation.z, -mouse_input.x * 25 * delta, delta * 5)	
-		camera.rotation.x = lerp_angle(camera.rotation.x, rotation_target.x, delta * 25)
-		rotation.y = lerp_angle(rotation.y, rotation_target.y, delta * 25)
 	
-
+	handle_camera_rotation(delta)
+	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	var input_dir = Input.get_vector("left", "right", "forward", "back")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+	handle_movement()
+	
 
 	move_and_slide()
 
@@ -110,6 +109,55 @@ func _input(event):
 		mouse_input = event.relative / sensitivity
 		rotation_target.y -= event.relative.x / sensitivity
 		rotation_target.x -= event.relative.y / sensitivity
+
+func handle_movement():
+	var input_dir = Input.get_vector("left", "right", "forward", "back")
+	var forward = input_dir.y
+	if isInverted:
+		forward *= -1
+	var right = input_dir.x
+	if isInverted:
+		right *= -1
+	var direction = (transform.basis * Vector3(right, 0, forward)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+func handle_camera_rotation(delta):
+	if camera == null:	
+		return
+
+	camera.rotation.x = lerp_angle(camera.rotation.x, rotation_target.x, delta * 25)
+	if camera.rotation_degrees.x >= 360:
+		camera.rotation_degrees.x -= 360
+	if camera.rotation_degrees.x <= -360:
+		camera.rotation_degrees.x += 360
+
+	if camera.rotation_degrees.x > 90 or camera.rotation_degrees.x < -90:
+		rotation.y = lerp_angle(rotation.y, rotation_target.y * -1, delta * 25)
+		rotation_degrees.z = 180
+		camera.rotation_degrees.z = 180
+		
+		isInverted = true
+		up_direction = Vector3.UP * -1
+		gravity = original_gravity * -1
+		if wasInverted != isInverted:
+			global_position.y = global_position.y + playerHeight + (playerHeight * 0.1)
+			wasInverted = isInverted
+
+	else:
+		rotation.y = lerp_angle(rotation.y, rotation_target.y, delta * 25)
+		rotation_degrees.z = 0
+		camera.rotation_degrees.z = 0
+		isInverted = false
+		up_direction = Vector3.UP
+		gravity = original_gravity
+		if wasInverted != isInverted:
+			global_position.y = global_position.y - playerHeight - (playerHeight * 0.1)
+			wasInverted = isInverted
 
 func handle_mouse_capture():
 	if !isMouseCaptured and Input.is_action_just_pressed("mouse_capture"):
