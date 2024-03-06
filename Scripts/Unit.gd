@@ -29,12 +29,6 @@ func SetHealth(unitPower):
 func SetAuthoritiy(id = 1):
 	multiplayerSynchronizer.set_multiplayer_authority(id)
 
-func _on_body_entered(body:Node):
-	#print("something touched unit: " + body.name)
-	#print("owner: " + body.owner.name)
-	if body is Bullet:
-		queue_free()
-
 func _physics_process(delta):
 	if playerToChase != null:
 		navMesh.target_position = playerToChase.global_position
@@ -67,5 +61,5 @@ func Die():
  	
 
 func _on_timer_timeout():
-	if !visible:
+	if destroying and !visible:
 		queue_free()

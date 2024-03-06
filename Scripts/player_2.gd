@@ -4,6 +4,7 @@ extends Node3D
 @onready var slider : HSlider = $UI/Panel/HSlider
 @onready var dragHandler : Control = $UI/Panel/DragHandler
 @onready var level = get_node("/root/Level")
+@onready var navigationRegion3D : NavigationRegion3D = get_node("/root/Level/World/NavigationRegion3D")
 @export var rechargeSpeed = 10
 
 var remotePlayer1 : Player1
@@ -30,7 +31,9 @@ func IsValidSpawn(unitData):
 	if slider.value < unitData.power: 
 		return false
 	
-	if remotePlayer1.IntersectsSafeZone(unitData.spawn_position):
+	var spawnPosition = NavigationServer3D.map_get_closest_point(navigationRegion3D.get_navigation_map(), unitData.spawn_position)
+	unitData.spawn_position = spawnPosition
+	if remotePlayer1.IntersectsSafeZone(spawnPosition):
 		return false
 	
 	return true

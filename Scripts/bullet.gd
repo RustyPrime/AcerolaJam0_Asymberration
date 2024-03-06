@@ -10,19 +10,14 @@ func _ready():
 
 
 func _on_body_entered(body:Node):
-	if self.get_multiplayer_authority() != GameManager.GetGroundPlayerID():
+	if self.get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
 	if body is Unit:
 		body.DoDamage.rpc(damage)
-		#print("destroy on hit unit")
-		if !destroying:
-			destroyBullet.rpc()
-	else: 
-		#print("destroy on hit other than unit")
-		if !destroying:
-			destroyBullet.rpc()
-
+		
+	if !destroying:
+		destroyBullet.rpc()	
 
 @rpc("any_peer", "call_local")
 func destroyBullet():

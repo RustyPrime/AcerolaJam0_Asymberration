@@ -21,7 +21,7 @@ func _physics_process(_delta):
 		
 func _process(_delta):
 	if currentDraggable != null:
-		currentDraggable.global_position = mousePosition
+		currentDraggable.global_position = mousePosition - Vector2(currentDraggable.size.x / 2, currentDraggable.size.y / 2)
 
 func on_is_dragging(button : Draggable):
 	currentDraggable = button

@@ -61,15 +61,15 @@ func SendPlayerInformation(player_name, id, isGroundPlayer):
 
 
 func peer_connected(id):
-	#print("player connected" + str(id))
+	print("player connected" + str(id))
 	pass
 func peer_disconnected(id):
-	#print("player disconnected" + str(id))
+	print("player disconnected" + str(id))
 	pass
 func connected_to_server():
-	#print("connected to server")
+	print("connected to server")
 	SendPlayerInformation.rpc_id(1, $Username.text, multiplayer.get_unique_id(), false)
 
 func connection_failed():
-	#print("connection failed")
+	print("connection failed")
 	pass
