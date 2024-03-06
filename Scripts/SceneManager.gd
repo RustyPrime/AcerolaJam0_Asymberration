@@ -26,7 +26,7 @@ func _ready():
 				var remotePlayer1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
 				player2.remotePlayer1 = remotePlayer1.get_node("Player1")
 				# make ceiling invisible
-				$World/Ceiling.queue_free()
+				%World/Ceiling.queue_free()
 
 
 func spawn_player(player_name, player_scene, player_spawn : Node3D):
