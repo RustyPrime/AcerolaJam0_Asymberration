@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhxlmgc3clgt0"]
 
 [ext_resource type="PackedScene" uid="uid://cx4n3fgv54r1a" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_ge8cf"]
-[ext_resource type="Material" uid="uid://b1ompht62jexn" path="res://Materials/pixelate_material.tres" id="2_mxddh"]
+[ext_resource type="Shader" path="res://Materials/pixelate_material.gdshader" id="2_hb7fs"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_bo0j5"]
-material = ExtResource("2_mxddh")
-size = Vector2(2, 2)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkyim"]
+shader = ExtResource("2_hb7fs")
+shader_parameter/pixel_size = 200
 
 [node name="PlayerRig" type="Node3D"]
 top_level = true
@@ -14,19 +14,12 @@ top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="Player1/Head" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+near = 0.01
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player1/Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -0.841707)
-visible = false
-cast_shadow = 0
-extra_cull_margin = 16384.0
-gi_mode = 0
-mesh = SubResource("QuadMesh_bo0j5")
+[node name="CanvasLayer" type="CanvasLayer" parent="Player1/Head/Camera3D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = ExtResource("2_mxddh")
+[node name="ColorRect" type="ColorRect" parent="Player1/Head/Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_fkyim")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
