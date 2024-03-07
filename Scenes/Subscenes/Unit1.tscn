@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk0y6w3ru8xui"]
+[gd_scene load_steps=8 format=3 uid="uid://bk0y6w3ru8xui"]
 
 [ext_resource type="Script" path="res://Scripts/Unit.gd" id="1_bixe1"]
+[ext_resource type="Material" uid="uid://dsj006y3uajp1" path="res://Materials/unit1_material.tres" id="2_cwoen"]
+[ext_resource type="Material" uid="uid://bllp3d7jonqim" path="res://Materials/Unit1_ParticleMaterial.tres" id="2_vaopk"]
+[ext_resource type="QuadMesh" uid="uid://b7sa14lu7j3av" path="res://Textures/BlueFresnel.tres" id="3_dlbo8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8kgt7"]
+[sub_resource type="SphereMesh" id="SphereMesh_uth35"]
+material = ExtResource("2_cwoen")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_37vlw"]
 properties/0/path = NodePath(".:position")
@@ -22,9 +26,17 @@ script = ExtResource("1_bixe1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
 shape = SubResource("CapsuleShape3D_7kgye")
 
+[node name="PurpleMist" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+amount = 1000
+visibility_aabb = AABB(-3.10917, -4, -4, 6.21835, 8, 8)
+process_material = ExtResource("2_vaopk")
+draw_pass_1 = ExtResource("3_dlbo8")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
-mesh = SubResource("CapsuleMesh_8kgt7")
+visible = false
+mesh = SubResource("SphereMesh_uth35")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_37vlw")

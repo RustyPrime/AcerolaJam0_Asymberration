@@ -14,13 +14,23 @@ var playerToChase : Player1
 var destroying = false
 
 func _ready():
+	var groundPlayerID = GameManager.GetGroundPlayerID()
+	SetAuthoritiy(groundPlayerID)
+
+	if !HasAuthority():
+		return
+
 	healthDisplay.text = str(health)
 
 
 func SetPlayer(player):
+	if !HasAuthority():
+		return
 	playerToChase = player.get_node("Player1")
 
 func SetHealth(unitPower):
+	if !HasAuthority():
+		return
 	health *= unitPower
 	if healthDisplay == null:
 		healthDisplay = $HealthDisplay
@@ -29,7 +39,14 @@ func SetHealth(unitPower):
 func SetAuthoritiy(id = 1):
 	multiplayerSynchronizer.set_multiplayer_authority(id)
 
+func HasAuthority():
+	return multiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	
+
 func _physics_process(delta):
+	if !HasAuthority():
+		return 
+
 	if playerToChase != null:
 		navMesh.target_position = playerToChase.global_position
 
