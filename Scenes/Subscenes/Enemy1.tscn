@@ -24,8 +24,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
 shape = SubResource("CapsuleShape3D_7kgye")
 
 [node name="PurpleMist" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-amount = 1000
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.734458, -3.21042e-08)
+amount = 200
 visibility_aabb = AABB(-3.10917, -4, -4, 6.21835, 8, 8)
 process_material = ExtResource("2_t8epx")
 draw_pass_1 = ExtResource("3_0b3ds")
