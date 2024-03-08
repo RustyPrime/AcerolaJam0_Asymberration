@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Enemy
 
+@export var particles : GPUParticles3D
 
 @onready var multiplayerSynchronizer : MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var navMesh: NavigationAgent3D = $NavigationAgent3D
@@ -12,9 +13,14 @@ var acceleration = 10
 var health = 2
 var playerToChase : Player1
 var destroying = false
+var material : Material
+var originalMaterialColor : Color
 
 func _ready():
 	var groundPlayerID = GameManager.GetGroundPlayerID()
+	material = particles.draw_pass_1.surface_get_material(0)
+	originalMaterialColor = material.albedo_color
+
 	SetAuthoritiy(groundPlayerID)
 
 	if !HasAuthority():
@@ -56,11 +62,17 @@ func _physics_process(delta):
 func DoDamage(damage):
 	#print("DoDamage rpc")
 	health -= damage
+
+	material.albedo_color = Color.WHITE
+	await get_tree().create_timer(0.1).timeout
+	material.albedo_color = originalMaterialColor
+
 	if health < 0:
 		health = 0
 	healthDisplay.text = str(health)
 	if health <= 0:
 		Die()
+	
 
 func Die():
 	if destroying: 

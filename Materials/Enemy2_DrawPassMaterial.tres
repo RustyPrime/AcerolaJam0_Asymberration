@@ -1,8 +1,9 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cim5x3l0susl4"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://mbh5rrf2rnjn"]
 
 [ext_resource type="Texture2D" uid="uid://2o6fxcfniiv5" path="res://Textures/ring_texture.tres" id="1_n41mp"]
 
 [resource]
+resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
 shading_mode = 0

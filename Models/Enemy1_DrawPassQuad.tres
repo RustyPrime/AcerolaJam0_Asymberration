@@ -3,4 +3,5 @@
 [ext_resource type="Material" uid="uid://dq7p43oqbpldl" path="res://Materials/Enemy1_DrawPassMaterial.tres" id="1_xqke5"]
 
 [resource]
+resource_local_to_scene = true
 material = ExtResource("1_xqke5")

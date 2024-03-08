@@ -6,6 +6,7 @@ const JUMP_VELOCITY = 4.5
 
 @export var BULLET_SPEED = 150.0
 @export var sensitivity = 700.0
+@export var shotDelay = 0.7
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var original_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -13,6 +14,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var bullet : PackedScene = load("res://Scenes/Subscenes/bullet.tscn")
 @onready var muzzle : Node3D = %Muzzle
+@onready var shotgun : Shotgun = $Head/Shotgun
 @onready var collisionShape : CollisionShape3D = $CollisionShape3D
 @onready var level = get_node("/root/Level")
 @onready var rng = RandomNumberGenerator.new()
@@ -20,6 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera : Node3D = $Head
 
 var spaceState : PhysicsDirectSpaceState3D
+var shotgunTimer : Timer
 
 var mouse_input : Vector2
 var rotation_target: Vector3
@@ -27,6 +30,7 @@ var rotation_target: Vector3
 var isMouseCaptured = true
 var isInverted = false
 var wasInverted = false
+var canShoot = true
 
 var safeZoneRadius : float
 var playerHeight : float
@@ -40,7 +44,9 @@ func _ready():
 		return
 		
 	rng.randomize()
-
+	shotgunTimer = Timer.new()
+	shotgun.add_child(shotgunTimer)
+	shotgunTimer.timeout.connect(_shotgun_timer_timeout)
 	playerHeight = collisionShape.shape.height
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -58,6 +64,9 @@ func _process(_delta):
 	if !hasAuthority():
 		return
 
+	if !canShoot:
+		return
+
 	mouse_input = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("shoot"):
 		var spreadData : Dictionary = {	}
@@ -70,8 +79,10 @@ func _process(_delta):
 			index += 1
 		spreadData["shotID"] = shotID
 		spreadData["shotCount"] = shotCount
-		shoot.rpc(JSON.stringify(spreadData))	
+		shoot.rpc(JSON.stringify(spreadData))
 		shotID += 1
+		canShoot = false
+		shotgunTimer.start(shotDelay)
 
 func randomSpread():
 	var randomSpreadRange = rng.randf_range(0, 0.1)
@@ -170,8 +181,12 @@ func handle_mouse_capture():
 func hasAuthority():
 	return $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 
+func _shotgun_timer_timeout():
+	canShoot = true
+
 @rpc("any_peer", "call_local")
 func shoot(spread_data):
+	shotgun.shoot()
 	var spreadData = JSON.parse_string(spread_data)
 	for index in spreadData["shotCount"]:
 		var data = spreadData[str(index)]

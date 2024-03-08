@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://cn2b14d7jn165"]
+
+[ext_resource type="Script" path="res://Scripts/shotgun.gd" id="1_8522k"]
+[ext_resource type="PackedScene" uid="uid://b6x2auivbscny" path="res://Models/shotgun.glb" id="2_4p1df"]
+[ext_resource type="AudioStream" uid="uid://dea1qceuo28b5" path="res://Sounds/shotgun.ogg" id="3_4jtn7"]
+[ext_resource type="AudioStream" uid="uid://cka2ffk76shib" path="res://Sounds/cocking.ogg" id="4_o3y6k"]
+
+[sub_resource type="Animation" id="Animation_a7sqo"]
+resource_name = "Idle"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shotgun")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.0348005, 0, 0.333333, 1, -0.000728889, 0.0339589, 0, 0.5, 1, -0.00156, 0.0329992, 0, 0.666667, 1, -0.00263111, 0.0317624, 0, 0.933333, 1, -0.00471172, 0.0293599, 0, 1.63333, 1, -0.0108412, 0.0222822, 0, 1.83333, 1, -0.0123689, 0.0205182, 0, 2, 1, -0.01344, 0.0192814, 0, 2.13333, 1, -0.0141252, 0.0184902, 0, 2.33333, 1, -0.0148089, 0.0177008, 0, 2.86667, 1, -0.0141252, 0.0184902, 0, 3, 1, -0.01344, 0.0192814, 0, 3.16667, 1, -0.0123689, 0.0205182, 0, 3.43333, 1, -0.0102883, 0.0229207, 0, 4.13333, 1, -0.00415878, 0.0299984, 0, 4.33333, 1, -0.00263111, 0.0317624, 0, 4.5, 1, -0.00156, 0.0329992, 0, 4.63333, 1, -0.000874779, 0.0337904, 0, 4.83333, 1, -0.000191113, 0.0345799, 0, 5, 1, 0, 0.0348005, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shotgun")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.466667, 1, -6.42005e-07, 0.000799425, -0.000799425, 0.999999, 0.666667, 1, -2.3431e-06, 0.00153072, -0.00153072, 0.999998, 0.833333, 1, -5.11873e-06, 0.00226246, -0.00226246, 0.999995, 1, 1, -9.4358e-06, 0.00307176, -0.00307176, 0.999991, 1.16667, 1, -1.54263e-05, 0.0039276, -0.0039276, 0.999985, 1.33333, 1, -2.30303e-05, 0.00479894, -0.00479894, 0.999977, 1.5, 1, -3.19772e-05, 0.00565475, -0.00565475, 0.999968, 1.66667, 1, -4.17851e-05, 0.006464, -0.006464, 0.999958, 1.83333, 1, -5.17805e-05, 0.00719568, -0.00719568, 0.999948, 2.03333, 1, -6.28424e-05, 0.00792689, -0.00792689, 0.999937, 2.36667, 1, -7.48867e-05, 0.00865336, -0.00865336, 0.999925, 2.96667, 1, -6.28424e-05, 0.00792689, -0.00792689, 0.999937, 3.16667, 1, -5.17805e-05, 0.00719568, -0.00719568, 0.999948, 3.33333, 1, -4.17851e-05, 0.006464, -0.006464, 0.999958, 3.5, 1, -3.19772e-05, 0.00565475, -0.00565475, 0.999968, 3.66667, 1, -2.30303e-05, 0.00479894, -0.00479894, 0.999977, 3.83333, 1, -1.54263e-05, 0.0039276, -0.0039276, 0.999985, 4, 1, -9.4358e-06, 0.00307176, -0.00307176, 0.999991, 4.16667, 1, -5.11873e-06, 0.00226246, -0.00226246, 0.999995, 4.33333, 1, -2.3431e-06, 0.00153072, -0.00153072, 0.999998, 4.53333, 1, -6.42004e-07, 0.000799425, -0.000799425, 0.999999, 4.86667, 1, -5.67486e-09, 7.28526e-05, -7.28526e-05, 1, 5, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_qgk4j"]
+resource_name = "Shot"
+length = 0.833333
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shotgun")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.0348005, 0, 0.0333333, 1, -0.290398, 0.0348005, 0, 0.0666667, 1, -0.76748, 0.0348005, 0, 0.1, 1, -1.18233, 0.0348005, 0, 0.133333, 1, -1.39444, 0.0348005, -0.0065625, 0.166667, 1, -1.37169, 0.0348005, -0.0328125, 0.2, 1, -1.31171, 0.0348005, -0.0905625, 0.233333, 1, -1.23316, 0.0348005, -0.148313, 0.266667, 1, -1.14225, 0.0348005, -0.190313, 0.3, 1, -1.04473, 0.0348005, -0.209293, 0.333333, 1, -0.945889, 0.0348005, -0.206463, 0.366667, 1, -0.848317, 0.0348005, -0.198587, 0.4, 1, -0.752564, 0.0348005, -0.187614, 0.433333, 1, -0.659207, 0.0348005, -0.174003, 0.466667, 1, -0.568824, 0.0348005, -0.158212, 0.5, 1, -0.481993, 0.0348005, -0.140701, 0.533333, 1, -0.401051, 0.0348005, -0.121813, 0.566667, 1, -0.325393, 0.0348005, -0.102582, 0.6, 1, -0.255597, 0.0348005, -0.0834647, 0.633333, 1, -0.192239, 0.0348005, -0.0649213, 0.666667, 1, -0.135898, 0.0348005, -0.0474101, 0.7, 1, -0.0900658, 0.0348005, -0.032193, 0.733333, 1, -0.0529827, 0.0348005, -0.0193846, 0.766667, 1, -0.0252258, 0.0348005, -0.00944379, 0.8, 1, -0.00737238, 0.0348005, -0.00282931, 0.833333, 1, 0, 0.0348005, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shotgun")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.0333333, 1, 0, 0.00386719, 0, 0.999993, 0.0666667, 1, 0, 0.0123137, 0, 0.999924, 0.1, 1, 0, 0.0241168, 0, 0.999709, 0.133333, 1, 0, 0.0380522, 0, 0.999276, 0.166667, 1, 0, 0.0528949, 0, 0.9986, 0.2, 1, 0, 0.0665075, 0, 0.997786, 0.233333, 1, 0, 0.0773684, 0, 0.997003, 0.266667, 1, 0, 0.084266, 0, 0.996443, 0.3, 1, 0, 0.0868629, 0, 0.99622, 0.333333, 1, 0, 0.0856915, 0, 0.996322, 0.366667, 1, 0, 0.0824302, 0, 0.996597, 0.4, 1, 0, 0.0778849, 0, 0.996962, 0.433333, 1, 0, 0.0722446, 0, 0.997387, 0.466667, 1, 0, 0.0656985, 0, 0.99784, 0.5, 1, 0, 0.0584356, 0, 0.998291, 0.533333, 1, 0, 0.0505985, 0, 0.998719, 0.6, 1, 0, 0.0346772, 0, 0.999399, 0.633333, 1, 0, 0.026975, 0, 0.999636, 0.666667, 1, 0, 0.0197002, 0, 0.999806, 0.7, 1, 0, 0.0133775, 0, 0.999911, 0.733333, 1, 0, 0.00805527, 0, 0.999968, 0.766667, 1, 0, 0.0039244, 0, 0.999992, 0.8, 1, 0, 0.00117574, 0, 0.999999, 0.833333, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juamw"]
+_data = {
+"Idle": SubResource("Animation_a7sqo"),
+"Shot": SubResource("Animation_qgk4j")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_epdjw"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g3pyb"]
+animation = &"Shot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1u83g"]
+animation = &"Shot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_edkag"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ywrm7"]
+advance_mode = 2
+advance_condition = &"shot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2flpc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_de2pn"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"shot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yf1w8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7xp82"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"shot"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4l4a4"]
+states/Idle/node = SubResource("AnimationNodeAnimation_epdjw")
+states/Idle/position = Vector2(265, 59)
+states/Shot/node = SubResource("AnimationNodeAnimation_1u83g")
+states/Shot/position = Vector2(265, 167)
+"states/Shot 2/node" = SubResource("AnimationNodeAnimation_g3pyb")
+"states/Shot 2/position" = Vector2(452, 166)
+states/Start/position = Vector2(88, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_edkag"), "Idle", "Shot", SubResource("AnimationNodeStateMachineTransition_ywrm7"), "Shot", "Idle", SubResource("AnimationNodeStateMachineTransition_2flpc"), "Shot", "Shot 2", SubResource("AnimationNodeStateMachineTransition_de2pn"), "Shot 2", "Idle", SubResource("AnimationNodeStateMachineTransition_yf1w8"), "Shot 2", "Shot", SubResource("AnimationNodeStateMachineTransition_7xp82")]
+
+[node name="Shotgun" type="Node3D"]
+script = ExtResource("1_8522k")
+
+[node name="shotgun" parent="." instance=ExtResource("2_4p1df")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="ShotAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_4jtn7")
+volume_db = -10.0
+max_distance = 100.0
+
+[node name="CockingAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_o3y6k")
+volume_db = -10.0
+max_distance = 100.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../shotgun")
+libraries = {
+"": SubResource("AnimationLibrary_juamw")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../shotgun")
+libraries = {
+"": SubResource("AnimationLibrary_juamw")
+}
+tree_root = SubResource("AnimationNodeStateMachine_4l4a4")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/shot = false

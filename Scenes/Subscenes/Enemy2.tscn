@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_gq7tn"]
 [ext_resource type="QuadMesh" uid="uid://cmakom5myahxo" path="res://Models/Enemy2_DrawPassQuad.tres" id="3_aijlk"]
-[ext_resource type="Material" uid="uid://fmjjlb3w2jlv" path="res://Materials/Enemy2_ParticleMaterial.tres" id="3_tuxdb"]
+[ext_resource type="Material" path="res://Materials/Enemy2_ParticleMaterial.tres" id="3_tuxdb"]
 [ext_resource type="AudioStream" uid="uid://bruhuhfjw075t" path="res://Sounds/critter.ogg" id="5_aiy5d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
@@ -17,9 +17,10 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Enemy2" type="CharacterBody3D" groups=["enemy"]]
+[node name="Enemy2" type="CharacterBody3D" node_paths=PackedStringArray("particles") groups=["enemy"]]
 collision_mask = 7
 script = ExtResource("1_gq7tn")
+particles = NodePath("GreenMist")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)

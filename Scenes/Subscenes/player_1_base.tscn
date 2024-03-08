@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Player1.gd" id="1_rdjtu"]
 [ext_resource type="Material" uid="uid://b3aluapbncj1v" path="res://Materials/player1_material.tres" id="2_sjo4x"]
-[ext_resource type="PackedScene" uid="uid://di8ig28xvkftd" path="res://Scenes/Subscenes/shotgun.tscn" id="3_s1s4l"]
+[ext_resource type="PackedScene" uid="uid://cn2b14d7jn165" path="res://Scenes/Subscenes/Shotgun2.tscn" id="3_6t18h"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pxubv"]
 
@@ -43,12 +43,12 @@ replication_config = SubResource("SceneReplicationConfig_14xoj")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70855, 0)
 
-[node name="shotgun" parent="Head" instance=ExtResource("3_s1s4l")]
-transform = Transform3D(0.999396, 0.03476, 0, 1.51941e-09, -4.3685e-08, -1, -0.03476, 0.999396, -4.37114e-08, 0.429216, -0.815884, -0.319143)
+[node name="Shotgun" parent="Head" instance=ExtResource("3_6t18h")]
+transform = Transform3D(-0.0491263, 0.998793, -4.36586e-08, 0, -4.37114e-08, -1, -0.998793, -0.0491263, 2.14738e-09, 0.364415, -0.790521, -1.30668)
 
-[node name="Muzzle" type="Node3D" parent="Head/shotgun"]
+[node name="Muzzle" type="Node3D" parent="Head/Shotgun"]
 unique_name_in_owner = true
-transform = Transform3D(-1.00377, 8.74227e-08, 4.36268e-08, -4.38762e-08, 1.91068e-15, -0.998066, -8.77524e-08, -0.999999, 1.90699e-15, 0.0404942, -1.76281, -0.310897)
+transform = Transform3D(-0.000194836, 0.00559246, 0.999984, -0.00249023, 0.999981, -0.00559292, -0.999997, -0.0024914, -0.000180906, 0.600301, 0.00433353, -0.227042)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head"]
 transform = Transform3D(0.999976, 2.20883e-17, -0.00686962, -2.30379e-17, 1, -1.38158e-16, 0.00686962, 1.38313e-16, 0.999976, -0.455009, -0.244651, -1.24168)

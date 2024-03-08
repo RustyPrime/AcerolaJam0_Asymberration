@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2cb13c6yvri5"]
+[gd_scene load_steps=15 format=3 uid="uid://c2cb13c6yvri5"]
 
 [ext_resource type="Script" path="res://Scripts/player_2.gd" id="1_pgitl"]
 [ext_resource type="Script" path="res://Scripts/DragHandler.gd" id="2_3pwg3"]
 [ext_resource type="PackedScene" uid="uid://c1rx6o2kylhf3" path="res://Scenes/Subscenes/draggable.tscn" id="2_onjjd"]
+[ext_resource type="Shader" path="res://Materials/pixelate_material.gdshader" id="2_x215u"]
 [ext_resource type="PackedScene" uid="uid://w28x28vm3pcb" path="res://Scenes/Subscenes/Enemy2.tscn" id="4_rc4i1"]
 [ext_resource type="PackedScene" uid="uid://4unlgiu32n5u" path="res://Scenes/Subscenes/Enemy3.tscn" id="5_xri61"]
 [ext_resource type="PackedScene" uid="uid://b2a50r17u8cgw" path="res://Scenes/Subscenes/Enemy4.tscn" id="6_ebsqj"]
@@ -23,11 +24,12 @@ thickness = 10
 color = Color(0, 1, 0, 1)
 thickness = 10
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_haoh8"]
+shader = ExtResource("2_x215u")
+shader_parameter/pixel_size = 225
+
 [node name="Player2" type="Node3D"]
 script = ExtResource("1_pgitl")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 8.11822e-08, -3.24377e-08, 0, 0.371044, 0.928616, 8.74228e-08, 0.928616, -0.371044, 0, 0, 0)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -118,3 +120,17 @@ offset_right = 140.0
 offset_bottom = 13.0
 enemy = ExtResource("6_ebsqj")
 powerRequirement = 50.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.11822e-08, -3.24377e-08, 0, 0.371044, 0.928616, 8.74228e-08, 0.928616, -0.371044, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_haoh8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
