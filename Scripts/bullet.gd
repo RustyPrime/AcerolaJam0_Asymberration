@@ -13,7 +13,7 @@ func _on_body_entered(body:Node):
 	if self.get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
-	if body is Unit:
+	if body is Enemy:
 		body.DoDamage.rpc(damage)
 		
 	if !destroying:

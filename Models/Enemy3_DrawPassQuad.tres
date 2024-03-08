@@ -1,0 +1,14 @@
+[gd_resource type="QuadMesh" load_steps=3 format=3 uid="uid://fxlilocbpmm0"]
+
+[ext_resource type="Texture2D" uid="uid://cskk4richv1rg" path="res://Textures/fresnel_texture_2.tres" id="1_yph64"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y1wiq"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_yph64")
+
+[resource]
+material = SubResource("StandardMaterial3D_y1wiq")
+size = Vector2(0.1, 5)

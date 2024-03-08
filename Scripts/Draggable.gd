@@ -5,14 +5,14 @@ signal is_being_dragged(draggable : Draggable)
 signal stopped_dragging(draggable : Draggable)
 
 var originalPosition : Vector2
-var unitData : UnitData
+var enemyData : EnemyData
 
-@export var unit : PackedScene
+@export var enemy : PackedScene
 @export var powerRequirement : float = 10.0
 
 func _ready():
 	originalPosition = global_position
-	unitData = UnitData.new("", powerRequirement, unit.resource_path)
+	enemyData = EnemyData.new("", powerRequirement, enemy.resource_path)
 
 func resetDraggable():
 	global_position = originalPosition

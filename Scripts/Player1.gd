@@ -45,10 +45,10 @@ func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-func IntersectsSafeZone(potentialUnitSpawnPosition):
+func IntersectsSafeZone(potentialEnemySpawnPosition):
 	var playerPosition = Vector3(global_position.x, 0, global_position.z)
-	potentialUnitSpawnPosition.y = 0
-	var distanceToPlayer = playerPosition.distance_to(potentialUnitSpawnPosition)
+	potentialEnemySpawnPosition.y = 0
+	var distanceToPlayer = playerPosition.distance_to(potentialEnemySpawnPosition)
 	if abs(distanceToPlayer) < safeZoneRadius:
 		return true
 	return false

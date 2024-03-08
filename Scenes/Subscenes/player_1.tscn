@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fkyim"]
 shader = ExtResource("2_hb7fs")
-shader_parameter/pixel_size = 200
+shader_parameter/pixel_size = 225
 
 [node name="PlayerRig" type="Node3D"]
 top_level = true
@@ -13,7 +13,6 @@ top_level = true
 [node name="Player1" parent="." instance=ExtResource("1_ge8cf")]
 
 [node name="Camera3D" type="Camera3D" parent="Player1/Head" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 near = 0.01
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player1/Head/Camera3D"]

@@ -10,29 +10,30 @@ extends Node3D
 var remotePlayer1 : Player1
 
 func _ready():
-	dragHandler.try_spawn_unit.connect(_try_spawn_unit)
+	dragHandler.try_spawn_enemy.connect(_try_spawn_enemy)
 
 func _process(delta):
 	slider.value = slider.value + (rechargeSpeed * delta)
 
 
-func _try_spawn_unit(unitData):
-	if !IsValidSpawn(unitData):
+func _try_spawn_enemy(enemyData):
+	if !IsValidSpawn(enemyData):
 		return	
 
-	slider.value -= unitData.power
+	slider.value -= enemyData.power
 	if slider.value < 0:
 		slider.value = 0
-	var unit_name = "unit_" + str(get_tree().get_nodes_in_group("unit").size() + 1)
-	unitData.name = unit_name
-	level.spawn_unit.rpc(unitData.ToJson())
+	var enemy_name = "enemy_" + str(get_tree().get_nodes_in_group("enemy").size() + 1)
+	enemyData.name = enemy_name
+	level.ask_player1_to_spawn_enemy.rpc(enemyData.ToJson())
+	#level.spawn_enemy(enemyData.ToJson())
 
-func IsValidSpawn(unitData):
-	if slider.value < unitData.power: 
+func IsValidSpawn(enemyData):
+	if slider.value < enemyData.power: 
 		return false
 	
-	var spawnPosition = NavigationServer3D.map_get_closest_point(navigationRegion3D.get_navigation_map(), unitData.spawn_position)
-	unitData.spawn_position = spawnPosition
+	var spawnPosition = NavigationServer3D.map_get_closest_point(navigationRegion3D.get_navigation_map(), enemyData.spawn_position)
+	enemyData.spawn_position = spawnPosition
 	if remotePlayer1.IntersectsSafeZone(spawnPosition):
 		return false
 	

@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2cb13c6yvri5"]
+[gd_scene load_steps=13 format=3 uid="uid://c2cb13c6yvri5"]
 
 [ext_resource type="Script" path="res://Scripts/player_2.gd" id="1_pgitl"]
 [ext_resource type="Script" path="res://Scripts/DragHandler.gd" id="2_3pwg3"]
 [ext_resource type="PackedScene" uid="uid://c1rx6o2kylhf3" path="res://Scenes/Subscenes/draggable.tscn" id="2_onjjd"]
+[ext_resource type="PackedScene" uid="uid://w28x28vm3pcb" path="res://Scenes/Subscenes/Enemy2.tscn" id="4_rc4i1"]
+[ext_resource type="PackedScene" uid="uid://4unlgiu32n5u" path="res://Scenes/Subscenes/Enemy3.tscn" id="5_xri61"]
+[ext_resource type="PackedScene" uid="uid://b2a50r17u8cgw" path="res://Scenes/Subscenes/Enemy4.tscn" id="6_ebsqj"]
 
 [sub_resource type="Theme" id="Theme_112o8"]
 
@@ -75,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_3pwg3")
 
-[node name="Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+[node name="Enemy1_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -89,26 +92,29 @@ offset_bottom = 77.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Draggable2" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+[node name="Enemy2_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
 layout_mode = 1
 offset_left = -61.0
 offset_top = -38.0
 offset_right = -11.0
 offset_bottom = 13.0
+enemy = ExtResource("4_rc4i1")
 powerRequirement = 20.0
 
-[node name="Draggable3" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+[node name="Enemy3_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
 layout_mode = 1
 offset_left = 14.0
 offset_top = -38.0
 offset_right = 66.0
 offset_bottom = 14.0
+enemy = ExtResource("5_xri61")
 powerRequirement = 30.0
 
-[node name="Draggable4" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+[node name="Enemy4_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
 layout_mode = 1
 offset_left = 89.0
 offset_top = -38.0
 offset_right = 140.0
 offset_bottom = 13.0
+enemy = ExtResource("6_ebsqj")
 powerRequirement = 50.0

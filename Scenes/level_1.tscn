@@ -1,19 +1,15 @@
-[gd_scene load_steps=31 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=29 format=3 uid="uid://cdvveg0cf4cjl"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_xg1sp"]
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_1yba8"]
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="2_qdp4c"]
-[ext_resource type="Script" path="res://Scripts/DeathZone.gd" id="3_6307p"]
 [ext_resource type="PackedScene" uid="uid://c5c08p1yp1ah" path="res://Scenes/Subscenes/player_1_remote.tscn" id="3_fbsae"]
 [ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="4_ax3pg"]
 
 [sub_resource type="Environment" id="Environment_it6eh"]
 background_mode = 1
 background_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_131qf"]
-size = Vector3(123.241, 2.24133, 131.497)
 
 [sub_resource type="Resource" id="Resource_kk63r"]
 script = ExtResource("2_1yba8")
@@ -519,14 +515,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.78378, 1.58866, 17.0622)
 [node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
 transform = Transform3D(1, 0, 0, 0, 0.305496, -0.952194, 0, 0.952194, 0.305496, -6.40579, 39.1607, -26.551)
 
-[node name="DeathZone" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.65203, 0)
-script = ExtResource("3_6307p")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6431, 0.620667, 1.79596)
-shape = SubResource("BoxShape3D_131qf")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93578, 3.48355, 14.0226)
 
@@ -641,4 +629,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 6)
 script = ExtResource("1_xg1sp")
 block_data = SubResource("Resource_mfmo5")
 
-[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Subscenes/Enemy2.tscn")
+spawn_path = NodePath("../EnemySpawn")
+
+[node name="EnemySpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80419, 2.72371, -5.19534)

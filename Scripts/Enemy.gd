@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Unit
+class_name Enemy
 
 
 @onready var multiplayerSynchronizer : MultiplayerSynchronizer = $MultiplayerSynchronizer
@@ -24,14 +24,10 @@ func _ready():
 
 
 func SetPlayer(player):
-	if !HasAuthority():
-		return
 	playerToChase = player.get_node("Player1")
 
-func SetHealth(unitPower):
-	if !HasAuthority():
-		return
-	health *= unitPower
+func SetHealth(enemyPower):
+	health *= enemyPower
 	if healthDisplay == null:
 		healthDisplay = $HealthDisplay
 	healthDisplay.text = str(health)
@@ -70,6 +66,8 @@ func Die():
 	if destroying: 
 		return
 
+	multiplayerSynchronizer.public_visibility = false
+	
 	destroying = true
 	hide()
 	

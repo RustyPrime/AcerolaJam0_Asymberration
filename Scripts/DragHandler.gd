@@ -1,6 +1,6 @@
 extends Control
 
-signal try_spawn_unit(unitData)
+signal try_spawn_enemy(enemyData)
 
 var spaceState : PhysicsDirectSpaceState3D
 var currentDraggable : Draggable
@@ -33,8 +33,8 @@ func on_stopped_dragging(draggable : Draggable):
 	if currentDraggable == draggable:
 		var rayHitData = ScreenPointToRay()
 		if IsValidSpawn(rayHitData):
-			draggable.unitData.spawn_position = rayHitData["position"]
-			try_spawn_unit.emit(draggable.unitData)
+			draggable.enemyData.spawn_position = rayHitData["position"]
+			try_spawn_enemy.emit(draggable.enemyData)
 		
 		draggable.resetDraggable()
 		currentDraggable = null
