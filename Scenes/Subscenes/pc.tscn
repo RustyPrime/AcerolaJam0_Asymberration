@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dne83omquuf4a"]
+
+[ext_resource type="PackedScene" uid="uid://n6mrjdy6tk2a" path="res://Models/pcScreen.glb" id="1_jr56s"]
+[ext_resource type="PackedScene" uid="uid://cepkaiaxacqso" path="res://Models/keyboard.glb" id="2_72o20"]
+[ext_resource type="PackedScene" uid="uid://s8wr47u3cw8q" path="res://Models/mouse.glb" id="3_2y8o4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kff7q"]
+size = Vector3(0.52533, 0.479355, 0.561584)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vo2ow"]
+size = Vector3(0.238949, 0.0279455, 0.729813)
+
+[node name="PC" type="Node3D"]
+
+[node name="pcScreen" parent="." instance=ExtResource("1_jr56s")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="pcScreen"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pcScreen/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0307922, 0.41407, 0.00253296)
+shape = SubResource("BoxShape3D_kff7q")
+
+[node name="keyboard" parent="." instance=ExtResource("2_72o20")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="keyboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.671782, 0, 0.234632)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="keyboard/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0223904, 0.00447607, 0.0156784)
+shape = SubResource("BoxShape3D_vo2ow")
+
+[node name="mouse" parent="." instance=ExtResource("3_2y8o4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0109418, 0)
