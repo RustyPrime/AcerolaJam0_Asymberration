@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://brkarq6ipr2ay"]
+
+[ext_resource type="Script" path="res://Scripts/screen_view.gd" id="1_sjsxo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4rim"]
+font_size = 51
+
+[sub_resource type="Theme" id="Theme_6v2n7"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_0xfm0"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_vkgv3"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_6rpos"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kbrua"]
+color = Color(0.294118, 0.294118, 0.294118, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_c7dxa"]
+color = Color(0, 1, 0, 1)
+thickness = 10
+
+[node name="ScreenView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sjsxo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -42.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Establishing uplink..."
+label_settings = SubResource("LabelSettings_g4rim")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 2
+theme = SubResource("Theme_6v2n7")
+theme_override_icons/grabber = SubResource("ImageTexture_0xfm0")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_vkgv3")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_6rpos")
+theme_override_styles/slider = SubResource("StyleBoxLine_kbrua")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_c7dxa")
+step = 0.1
+value = 50.0
+editable = false
+scrollable = false

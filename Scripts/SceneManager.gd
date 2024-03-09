@@ -95,4 +95,8 @@ func setup_enemy(spawned_enemy, enemyData):
 func ask_player1_to_spawn_enemy(enemyData):
 	if multiplayer.get_unique_id() == GameManager.GetGroundPlayerID():
 		spawn_enemy_via_mp_spawner(enemyData)
+		
+
+
+
 

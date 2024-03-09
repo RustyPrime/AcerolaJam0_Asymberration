@@ -1,9 +1,12 @@
 extends CharacterBody3D
 class_name Player1
 
-const SPEED = 5.0
+
+@onready var movementSpeed : int = walkSpeed
 const JUMP_VELOCITY = 4.5
 
+@export var walkSpeed : int = 5
+@export var runSpeed :int = 7
 @export var BULLET_SPEED = 150.0
 @export var sensitivity = 700.0
 @export var shotDelay = 0.7
@@ -23,6 +26,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var spaceState : PhysicsDirectSpaceState3D
 var shotgunTimer : Timer
+var initialShotgunPosition : Vector3
+var initialShotgunRotation : Vector3
 
 var mouse_input : Vector2
 var rotation_target: Vector3
@@ -39,7 +44,8 @@ var shotID : int = 0
 
 func _ready():
 	safeZoneRadius = safeZone.shape.radius
-	
+	initialShotgunPosition = shotgun.position
+	initialShotgunRotation = shotgun.rotation_degrees
 	if !hasAuthority():
 		return
 		
@@ -48,6 +54,7 @@ func _ready():
 	shotgun.add_child(shotgunTimer)
 	shotgunTimer.timeout.connect(_shotgun_timer_timeout)
 	playerHeight = collisionShape.shape.height
+	
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -83,6 +90,16 @@ func _process(_delta):
 		shotID += 1
 		canShoot = false
 		shotgunTimer.start(shotDelay)
+
+	if Input.is_action_pressed("sprint"):
+		movementSpeed = runSpeed
+		shotgun.rotation_degrees = Vector3(90, 92.8, -45)
+		shotgun.position.x = initialShotgunPosition.x - 0.5
+	else:
+		movementSpeed = walkSpeed
+		shotgun.position = initialShotgunPosition
+		shotgun.rotation_degrees = initialShotgunRotation
+
 
 func randomSpread():
 	var randomSpreadRange = rng.randf_range(0, 0.1)
@@ -130,11 +147,11 @@ func handle_movement():
 		right *= -1
 	var direction = (transform.basis * Vector3(right, 0, forward)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * movementSpeed
+		velocity.z = direction.z * movementSpeed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, movementSpeed)
+		velocity.z = move_toward(velocity.z, 0, movementSpeed)
 
 func handle_camera_rotation(delta):
 	if camera == null:	

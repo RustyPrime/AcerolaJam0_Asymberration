@@ -1,0 +1,114 @@
+[gd_scene load_steps=17 format=3 uid="uid://bwq7222k3oykc"]
+
+[ext_resource type="PackedScene" uid="uid://3iyyq870qytq" path="res://Models/button.glb" id="1_edwu2"]
+[ext_resource type="Script" path="res://Scripts/button.gd" id="1_sjti2"]
+[ext_resource type="PackedScene" uid="uid://ujd8ht56ocro" path="res://Scenes/Subscenes/screen.tscn" id="3_2l0qi"]
+[ext_resource type="AudioStream" uid="uid://dmtlmr8rybxfk" path="res://Sounds/step_on_button.ogg" id="4_klmeq"]
+[ext_resource type="AudioStream" uid="uid://h1js8nqknav7" path="res://Sounds/step_off_button.ogg" id="5_k6sdq"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oiayr"]
+height = 1.57348
+radius = 1.01427
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_81jgf"]
+height = 0.151718
+radius = 1.37169
+
+[sub_resource type="Animation" id="Animation_038qn"]
+resource_name = "pressed"
+length = 0.416667
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.135617, 0, 0.0333333, 1, 0, 0.133869, 0, 0.0666667, 1, 0, 0.129874, 0, 0.1, 1, 0, 0.124006, 0, 0.133333, 1, 0, 0.11664, 0, 0.166667, 1, 0, 0.10815, 0, 0.233333, 1, 0, 0.0896717, 0, 0.266667, 1, 0, 0.0808072, 0, 0.3, 1, 0, 0.0726919, 0, 0.333333, 1, 0, 0.0657002, 0, 0.366667, 1, 0, 0.0609559, 0, 0.4, 1, 0, 0.0584588, 0, 0.416667, 1, 0, 0.0575849, 0)
+
+[sub_resource type="Animation" id="Animation_bfrch"]
+resource_name = "unpressed "
+length = 0.416667
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.0575849, 0, 0.0333333, 1, 0, 0.0575849, 0, 0.0666667, 1, 0, 0.0591905, 0, 0.1, 1, 0, 0.0631295, 0, 0.133333, 1, 0, 0.0695091, 0, 0.166667, 1, 0, 0.0778154, 0, 0.2, 1, 0, 0.0876631, 0, 0.233333, 1, 0, 0.0978961, 0, 0.266667, 1, 0, 0.108001, 0, 0.3, 1, 0, 0.117463, 0, 0.333333, 1, 0, 0.125769, 0, 0.366667, 1, 0, 0.131507, 0, 0.4, 1, 0, 0.134547, 0, 0.416667, 1, 0, 0.135617, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oyw4o"]
+_data = {
+"pressed": SubResource("Animation_038qn"),
+"unpressed ": SubResource("Animation_bfrch")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ta8mg"]
+animation = &"pressed"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_210w8"]
+animation = &"unpressed "
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_brqdj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e307h"]
+advance_mode = 2
+advance_condition = &"pressed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fql28"]
+advance_mode = 2
+advance_condition = &"unpressed"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2i66y"]
+states/Start/position = Vector2(64, 116)
+states/pressed/node = SubResource("AnimationNodeAnimation_ta8mg")
+states/pressed/position = Vector2(425, 82)
+"states/unpressed /node" = SubResource("AnimationNodeAnimation_210w8")
+"states/unpressed /position" = Vector2(292, 43)
+transitions = ["Start", "unpressed ", SubResource("AnimationNodeStateMachineTransition_brqdj"), "unpressed ", "pressed", SubResource("AnimationNodeStateMachineTransition_e307h"), "pressed", "unpressed ", SubResource("AnimationNodeStateMachineTransition_fql28")]
+
+[node name="Button" type="Node3D"]
+script = ExtResource("1_sjti2")
+
+[node name="button" parent="." instance=ExtResource("1_edwu2")]
+
+[node name="Button" parent="button" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135617, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.950827, 0)
+shape = SubResource("CylinderShape3D_oiayr")
+
+[node name="BaseCollider" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseCollider"]
+shape = SubResource("CylinderShape3D_81jgf")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../button")
+libraries = {
+"": SubResource("AnimationLibrary_oyw4o")
+}
+tree_root = SubResource("AnimationNodeStateMachine_2i66y")
+anim_player = NodePath("../button/AnimationPlayer")
+parameters/conditions/pressed = false
+parameters/conditions/unpressed = false
+
+[node name="Screen" parent="." instance=ExtResource("3_2l0qi")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 5.00476, 2.12591e-07)
+initialText = "Ready for calibration"
+interactText = "Calibrating gravity..."
+doneText = "Calibration finished"
+
+[node name="StepOnSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_klmeq")
+
+[node name="StepOffSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_k6sdq")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+
+[editable path="button"]

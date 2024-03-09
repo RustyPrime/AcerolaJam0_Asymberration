@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_gq7tn"]
 [ext_resource type="QuadMesh" uid="uid://cmakom5myahxo" path="res://Models/Enemy2_DrawPassQuad.tres" id="3_aijlk"]
 [ext_resource type="Material" path="res://Materials/Enemy2_ParticleMaterial.tres" id="3_tuxdb"]
-[ext_resource type="AudioStream" uid="uid://bruhuhfjw075t" path="res://Sounds/critter.ogg" id="5_aiy5d"]
+[ext_resource type="AudioStream" uid="uid://bruhuhfjw075t" path="res://Sounds/enemy2.ogg" id="4_a5nbg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
 radius = 1.19681
@@ -43,8 +43,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20179, 0)
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_aiy5d")
+stream = ExtResource("4_a5nbg")
 autoplay = true
-max_distance = 10.0
+max_distance = 20.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

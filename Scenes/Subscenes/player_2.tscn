@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2cb13c6yvri5"]
+[gd_scene load_steps=20 format=3 uid="uid://c2cb13c6yvri5"]
 
 [ext_resource type="Script" path="res://Scripts/player_2.gd" id="1_pgitl"]
 [ext_resource type="Script" path="res://Scripts/DragHandler.gd" id="2_3pwg3"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://4unlgiu32n5u" path="res://Scenes/Subscenes/Enemy3.tscn" id="5_xri61"]
 [ext_resource type="PackedScene" uid="uid://b2a50r17u8cgw" path="res://Scenes/Subscenes/Enemy4.tscn" id="6_ebsqj"]
 [ext_resource type="Texture2D" uid="uid://ckj85qwsorniw" path="res://Textures/Spikes.png" id="7_tb5me"]
+[ext_resource type="AudioStream" uid="uid://hq125mc730ae" path="res://Sounds/spawn.ogg" id="11_7cqaq"]
+[ext_resource type="AudioStream" uid="uid://gvtultv3c6rp" path="res://Sounds/noSpawn.ogg" id="11_dxovi"]
 
 [sub_resource type="Theme" id="Theme_112o8"]
 
@@ -97,6 +99,7 @@ offset_bottom = 77.0
 grow_horizontal = 1
 grow_vertical = 1
 texture_normal = ExtResource("4_liiph")
+stretch_mode = 6
 
 [node name="Enemy2_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
 layout_mode = 1
@@ -105,6 +108,7 @@ offset_top = -38.0
 offset_right = -11.0
 offset_bottom = 13.0
 texture_normal = ExtResource("5_trjsv")
+stretch_mode = 6
 enemy = ExtResource("4_rc4i1")
 powerRequirement = 20.0
 
@@ -115,6 +119,7 @@ offset_top = -38.0
 offset_right = 66.0
 offset_bottom = 14.0
 texture_normal = ExtResource("7_tb5me")
+stretch_mode = 6
 enemy = ExtResource("5_xri61")
 powerRequirement = 30.0
 
@@ -124,6 +129,7 @@ offset_left = 89.0
 offset_top = -38.0
 offset_right = 140.0
 offset_bottom = 13.0
+stretch_mode = 6
 enemy = ExtResource("6_ebsqj")
 powerRequirement = 50.0
 
@@ -140,3 +146,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_7cqaq")
+
+[node name="NoSpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_dxovi")

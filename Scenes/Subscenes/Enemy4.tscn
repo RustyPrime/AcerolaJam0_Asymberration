@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2a50r17u8cgw"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_weftt"]
-[ext_resource type="AudioStream" uid="uid://bruhuhfjw075t" path="res://Sounds/critter.ogg" id="4_hhmcv"]
+[ext_resource type="AudioStream" uid="uid://bs43x7vs0qcu1" path="res://Sounds/enemy4.ogg" id="2_7lqsv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
 radius = 1.19681
@@ -34,8 +34,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20179, 0)
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_hhmcv")
+stream = ExtResource("2_7lqsv")
 autoplay = true
-max_distance = 10.0
+max_distance = 40.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
