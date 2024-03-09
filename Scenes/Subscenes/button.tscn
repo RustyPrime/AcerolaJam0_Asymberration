@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://h1js8nqknav7" path="res://Sounds/step_off_button.ogg" id="5_k6sdq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_oiayr"]
-height = 1.57348
+height = 0.754661
 radius = 1.01427
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_81jgf"]
@@ -78,7 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135617, 0)
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.950827, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.452711, 0)
 shape = SubResource("CylinderShape3D_oiayr")
 
 [node name="BaseCollider" type="StaticBody3D" parent="."]
@@ -97,7 +97,7 @@ parameters/conditions/pressed = false
 parameters/conditions/unpressed = false
 
 [node name="Screen" parent="." instance=ExtResource("3_2l0qi")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 5.00476, 2.12591e-07)
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 3.03588, 3.84716e-07)
 initialText = "Ready for calibration"
 interactText = "Calibrating gravity..."
 doneText = "Calibration finished"

@@ -40,6 +40,9 @@ func SetFinishedText():
 func HasFinished():
 	return currentState == state.finished
 
+func IsInProgress():
+	return currentState == state.inProgress
+
 func ResetProgress():
 	if HasFinished():
 		return

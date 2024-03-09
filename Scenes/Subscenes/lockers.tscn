@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://boh0wmluaijpl"]
+
+[ext_resource type="PackedScene" uid="uid://bvuehlpxvbsls" path="res://Models/lockers.glb" id="1_di1fj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3x82o"]
+size = Vector3(9.7878, 2.51343, 0.5177)
+
+[node name="Lockers" instance=ExtResource("1_di1fj")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55376, 1.27405, -0.00921631)
+shape = SubResource("BoxShape3D_3x82o")

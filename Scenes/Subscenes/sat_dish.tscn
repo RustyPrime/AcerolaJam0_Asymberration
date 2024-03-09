@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cuagvafhouylk" path="res://Models/satDish.glb" id="1_nt8ja"]
 [ext_resource type="Script" path="res://Scripts/sat_dish.gd" id="1_qb5tm"]
 [ext_resource type="PackedScene" uid="uid://ujd8ht56ocro" path="res://Scenes/Subscenes/screen.tscn" id="3_x7myi"]
-[ext_resource type="AudioStream" uid="uid://df3fkbpc1pjyq" path="res://Sounds/dishInteract.ogg" id="4_nbruj"]
+[ext_resource type="AudioStream" uid="uid://df3fkbpc1pjyq" path="res://Sounds/interact.ogg" id="4_nbruj"]
 
 [sub_resource type="Animation" id="Animation_mgmx8"]
 resource_name = "Idle"
