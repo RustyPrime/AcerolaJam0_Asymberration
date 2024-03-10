@@ -23,10 +23,10 @@ texture = ExtResource("2_ib6bs")
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
-offset_left = 97.0
-offset_top = 73.0
-offset_right = 162.0
-offset_bottom = 104.0
+offset_left = 100.0
+offset_top = 75.0
+offset_right = 175.0
+offset_bottom = 110.0
 text = "HOST"
 
 [node name="Joining" type="Control" parent="."]
@@ -40,42 +40,43 @@ mouse_filter = 2
 
 [node name="Join" type="Button" parent="Joining"]
 layout_mode = 0
-offset_left = 98.0
-offset_top = 167.0
-offset_right = 161.0
-offset_bottom = 198.0
+offset_left = 100.0
+offset_top = 175.0
+offset_right = 175.0
+offset_bottom = 210.0
 text = "JOIN"
-
-[node name="IpToJoin" type="LineEdit" parent="Joining"]
-layout_mode = 0
-offset_left = 171.0
-offset_top = 117.0
-offset_right = 441.0
-offset_bottom = 148.0
-placeholder_text = "Example: 192.168.0.56"
 
 [node name="Label" type="Label" parent="Joining"]
 layout_mode = 0
-offset_left = 98.0
-offset_top = 118.0
-offset_right = 161.0
-offset_bottom = 149.0
+offset_left = 100.0
+offset_top = 125.0
+offset_right = 163.0
+offset_bottom = 156.0
 text = "IP:"
+vertical_alignment = 1
+
+[node name="IpToJoin" type="LineEdit" parent="Joining"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 125.0
+offset_right = 445.0
+offset_bottom = 160.0
+placeholder_text = "Example: 192.168.0.56"
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
-offset_left = 97.0
-offset_top = 205.0
-offset_right = 170.0
-offset_bottom = 236.0
+offset_left = 100.0
+offset_top = 225.0
+offset_right = 175.0
+offset_bottom = 260.0
 text = "START"
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 0
-offset_left = 98.0
-offset_top = 245.0
-offset_right = 171.0
-offset_bottom = 276.0
+offset_left = 100.0
+offset_top = 275.0
+offset_right = 175.0
+offset_bottom = 310.0
 text = "BACK
 "
 
@@ -97,6 +98,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = -9.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
