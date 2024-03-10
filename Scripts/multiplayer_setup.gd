@@ -1,10 +1,12 @@
 extends Control
 
+@onready var console : VBoxContainer = $ColorRect/ScrollContainer/VBoxContainer
+
 var peer : ENetMultiplayerPeer
 
 
 var address = "localhost"
-var port = 8910
+var port = 19101
 var compression : ENetConnection.CompressionMode = ENetConnection.COMPRESS_RANGE_CODER
 
 func _ready():
@@ -13,16 +15,18 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 
+
+
 func _on_host_pressed():
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(port)
 	if error != OK:
-		#print("Cannot Host: " + error)
+		debugLog("Cannot Host: " + error)
 		return
 
 	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
-	#print("Waiting for players!")
+	debugLog("Waiting for players!")
 	SendPlayerInformation($Username.text, multiplayer.get_unique_id(), true)
 
 
@@ -51,7 +55,6 @@ func SendPlayerInformation(player_name, id, isGroundPlayer):
 		GameManager.Players[id] = {
 			"name" : player_name,
 			"isGroundPlayer" : isGroundPlayer
-			# todo: add score?
 		}
 	if multiplayer.is_server():
 		for identifier in GameManager.Players:
@@ -61,15 +64,20 @@ func SendPlayerInformation(player_name, id, isGroundPlayer):
 
 
 func peer_connected(id):
-	print("player connected" + str(id))
+	debugLog("player connected" + str(id))
 	pass
 func peer_disconnected(id):
-	print("player disconnected" + str(id))
+	debugLog("player disconnected" + str(id))
 	pass
 func connected_to_server():
-	print("connected to server")
+	debugLog("connected to server")
 	SendPlayerInformation.rpc_id(1, $Username.text, multiplayer.get_unique_id(), false)
 
 func connection_failed():
-	print("connection failed")
+	debugLog("connection failed")
 	pass
+
+func debugLog(text):
+	var label = Label.new()
+	label.text = str(text)
+	console.add_child(label)
