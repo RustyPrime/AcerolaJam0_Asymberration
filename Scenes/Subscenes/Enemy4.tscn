@@ -1,11 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2a50r17u8cgw"]
+[gd_scene load_steps=9 format=3 uid="uid://b2a50r17u8cgw"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_weftt"]
 [ext_resource type="AudioStream" uid="uid://bs43x7vs0qcu1" path="res://Sounds/enemy4.ogg" id="2_7lqsv"]
+[ext_resource type="Texture2D" uid="uid://f6odbc0mmdqa" path="res://Textures/star.png" id="2_qpeuk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
-radius = 1.19681
-height = 3.06644
+radius = 0.808719
+height = 2.66799
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wr406"]
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+damping_min = 50.0
+damping_max = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbwrf"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 0.0431373)
+albedo_texture = ExtResource("2_qpeuk")
+billboard_mode = 1
+grow_amount = -16.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_0egaw"]
+material = SubResource("StandardMaterial3D_jbwrf")
+size = Vector2(0.5, 0.5)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_37vlw"]
 properties/0/path = NodePath(".:position")
@@ -15,13 +37,20 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Enemy4" type="CharacterBody3D" groups=["enemy"]]
+[node name="Enemy4" type="CharacterBody3D" node_paths=PackedStringArray("particles") groups=["enemy"]]
 collision_mask = 7
 script = ExtResource("1_weftt")
+particles = NodePath("Red")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
 shape = SubResource("CapsuleShape3D_7kgye")
+
+[node name="Red" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912851, 0)
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_wr406")
+draw_pass_1 = SubResource("QuadMesh_0egaw")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_37vlw")
