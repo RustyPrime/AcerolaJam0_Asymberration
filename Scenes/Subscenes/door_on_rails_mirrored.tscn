@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://lepxspy1aid0"]
+
+[ext_resource type="PackedScene" uid="uid://mstw071jaahu" path="res://Models/doorOnRailsMirrored.glb" id="1_raetw"]
+
+[node name="DoorOnRailsMirrored" type="Node3D"]
+
+[node name="doorOnRailsMirrored" parent="." instance=ExtResource("1_raetw")]

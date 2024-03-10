@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cepciqjp835t5"]
+[gd_scene load_steps=27 format=3 uid="uid://cepciqjp835t5"]
 
 [ext_resource type="Script" path="res://Scripts/vfx_texture_grabber.gd" id="1_7ke2c"]
 [ext_resource type="Material" uid="uid://d3fw7o5esja6u" path="res://Materials/Enemy1_ParticleMaterial.tres" id="2_chqwm"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://2o6fxcfniiv5" path="res://Textures/ring_texture.tres" id="3_eiuia"]
 [ext_resource type="Texture2D" uid="uid://cskk4richv1rg" path="res://Textures/fresnel_texture_2.tres" id="4_5tj32"]
 [ext_resource type="Texture2D" uid="uid://f6odbc0mmdqa" path="res://Textures/star.png" id="4_sor5b"]
+[ext_resource type="PackedScene" uid="uid://cn2b14d7jn165" path="res://Scenes/Subscenes/Shotgun2.tscn" id="8_24rvq"]
+[ext_resource type="Material" uid="uid://b1ompht62jexn" path="res://Materials/pixelate_material.tres" id="9_lqx5p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24o26"]
 resource_local_to_scene = true
@@ -113,7 +115,7 @@ background_mode = 1
 
 [node name="VFX_TextureGrabber" type="Node3D" node_paths=PackedStringArray("vfx")]
 script = ExtResource("1_7ke2c")
-vfx = NodePath("Red")
+vfx = NodePath("Shotgun")
 
 [node name="GreenMist" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0152204, 0.907412, 0)
@@ -124,6 +126,7 @@ draw_pass_1 = SubResource("QuadMesh_wc832")
 
 [node name="Red" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912851, 0)
+visible = false
 amount = 1000
 process_material = SubResource("ParticleProcessMaterial_wr406")
 draw_pass_1 = SubResource("QuadMesh_0egaw")
@@ -145,7 +148,23 @@ process_material = ExtResource("2_chqwm")
 draw_pass_1 = SubResource("QuadMesh_rk1bt")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0948465, 0.936002, 2.67842)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.630925, 1.44319, 1.55861)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2arfi")
+
+[node name="Shotgun" parent="." instance=ExtResource("8_24rvq")]
+transform = Transform3D(0.414006, -0.444471, 0.216955, 0.445705, 0.212622, -0.414926, 0.214408, 0.416248, 0.443612, 0, 1.11882, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.687633, -0.12337, -0.715501, 0.505856, 0.788322, 0.350227, 0.520837, -0.602768, 0.604483, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("9_lqx5p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

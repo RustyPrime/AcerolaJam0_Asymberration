@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ost5ittn3qme"]
+
+[ext_resource type="PackedScene" uid="uid://cln4vude01ra1" path="res://Models/doorOnRails.glb" id="1_4pkfg"]
+
+[node name="DoorOnRails" type="Node3D"]
+
+[node name="doorOnRails" parent="." instance=ExtResource("1_4pkfg")]
