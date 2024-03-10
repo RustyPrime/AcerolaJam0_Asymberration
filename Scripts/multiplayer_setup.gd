@@ -38,7 +38,7 @@ func _on_host_pressed():
 	debugLog("Host succesful on local ip: " + ip_adress)
 	debugLog("Give this ip to another player in your local network.")
 	debugLog("Waiting for another player!")
-	SendPlayerInformation($Username.text, multiplayer.get_unique_id(), true)
+	SendPlayerInformation("", multiplayer.get_unique_id(), true)
 
 	joining.hide()
 
@@ -101,7 +101,7 @@ func _on_back_pressed():
 
 	if peer != null:
 		peer.close()
-	GameManager.selectedMode = GameManager.PlayMode.UnInit
+	GameManager.reset()
 
 	prevMenu.show()
 

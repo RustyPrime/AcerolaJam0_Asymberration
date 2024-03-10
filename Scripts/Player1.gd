@@ -22,10 +22,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var level = get_node("/root/Level")
 @onready var rng = RandomNumberGenerator.new()
 @onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
+@onready var hitTimer : Timer = $HitZone/HitTimer
 @onready var camera : Node3D = $Head
 
 var spaceState : PhysicsDirectSpaceState3D
 var shotgunTimer : Timer
+var enemiesHittingPlayer : Array[Node3D]
 var initialShotgunPosition : Vector3
 var initialShotgunRotation : Vector3
 
@@ -41,6 +43,8 @@ var safeZoneRadius : float
 var playerHeight : float
 var shotID : int = 0
 
+var health = 100
+
 
 func _ready():
 	safeZoneRadius = safeZone.shape.radius
@@ -53,6 +57,8 @@ func _ready():
 	shotgunTimer = Timer.new()
 	shotgun.add_child(shotgunTimer)
 	shotgunTimer.timeout.connect(_shotgun_timer_timeout)
+
+	hitTimer.timeout.connect(HitPlayer)
 	playerHeight = collisionShape.shape.height
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -230,5 +236,35 @@ func shoot(spread_data):
 		spawned_bullet.apply_force((direction) * BULLET_SPEED)
 
 	
-	
+func HitPlayer():
+	health -= 10
+	if health <= 0:
+		health = 0
+		Die()
 
+func Die():
+	# todo: show gameover screen
+	pass
+
+
+func _on_hit_area_3d_body_entered(body:Node3D):
+	if !hasAuthority():
+		return
+	if body is Enemy:
+		var enemiesCount = enemiesHittingPlayer.size()
+		enemiesHittingPlayer.append(body)
+		if enemiesCount == 0:
+			hitTimer.start()
+			HitPlayer()
+
+
+func _on_hit_area_3d_body_exited(body:Node3D):
+	if !hasAuthority():
+		return
+
+	if body is Enemy:
+		var index = enemiesHittingPlayer.find(body)
+		if index != -1:
+			enemiesHittingPlayer.remove_at(index)
+			if enemiesHittingPlayer.size() == 0:
+				hitTimer.stop()

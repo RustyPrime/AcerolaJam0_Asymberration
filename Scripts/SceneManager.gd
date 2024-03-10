@@ -17,6 +17,8 @@ extends Node3D
 @onready var tier3timer : Timer = $AutoSpawner/Tier3EnemyTimer
 @onready var tier4timer : Timer = $AutoSpawner/Tier4EnemyTimer
 @onready var rng = RandomNumberGenerator.new()
+@onready var winScreen : Control = $GameEndUI/WinScreen
+@onready var loseScreen : Control = $GameEndUI/LoseScreen
 
 var playerID = -1
 var player1
@@ -64,7 +66,7 @@ func _spawntimer_timeout(tier):
 	if player1.get_node("Player1").IntersectsSafeZone(randomSpawn.global_position):
 		# if the randomly selected spawn point is inside the safe zone of the player skip it instead of re-roll to add randomness
 		return
-		
+
 	var powerRequirement = 20
 	var enemyPath = "res://Scenes/Subscenes/Enemy1.tscn"
 	match tier:
@@ -155,5 +157,10 @@ func ask_player1_to_spawn_enemy(enemyData):
 		
 
 
+
+
+func _on_back_to_main_pressed():
+	GameManager.reset()
+	get_tree().change_scene_to_file("res://Scenes/pre_main_menu.tscn")
 
 

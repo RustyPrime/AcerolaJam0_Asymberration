@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://uav3p52crhhs"]
+[gd_scene load_steps=9 format=3 uid="uid://uav3p52crhhs"]
 
 [ext_resource type="Script" path="res://Scripts/Player1.gd" id="1_rdjtu"]
 [ext_resource type="Material" uid="uid://b3aluapbncj1v" path="res://Materials/player1_material.tres" id="2_sjo4x"]
@@ -25,7 +25,11 @@ properties/2/replication_mode = 1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wts2o"]
 height = 0.1
-radius = 15.0
+radius = 10.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_252dh"]
+radius = 0.646605
+height = 1.79654
 
 [node name="Player1" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.999952, 0.0098435, 0, -0.0098435, 0.999952, 0, 0.01548, 0)
@@ -71,3 +75,17 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeZone/Area3D"]
 shape = SubResource("CylinderShape3D_wts2o")
+
+[node name="HitZone" type="Node3D" parent="."]
+
+[node name="HitTimer" type="Timer" parent="HitZone"]
+wait_time = 0.7
+
+[node name="HitArea3D" type="Area3D" parent="HitZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832981, 1.74623e-10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitZone/HitArea3D"]
+shape = SubResource("CapsuleShape3D_252dh")
+
+[connection signal="body_entered" from="HitZone/HitArea3D" to="." method="_on_hit_area_3d_body_entered"]
+[connection signal="body_exited" from="HitZone/HitArea3D" to="." method="_on_hit_area_3d_body_exited"]

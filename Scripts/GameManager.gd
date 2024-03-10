@@ -21,3 +21,8 @@ func GetGroundPlayerID():
 
 func isLAN():
     return selectedMode == PlayMode.LAN
+
+func reset():
+    selectedMode = PlayMode.UnInit
+    Players = {}
+    
