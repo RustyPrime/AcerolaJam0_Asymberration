@@ -96,7 +96,8 @@ func _process(_delta):
 
 	if Input.is_action_pressed("sprint"):
 		movementSpeed = runSpeed
-		shotgun.rotation_degrees = Vector3(90, 92.8, -45)
+		shotgun.rotation_degrees = initialShotgunRotation
+		shotgun.rotation_degrees.z = -45.0
 		shotgun.position.x = initialShotgunPosition.x - 0.5
 	else:
 		movementSpeed = walkSpeed
@@ -199,11 +200,10 @@ func handle_mouse_capture():
 		isMouseCaptured = false
 
 func hasAuthority():
-	var mpSynch = $MultiplayerSynchronizer
-	if mpSynch == null or !GameManager.isLAN(): 
-		return true
-	else:
-		return $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	if GameManager.isLAN():
+		var mpSynch = $MultiplayerSynchronizer
+		return mpSynch.get_multiplayer_authority() == multiplayer.get_unique_id()
+	return true
 
 func _shotgun_timer_timeout():
 	canShoot = true

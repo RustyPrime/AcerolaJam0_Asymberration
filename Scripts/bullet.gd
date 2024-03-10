@@ -1,7 +1,7 @@
 extends RigidBody3D
 class_name Bullet
 
-var damage = 2
+var damage = 10
 var destroying = false
 @onready var destroyTimer : Timer = $Timer
 
@@ -14,7 +14,7 @@ func _on_body_entered(body:Node):
 	if GameManager.isLAN() and get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
-	if body is Enemy:
+	if body is Enemy or body is DestructableTarget:
 		body.DoDamage.rpc(damage)
 		
 	if !destroying:

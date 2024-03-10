@@ -5,8 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cn2b14d7jn165" path="res://Scenes/Subscenes/Shotgun2.tscn" id="3_6t18h"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pxubv"]
+radius = 0.4
+height = 1.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nwete"]
+radius = 0.41
+height = 1.5
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_14xoj"]
 properties/0/path = NodePath(".:position")
@@ -26,27 +30,25 @@ radius = 15.0
 [node name="Player1" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.999952, 0.0098435, 0, -0.0098435, 0.999952, 0, 0.01548, 0)
 script = ExtResource("1_rdjtu")
-walkSpeed = 7
-runSpeed = 15
 BULLET_SPEED = 300.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997871, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740655, 1.74623e-10)
 mesh = SubResource("CapsuleMesh_pxubv")
 surface_material_override/0 = ExtResource("2_sjo4x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997871, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740655, 1.74623e-10)
 shape = SubResource("CapsuleShape3D_nwete")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_14xoj")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70855, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1943, 1.10595e-09)
 
 [node name="Shotgun" parent="Head" instance=ExtResource("3_6t18h")]
-transform = Transform3D(-0.0491263, 0.998793, -4.36586e-08, 0, -4.37114e-08, -1, -0.998793, -0.0491263, 2.14738e-09, 0.364415, -0.790521, -1.30668)
+transform = Transform3D(-0.0147379, 0.299638, -1.30976e-08, 0, -1.31134e-08, -0.3, -0.299638, -0.0147379, 6.44214e-10, 0.295, -0.298, -0.626)
 
 [node name="Muzzle" type="Node3D" parent="Head/Shotgun"]
 unique_name_in_owner = true

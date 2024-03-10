@@ -41,7 +41,8 @@ func SetHealth(enemyPower):
 	healthDisplay.text = str(health)
 
 func SetAuthoritiy(id = 1):
-	multiplayerSynchronizer.set_multiplayer_authority(id)
+	if GameManager.isLAN():
+		multiplayerSynchronizer.set_multiplayer_authority(id)
 
 func HasAuthority():
 	return !GameManager.isLAN() or multiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()

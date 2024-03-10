@@ -17,9 +17,10 @@ offset_left = 109.0
 offset_top = 155.0
 offset_right = 229.0
 offset_bottom = 197.0
-text = "LAN (windows client only)"
+text = "LAN-Multiplayer (Windows client only)"
 
 [node name="Singleplayer" type="Button" parent="."]
+layout_mode = 0
 offset_left = 109.0
 offset_top = 220.0
 offset_right = 316.0

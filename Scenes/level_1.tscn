@@ -1,8 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=29 format=3 uid="uid://cdvveg0cf4cjl"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="2_qdp4c"]
-[ext_resource type="PackedScene" path="res://Scenes/Subscenes/player_1_remote.tscn" id="3_fbsae"]
+[ext_resource type="PackedScene" uid="uid://c5c08p1yp1ah" path="res://Scenes/Subscenes/player_1_remote.tscn" id="3_fbsae"]
 [ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="4_ax3pg"]
 [ext_resource type="PackedScene" uid="uid://dowwehwb4hrru" path="res://Scenes/Subscenes/sat_dish.tscn" id="5_u62ow"]
 [ext_resource type="PackedScene" uid="uid://25go8fwr32gk" path="res://Scenes/Subscenes/scene.tscn" id="6_mfcu6"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cslly3ej65hy1" path="res://Scenes/Subscenes/box_1.tscn" id="16_l83o0"]
 [ext_resource type="PackedScene" uid="uid://bb7q0lqo238ss" path="res://Scenes/Subscenes/ceiling.tscn" id="17_dcbj3"]
 [ext_resource type="PackedScene" uid="uid://dpf5tnalkkwxo" path="res://Scenes/Subscenes/box_2.tscn" id="17_wq4il"]
+[ext_resource type="PackedScene" uid="uid://djolw8digd37k" path="res://Scenes/Subscenes/target.tscn" id="18_a5bna"]
 [ext_resource type="PackedScene" uid="uid://c8e1vucnxd3ax" path="res://Scenes/Subscenes/box_3.tscn" id="18_oy27w"]
 
 [sub_resource type="Environment" id="Environment_3v1yv"]
@@ -85,13 +86,14 @@ emission_energy_multiplier = 10.0
 top_radius = 0.02
 bottom_radius = 0.02
 
-[node name="Level" type="Node3D" node_paths=PackedStringArray("player1_spawnPoint", "player2_spawnPoint")]
+[node name="Level" type="Node3D" node_paths=PackedStringArray("player1_spawnPoint", "player2_spawnPoint", "enemySpawnPoints")]
 script = ExtResource("1_y2gin")
 player1_scene = ExtResource("2_qdp4c")
 player1_remote_scene = ExtResource("3_fbsae")
 player2_scene = ExtResource("4_ax3pg")
 player1_spawnPoint = NodePath("Multiplayer/SpawnPoint1")
 player2_spawnPoint = NodePath("Multiplayer/SpawnPoint2")
+enemySpawnPoints = [NodePath("EnemySpawns/Spawn1"), NodePath("EnemySpawns/Spawn2"), NodePath("EnemySpawns/Spawn3"), NodePath("EnemySpawns/Spawn4"), NodePath("EnemySpawns/Spawn5"), NodePath("EnemySpawns/Spawn6"), NodePath("EnemySpawns/Spawn7"), NodePath("EnemySpawns/Spawn8"), NodePath("EnemySpawns/Spawn9")]
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -241,6 +243,24 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.5803
 
 [node name="Ceiling" parent="World" instance=ExtResource("17_dcbj3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0977, 1.90735e-06, -1.59151)
+
+[node name="Targets" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83558, 0.804607, -12.1458)
+
+[node name="Target" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(-2.18557e-08, -0.866025, -0.5, -1, 1.91069e-15, 4.37114e-08, -3.78552e-08, 0.5, -0.866025, 9.15665, 0, -3.12814)
+
+[node name="Target2" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(3.17243e-09, -0.997363, 0.0725768, -1, 1.91069e-15, 4.37114e-08, -4.35961e-08, -0.0725768, -0.997363, 9.15665, 0, -1.32469)
+
+[node name="Target3" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(-5.37251e-09, -0.992418, -0.122909, -1, 1.91069e-15, 4.37114e-08, -4.338e-08, 0.122909, -0.992418, 9.15665, 0, 0.280461)
+
+[node name="Target4" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(8.21244e-09, -0.982192, 0.187879, -1, 1.91069e-15, 4.37114e-08, -4.2933e-08, -0.187879, -0.982192, 9.15665, 0, 1.99471)
+
+[node name="Target5" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(1.84034e-08, -0.907051, 0.42102, -1, 1.91069e-15, 4.37114e-08, -3.96485e-08, -0.42102, -0.907051, 9.15665, 0, 3.50359)
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -401,17 +421,58 @@ omni_range = 25.038
 [node name="Multiplayer" type="Node3D" parent="."]
 
 [node name="SpawnPoint1" type="Node3D" parent="Multiplayer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.78378, 1.58866, 17.0622)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95421, 1.58866, 11.1468)
 
 [node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
 transform = Transform3D(1, 0, 0, 0, 0.305496, -0.952194, 0, 0.952194, 0.305496, -6.40579, 39.1607, -26.551)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/Subscenes/Enemy2.tscn")
-spawn_path = NodePath("../EnemySpawn")
+spawn_path = NodePath("../EnemySpawns")
 
-[node name="EnemySpawn" type="Node3D" parent="."]
+[node name="EnemySpawns" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80419, 2.72371, -5.19534)
+
+[node name="Spawn1" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8131, -1.1686, 13.8189)
+
+[node name="Spawn2" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8131, -1.1686, -6.90716)
+
+[node name="Spawn3" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8347, -1.1686, 13.8189)
+
+[node name="Spawn4" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7087, -1.1686, -6.84206)
+
+[node name="Spawn5" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.7667, -1.1686, 2.87881)
+
+[node name="Spawn6" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3977, -1.1686, 2.87881)
+
+[node name="Spawn7" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04098, -1.1686, 2.87881)
+
+[node name="Spawn8" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3556, -1.1686, 2.87881)
+
+[node name="Spawn9" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.542813, -1.1686, -8.05114)
+
+[node name="AutoSpawner" type="Node3D" parent="."]
+
+[node name="Tier1EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 10.0
+
+[node name="Tier2EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 30.0
+
+[node name="Tier3EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 60.0
+
+[node name="Tier4EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 120.0
 
 [connection signal="body_entered" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_exited"]

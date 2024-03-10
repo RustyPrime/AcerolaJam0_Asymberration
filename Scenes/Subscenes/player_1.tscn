@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhxlmgc3clgt0"]
 
-[ext_resource type="PackedScene" uid="uid://cx4n3fgv54r1a" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_ge8cf"]
+[ext_resource type="PackedScene" uid="uid://uav3p52crhhs" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_ge8cf"]
 [ext_resource type="Script" path="res://Scripts/PlayerRig.gd" id="1_w1bki"]
 [ext_resource type="Shader" path="res://Materials/pixelate_material.gdshader" id="2_hb7fs"]
 
@@ -15,7 +15,7 @@ script = ExtResource("1_w1bki")
 [node name="Player1" parent="." instance=ExtResource("1_ge8cf")]
 
 [node name="Shotgun" parent="Player1/Head" index="0"]
-transform = Transform3D(-0.0491263, 0.998793, -4.36586e-08, 0, -4.37114e-08, -1, -0.998793, -0.0491263, 2.14738e-09, 0.364415, -0.790521, -1.30668)
+transform = Transform3D(0.046317, 0.294889, 0.0299197, 0.00286706, 0.0298356, -0.298499, -0.296389, 0.0463712, 0.00178811, 0.271841, -0.299433, -0.477805)
 
 [node name="Camera3D" type="Camera3D" parent="Player1/Head" index="2"]
 current = true
