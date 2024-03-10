@@ -26,8 +26,12 @@ var player1
 var enemyID = 1
 var enemies = {}
 var canSpawnEnemies = false
+var completedChallangesCounter = 0
 
 func _ready():
+	for screen in get_tree().get_nodes_in_group("screen"):
+		screen.has_finished.connect(ChallangeCompleted)
+
 	if GameManager.isLAN():
 		multiplayerSpawner.spawn_function = spawn_enemy_function
 		multiplayerSpawner.spawned.connect(_on_authority_spawned_enemy)
@@ -171,12 +175,38 @@ func PlayerOneDied():
 			loseScreen.show()
 		else:
 			winScreen.show()
-
-
+	
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 			enemy.queue_free()
-		
 
+@rpc("any_peer", "call_local")
+func PlayerOneWon():
+	player1.isDead = true
+	if !GameManager.isLAN():
+		winScreen.show()
+
+		tier1timer.stop()
+		tier2timer.stop()
+		tier3timer.stop()
+		tier4timer.stop()
+		
+	else:
+		if multiplayer.get_unique_id() == GameManager.GetGroundPlayerID():
+			winScreen.show()
+		else:
+			loseScreen.show()
+	
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+			enemy.queue_free()
+
+
+
+
+
+func ChallangeCompleted():
+	completedChallangesCounter += 1
+	if completedChallangesCounter >= 4:
+		PlayerOneWon.rpc()
 
 
 func _on_back_to_main_pressed():

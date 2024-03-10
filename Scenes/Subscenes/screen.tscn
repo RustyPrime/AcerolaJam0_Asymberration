@@ -19,7 +19,7 @@ lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_hmw1i")
 add_uv2 = true
 
-[node name="Screen" type="Node3D"]
+[node name="Screen" type="Node3D" groups=["screen"]]
 script = ExtResource("1_yynd6")
 
 [node name="screen" parent="." instance=ExtResource("1_akis4")]

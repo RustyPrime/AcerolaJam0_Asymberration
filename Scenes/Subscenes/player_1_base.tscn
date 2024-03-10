@@ -32,7 +32,7 @@ radius = 10.0
 radius = 0.646605
 height = 1.79654
 
-[node name="Player1" type="CharacterBody3D"]
+[node name="Player1" type="CharacterBody3D" groups=["player1"]]
 transform = Transform3D(1, 0, 0, 0, 0.999952, 0.0098435, 0, -0.0098435, 0.999952, 0, 0.01548, 0)
 script = ExtResource("1_rdjtu")
 BULLET_SPEED = 300.0
@@ -89,7 +89,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832981, 1.74623e-10)
 shape = SubResource("CapsuleShape3D_252dh")
 
 [node name="HitSound" type="AudioStreamPlayer3D" parent="HitZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("4_y0vfs")
 
 [connection signal="body_entered" from="HitZone/HitArea3D" to="." method="_on_hit_area_3d_body_entered"]

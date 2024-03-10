@@ -11,12 +11,15 @@ func _ready():
 
 
 func _on_body_entered(body:Node):
+	print("bullet collided with " + body.name)
 	if GameManager.isLAN() and get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
-	if body is Enemy or body is DestructableTarget:
+	if body is Enemy:
 		body.DoDamage.rpc(damage)
-		
+	if body.owner is DestructableTarget or body.owner is SpecialTarget:	
+		body.owner.DoDamage.rpc(damage)
+	
 	if !destroying:
 		destroyBullet.rpc()	
 

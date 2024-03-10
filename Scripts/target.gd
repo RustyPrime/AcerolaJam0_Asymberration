@@ -1,6 +1,7 @@
 extends Node3D
 class_name DestructableTarget
 
+signal death
 
 var health = 2
 var destroying = false
@@ -8,6 +9,7 @@ var destroying = false
 
 @rpc("any_peer", "call_local")
 func DoDamage(damage):
+	print("hit target")
 	health -= damage
 	if health < 0:
 		health = 0
@@ -17,7 +19,7 @@ func DoDamage(damage):
 func Die():
 	if destroying: 
 		return
-	
+	death.emit()
 	destroying = true
 	hide()
 	
