@@ -93,6 +93,7 @@ states/Start/position = Vector2(88, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_edkag"), "Idle", "Shot", SubResource("AnimationNodeStateMachineTransition_ywrm7"), "Shot", "Idle", SubResource("AnimationNodeStateMachineTransition_2flpc"), "Shot", "Shot 2", SubResource("AnimationNodeStateMachineTransition_de2pn"), "Shot 2", "Idle", SubResource("AnimationNodeStateMachineTransition_yf1w8"), "Shot 2", "Shot", SubResource("AnimationNodeStateMachineTransition_7xp82")]
 
 [node name="Shotgun" type="Node3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 script = ExtResource("1_8522k")
 
 [node name="shotgun" parent="." instance=ExtResource("2_4p1df")]
@@ -100,7 +101,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="ShotAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_4jtn7")
-volume_db = -10.0
+volume_db = -15.0
 max_distance = 100.0
 
 [node name="CockingAudio" type="AudioStreamPlayer3D" parent="."]

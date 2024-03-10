@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5c08p1yp1ah"]
 
-[ext_resource type="PackedScene" uid="uid://cx4n3fgv54r1a" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_13cwo"]
+[ext_resource type="PackedScene" uid="uid://uav3p52crhhs" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_13cwo"]
 [ext_resource type="Script" path="res://Scripts/PlayerRig.gd" id="1_l60q6"]
 
 [node name="PlayerRig" type="Node3D"]

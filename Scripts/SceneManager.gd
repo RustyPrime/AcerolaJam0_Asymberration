@@ -156,6 +156,26 @@ func ask_player1_to_spawn_enemy(enemyData):
 		spawn_enemy_via_mp_spawner(enemyData)
 		
 
+@rpc("any_peer", "call_local")
+func PlayerOneDied():
+	if GameManager.isLAN():
+		loseScreen.show()
+
+		tier1timer.stop()
+		tier2timer.stop()
+		tier3timer.stop()
+		tier4timer.stop()
+		
+	else:
+		if multiplayer.get_unique_id() == GameManager.GetGroundPlayerID():
+			loseScreen.show()
+		else:
+			winScreen.show()
+
+
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+			enemy.queue_free()
+		
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=31 format=3 uid="uid://cdvveg0cf4cjl"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="2_qdp4c"]
@@ -88,6 +88,9 @@ bottom_radius = 0.02
 
 [sub_resource type="LabelSettings" id="LabelSettings_wyy65"]
 font_size = 76
+
+[sub_resource type="LabelSettings" id="LabelSettings_sera7"]
+font_size = 40
 
 [node name="Level" type="Node3D" node_paths=PackedStringArray("player1_spawnPoint", "player2_spawnPoint", "enemySpawnPoints")]
 script = ExtResource("1_y2gin")
@@ -494,6 +497,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="GameEndUI/WinScreen"]
 layout_mode = 1
@@ -517,11 +521,22 @@ vertical_alignment = 1
 
 [node name="BackToMain" type="Button" parent="GameEndUI/WinScreen"]
 layout_mode = 0
-offset_left = 324.0
-offset_top = 360.0
-offset_right = 499.0
-offset_bottom = 416.0
+offset_left = 178.0
+offset_top = 317.0
+offset_right = 617.0
+offset_bottom = 446.0
+
+[node name="Label" type="Label" parent="GameEndUI/WinScreen/BackToMain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Back to main menu"
+label_settings = SubResource("LabelSettings_sera7")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LoseScreen" type="Control" parent="GameEndUI"]
 visible = false
@@ -553,11 +568,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BackToMain" type="Button" parent="GameEndUI/LoseScreen"]
-offset_left = 324.0
-offset_top = 360.0
-offset_right = 499.0
-offset_bottom = 416.0
+offset_left = 178.0
+offset_top = 317.0
+offset_right = 617.0
+offset_bottom = 446.0
+
+[node name="Label" type="Label" parent="GameEndUI/LoseScreen/BackToMain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Back to main menu"
+label_settings = SubResource("LabelSettings_sera7")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_exited"]

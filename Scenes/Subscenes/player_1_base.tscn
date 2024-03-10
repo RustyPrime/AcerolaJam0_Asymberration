@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://uav3p52crhhs"]
+[gd_scene load_steps=10 format=3 uid="uid://uav3p52crhhs"]
 
 [ext_resource type="Script" path="res://Scripts/Player1.gd" id="1_rdjtu"]
 [ext_resource type="Material" uid="uid://b3aluapbncj1v" path="res://Materials/player1_material.tres" id="2_sjo4x"]
 [ext_resource type="PackedScene" uid="uid://cn2b14d7jn165" path="res://Scenes/Subscenes/Shotgun2.tscn" id="3_6t18h"]
+[ext_resource type="AudioStream" uid="uid://6y6ow58771kx" path="res://Sounds/playerHit.ogg" id="4_y0vfs"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pxubv"]
 radius = 0.4
@@ -86,6 +87,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832981, 1.74623e-10)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitZone/HitArea3D"]
 shape = SubResource("CapsuleShape3D_252dh")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="HitZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+stream = ExtResource("4_y0vfs")
 
 [connection signal="body_entered" from="HitZone/HitArea3D" to="." method="_on_hit_area_3d_body_entered"]
 [connection signal="body_exited" from="HitZone/HitArea3D" to="." method="_on_hit_area_3d_body_exited"]

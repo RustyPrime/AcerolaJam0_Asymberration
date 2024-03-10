@@ -23,6 +23,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var rng = RandomNumberGenerator.new()
 @onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
 @onready var hitTimer : Timer = $HitZone/HitTimer
+@onready var hitSound : AudioStreamPlayer3D = $HitZone/HitSound
 @onready var camera : Node3D = $Head
 
 var spaceState : PhysicsDirectSpaceState3D
@@ -38,6 +39,7 @@ var isMouseCaptured = true
 var isInverted = false
 var wasInverted = false
 var canShoot = true
+var isDead = false
 
 var safeZoneRadius : float
 var playerHeight : float
@@ -83,6 +85,9 @@ func _process(_delta):
 	if !canShoot:
 		return
 
+	if isDead:
+		return
+
 	mouse_input = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("shoot"):
 		var spreadData : Dictionary = {	}
@@ -120,6 +125,8 @@ func randomSpread():
 
 
 func _physics_process(delta):
+	if isDead:
+		return
 	if spaceState == null:
 		spaceState = level.get_world_3d().direct_space_state
 
@@ -238,13 +245,16 @@ func shoot(spread_data):
 	
 func HitPlayer():
 	health -= 10
+	hitSound.play()
 	if health <= 0:
 		health = 0
 		Die()
 
 func Die():
-	# todo: show gameover screen
-	pass
+	isDead = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	level.PlayerOneDied.rpc()
+
 
 
 func _on_hit_area_3d_body_entered(body:Node3D):
