@@ -20,9 +20,13 @@ offset_bottom = 104.0
 text = "HOST"
 
 [node name="Joining" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Join" type="Button" parent="Joining"]
 layout_mode = 0
@@ -72,7 +76,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -360.0
+offset_left = -451.0
 offset_top = -196.0
 grow_horizontal = 0
 grow_vertical = 0

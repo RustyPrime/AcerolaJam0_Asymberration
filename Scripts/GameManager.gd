@@ -23,6 +23,18 @@ func isLAN():
     return selectedMode == PlayMode.LAN
 
 func reset():
+    var level = get_node_or_null("/root/Level")
+    if level != null:
+        level.queue_free()
+
+    var mainMenu = get_node_or_null("/root/MainMenu")
+    if mainMenu != null:
+        mainMenu.dispose()
+        mainMenu.queue_free()
+    
+    var preMain = get_node_or_null("/root/PreMainMenu")
+    preMain.show()
+
     selectedMode = PlayMode.UnInit
-    Players = {}
+    Players.clear()
     

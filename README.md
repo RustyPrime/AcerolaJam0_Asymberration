@@ -9,6 +9,7 @@
 - Github & Fork
 - XMind
 - Paint
+- Pixelate Shader from https://godotshaders.com/shader/pixelate/
 
 ## Concept
 

@@ -158,7 +158,7 @@ func ask_player1_to_spawn_enemy(enemyData):
 
 @rpc("any_peer", "call_local")
 func PlayerOneDied():
-	if GameManager.isLAN():
+	if !GameManager.isLAN():
 		loseScreen.show()
 
 		tier1timer.stop()
@@ -180,7 +180,7 @@ func PlayerOneDied():
 
 
 func _on_back_to_main_pressed():
+	print("back to main pressed")
 	GameManager.reset()
-	get_tree().change_scene_to_file("res://Scenes/pre_main_menu.tscn")
 
 

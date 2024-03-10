@@ -2,6 +2,10 @@ extends Control
 
 @onready var console : VBoxContainer = $ColorRect/ScrollContainer/VBoxContainer
 @onready var joining : Control = $Joining
+@onready var hostButton : Button = $Host
+@onready var startButton : Button = $Start
+@onready var ipField : LineEdit = $Joining/IpToJoin
+
 var peer : ENetMultiplayerPeer
 var prevMenu : Control
 
@@ -25,6 +29,9 @@ func _ready():
 		if OS.has_environment("HOSTNAME"):
 			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 
+	# todo: maybe remove this
+	ipField.text = ip_adress
+
 
 func _on_host_pressed():
 	peer = ENetMultiplayerPeer.new()
@@ -41,13 +48,26 @@ func _on_host_pressed():
 	SendPlayerInformation("", multiplayer.get_unique_id(), true)
 
 	joining.hide()
+	hostButton.hide()
+	
 
 
 func _on_join_pressed():
+	ip_adress = ipField.text
+
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip_adress, port)
+	var error = peer.create_client(ip_adress, port)
+	if error != OK:
+		debugLog("Error: Could not join. Error Code: " + str(error))
+		return
+		
 	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
+
+	hostButton.hide()
+	startButton.hide()
+	joining.hide()
+	debugLog("Join successful, waiting for host to start the game")
 
 func _on_start_pressed():
 	StartGame.rpc()
@@ -94,6 +114,10 @@ func debugLog(text):
 
 
 func _on_back_pressed():
+	dispose()
+	GameManager.reset()
+
+func dispose():
 	multiplayer.peer_connected.disconnect(peer_connected)
 	multiplayer.peer_disconnected.disconnect(peer_disconnected)
 	multiplayer.connected_to_server.disconnect(connected_to_server)
@@ -101,8 +125,3 @@ func _on_back_pressed():
 
 	if peer != null:
 		peer.close()
-	GameManager.reset()
-
-	prevMenu.show()
-
-	self.queue_free()

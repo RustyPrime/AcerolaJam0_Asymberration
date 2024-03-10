@@ -4,8 +4,6 @@ func _ready():
 	pass
 
 
-
-
 func _on_lan_pressed():
 	if OS.get_name() == "Web":
 		return

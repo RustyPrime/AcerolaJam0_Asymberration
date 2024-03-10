@@ -32,11 +32,10 @@ thickness = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haoh8"]
 shader = ExtResource("2_x215u")
-shader_parameter/pixel_size = 225
+shader_parameter/pixel_size = 250
 
 [node name="Player2" type="Node3D"]
 script = ExtResource("1_pgitl")
-rechargeSpeed = 8
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

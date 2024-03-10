@@ -8,7 +8,8 @@ extends Node3D
 @onready var level = get_node("/root/Level")
 @onready var navigationRegion3D : NavigationRegion3D = get_node("/root/Level/World/NavigationRegion3D")
 
-@export var rechargeSpeed = 10
+@export var rechargeSpeed : float = 5.0
+var charge : float = 0.0
 
 var remotePlayer1 : Player1
 
@@ -16,7 +17,8 @@ func _ready():
 	dragHandler.try_spawn_enemy.connect(_try_spawn_enemy)
 
 func _process(delta):
-	slider.value = slider.value + (rechargeSpeed * delta)
+	charge += (rechargeSpeed * delta)
+	slider.value = charge
 
 
 func _try_spawn_enemy(enemyData):
@@ -24,9 +26,9 @@ func _try_spawn_enemy(enemyData):
 		noSpawnSound.play()
 		return	
 
-	slider.value -= enemyData.power
-	if slider.value < 0:
-		slider.value = 0
+	charge -= enemyData.power
+	if charge < 0:
+		charge = 0
 	var enemy_name = "enemy_" + str(get_tree().get_nodes_in_group("enemy").size() + 1)
 	enemyData.name = enemy_name
 	level.ask_player1_to_spawn_enemy.rpc(enemyData.ToJson())
