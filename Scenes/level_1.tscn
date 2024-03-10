@@ -22,10 +22,6 @@
 [sub_resource type="Environment" id="Environment_3v1yv"]
 background_mode = 1
 background_color = Color(0.207843, 0.207843, 0.207843, 1)
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
-sdfgi_enabled = true
 glow_enabled = true
 fog_enabled = true
 fog_light_energy = 1.55
@@ -568,6 +564,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BackToMain" type="Button" parent="GameEndUI/LoseScreen"]
+layout_mode = 0
 offset_left = 178.0
 offset_top = 317.0
 offset_right = 617.0
