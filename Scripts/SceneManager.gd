@@ -127,7 +127,6 @@ func spawn_enemy_function(enemyDataJSON):
 # Gets called after the spawn_function has run
 # At this point the node has been added and _ready has run
 func _on_authority_spawned_enemy(node : Node):
-	print(multiplayer.get_unique_id())
 	var enemiesCopy = enemies.duplicate(true)
 	for index in enemiesCopy:
 		if enemiesCopy[str(index)].enemy == node:
@@ -210,7 +209,6 @@ func ChallangeCompleted():
 
 
 func _on_back_to_main_pressed():
-	print("back to main pressed")
 	GameManager.reset()
 
 

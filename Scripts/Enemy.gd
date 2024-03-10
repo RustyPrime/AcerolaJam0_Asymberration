@@ -5,7 +5,6 @@ class_name Enemy
 
 @onready var multiplayerSynchronizer : MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var navMesh: NavigationAgent3D = $NavigationAgent3D
-@onready var healthDisplay: Label3D = $HealthDisplay
 @onready var destroyTimer : Timer = $Timer
 
 var movementSpeed = 2
@@ -28,17 +27,12 @@ func _ready():
 	if !HasAuthority():
 		return
 
-	healthDisplay.text = str(health)
-
 
 func SetPlayer(player):
 	playerToChase = player.get_node("Player1")
 
 func SetHealth(enemyPower):
 	health *= enemyPower
-	if healthDisplay == null:
-		healthDisplay = $HealthDisplay
-	healthDisplay.text = str(health)
 
 func SetAuthoritiy(id = 1):
 	if GameManager.isLAN():
@@ -63,17 +57,14 @@ func _physics_process(delta):
 
 @rpc("any_peer", "call_local")
 func DoDamage(damage):
-	#print("DoDamage rpc")
 	health -= damage
 
 	material.albedo_color = Color.WHITE
 	await get_tree().create_timer(0.1).timeout
 	material.albedo_color = originalMaterialColor
 
-	if health < 0:
-		health = 0
-	healthDisplay.text = str(health)
 	if health <= 0:
+		health = 0
 		Die()
 	
 

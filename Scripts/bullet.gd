@@ -11,7 +11,6 @@ func _ready():
 
 
 func _on_body_entered(body:Node):
-	print("bullet collided with " + body.name)
 	if GameManager.isLAN() and get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 

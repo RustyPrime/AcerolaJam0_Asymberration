@@ -9,7 +9,6 @@ var destroying = false
 
 @rpc("any_peer", "call_local")
 func DoDamage(damage):
-	print("hit target")
 	health -= damage
 	if health < 0:
 		health = 0

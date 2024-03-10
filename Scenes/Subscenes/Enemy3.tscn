@@ -74,9 +74,6 @@ replication_config = SubResource("SceneReplicationConfig_37vlw")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[node name="HealthDisplay" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20179, 0)
-
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
