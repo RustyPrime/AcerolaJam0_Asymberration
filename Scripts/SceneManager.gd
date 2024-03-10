@@ -18,24 +18,26 @@ var enemyID = 1
 var enemies = {}
 
 func _ready():
-	
-	multiplayerSpawner.spawn_function = spawn_enemy_function
-	multiplayerSpawner.spawned.connect(_on_authority_spawned_enemy)
-	
-	for id in GameManager.Players:
-		if id == multiplayer.get_unique_id():
-			if GameManager.Players[id].isGroundPlayer == true:
-				player1 = spawn_player("player1", player1_scene, player1_spawnPoint)
-				playerID = id
-				multiplayerSpawner.set_multiplayer_authority(id)
-				#$WorldEnvironment/WorldEnvironment/DirectionalLight3D.
-			else:
-				var player2 = spawn_player("player2", player2_scene, player2_spawnPoint)
-				# spawn remote player 1
-				var remotePlayer1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
-				player2.remotePlayer1 = remotePlayer1.get_node("Player1")
-				# make ceiling invisible
-				%World/Ceiling.queue_free()
+	if GameManager.isLAN():
+		multiplayerSpawner.spawn_function = spawn_enemy_function
+		multiplayerSpawner.spawned.connect(_on_authority_spawned_enemy)
+
+		for id in GameManager.Players:
+			if id == multiplayer.get_unique_id():
+				if GameManager.Players[id].isGroundPlayer == true:
+					player1 = spawn_player("player1", player1_scene, player1_spawnPoint)
+					playerID = id
+					multiplayerSpawner.set_multiplayer_authority(id)
+					#$WorldEnvironment/WorldEnvironment/DirectionalLight3D.
+				else:
+					var player2 = spawn_player("player2", player2_scene, player2_spawnPoint)
+					# spawn remote player 1
+					var remotePlayer1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
+					player2.remotePlayer1 = remotePlayer1.get_node("Player1")
+					# make ceiling invisible
+					%World/Ceiling.queue_free()
+	else:
+		spawn_player("player1", player1_scene, player1_spawnPoint)
 				
 				
 

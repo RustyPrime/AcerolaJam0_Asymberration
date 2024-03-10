@@ -6,11 +6,12 @@ var destroying = false
 @onready var destroyTimer : Timer = $Timer
 
 func _ready():
-	self.set_multiplayer_authority(GameManager.GetGroundPlayerID())
+	if GameManager.isLAN():
+		set_multiplayer_authority(GameManager.GetGroundPlayerID())
 
 
 func _on_body_entered(body:Node):
-	if self.get_multiplayer_authority() != multiplayer.get_unique_id():
+	if GameManager.isLAN() and get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
 	if body is Enemy:

@@ -17,11 +17,13 @@ var material : Material
 var originalMaterialColor : Color
 
 func _ready():
-	var groundPlayerID = GameManager.GetGroundPlayerID()
+	
 	material = particles.draw_pass_1.surface_get_material(0)
 	originalMaterialColor = material.albedo_color
-
-	SetAuthoritiy(groundPlayerID)
+	
+	if GameManager.isLAN():
+		var groundPlayerID = GameManager.GetGroundPlayerID()
+		SetAuthoritiy(groundPlayerID)
 
 	if !HasAuthority():
 		return
@@ -42,7 +44,7 @@ func SetAuthoritiy(id = 1):
 	multiplayerSynchronizer.set_multiplayer_authority(id)
 
 func HasAuthority():
-	return multiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	return !GameManager.isLAN() or multiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 	
 
 func _physics_process(delta):

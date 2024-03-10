@@ -7,7 +7,8 @@ var playerInRange : bool = false
 
 
 func _ready():
-	set_multiplayer_authority(GameManager.GetGroundPlayerID())
+	if GameManager.isLAN():
+		set_multiplayer_authority(GameManager.GetGroundPlayerID())
 
 	screen.has_finished.connect(_on_screen_has_finished)
 
@@ -26,7 +27,7 @@ func _process(_delta):
 
 
 func _on_area_3d_body_entered(body:Node3D):
-	if get_multiplayer_authority() != multiplayer.get_unique_id():
+	if GameManager.isLAN() and get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
 	if body.owner is PlayerRig:
@@ -34,7 +35,7 @@ func _on_area_3d_body_entered(body:Node3D):
 
 
 func _on_area_3d_body_exited(body:Node3D):
-	if get_multiplayer_authority() != multiplayer.get_unique_id():
+	if GameManager.isLAN() and get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
 
 	if body.owner is PlayerRig:

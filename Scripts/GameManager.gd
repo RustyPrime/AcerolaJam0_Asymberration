@@ -1,5 +1,14 @@
 extends Node
 
+
+enum PlayMode {
+    UnInit,
+    LAN,
+    Singleplayer
+}
+
+var selectedMode : PlayMode = PlayMode.UnInit
+
 var Players = {}
 
 func GetGroundPlayerID():
@@ -8,3 +17,7 @@ func GetGroundPlayerID():
             return playerID
 
     return null
+
+
+func isLAN():
+    return selectedMode == PlayMode.LAN

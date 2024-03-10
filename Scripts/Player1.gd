@@ -55,7 +55,10 @@ func _ready():
 	shotgunTimer.timeout.connect(_shotgun_timer_timeout)
 	playerHeight = collisionShape.shape.height
 	
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+	if !GameManager.isLAN():
+		$MultiplayerSynchronizer.queue_free()
 
 
 func IntersectsSafeZone(potentialEnemySpawnPosition):
@@ -196,7 +199,11 @@ func handle_mouse_capture():
 		isMouseCaptured = false
 
 func hasAuthority():
-	return $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	var mpSynch = $MultiplayerSynchronizer
+	if mpSynch == null or !GameManager.isLAN(): 
+		return true
+	else:
+		return $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 
 func _shotgun_timer_timeout():
 	canShoot = true

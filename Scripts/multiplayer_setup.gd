@@ -1,11 +1,12 @@
 extends Control
 
 @onready var console : VBoxContainer = $ColorRect/ScrollContainer/VBoxContainer
-
+@onready var joining : Control = $Joining
 var peer : ENetMultiplayerPeer
+var prevMenu : Control
 
 
-var address = "localhost"
+var ip_adress = "127.0.0.1"
 var port = 19101
 var compression : ENetConnection.CompressionMode = ENetConnection.COMPRESS_RANGE_CODER
 
@@ -14,7 +15,15 @@ func _ready():
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
-
+	if OS.has_feature("windows"):
+		if OS.has_environment("COMPUTERNAME"):
+			ip_adress = IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
+	elif OS.has_feature("x11"):
+		if OS.has_environment("HOSTNAME"):
+			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+	elif OS.has_feature("OSX"):
+		if OS.has_environment("HOSTNAME"):
+			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 
 
 func _on_host_pressed():
@@ -26,23 +35,23 @@ func _on_host_pressed():
 
 	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
-	debugLog("Waiting for players!")
+	debugLog("Host succesful on local ip: " + ip_adress)
+	debugLog("Give this ip to another player in your local network.")
+	debugLog("Waiting for another player!")
 	SendPlayerInformation($Username.text, multiplayer.get_unique_id(), true)
+
+	joining.hide()
 
 
 func _on_join_pressed():
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(address, port)
+	peer.create_client(ip_adress, port)
 	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
 
 func _on_start_pressed():
 	StartGame.rpc()
 	
-
-func _on_offline_pressed():
-	pass # Replace with function body.
-
 @rpc("any_peer", "call_local")
 func StartGame():
 	var gameScene = load("res://Scenes/level_1.tscn").instantiate()
@@ -71,7 +80,7 @@ func peer_disconnected(id):
 	pass
 func connected_to_server():
 	debugLog("connected to server")
-	SendPlayerInformation.rpc_id(1, $Username.text, multiplayer.get_unique_id(), false)
+	SendPlayerInformation.rpc_id(1, "", multiplayer.get_unique_id(), false)
 
 func connection_failed():
 	debugLog("connection failed")
@@ -81,3 +90,19 @@ func debugLog(text):
 	var label = Label.new()
 	label.text = str(text)
 	console.add_child(label)
+
+
+
+func _on_back_pressed():
+	multiplayer.peer_connected.disconnect(peer_connected)
+	multiplayer.peer_disconnected.disconnect(peer_disconnected)
+	multiplayer.connected_to_server.disconnect(connected_to_server)
+	multiplayer.connection_failed.disconnect(connection_failed)
+
+	if peer != null:
+		peer.close()
+	GameManager.selectedMode = GameManager.PlayMode.UnInit
+
+	prevMenu.show()
+
+	self.queue_free()
