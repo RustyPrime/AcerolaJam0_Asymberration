@@ -97,7 +97,7 @@ parameters/conditions/pressed = false
 parameters/conditions/unpressed = false
 
 [node name="Screen" parent="." instance=ExtResource("3_2l0qi")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 3.03588, 3.84716e-07)
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 3.19604, 3.70714e-07)
 initialText = "Ready for calibration"
 interactText = "Calibrating gravity..."
 doneText = "Calibration finished"
