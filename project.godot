@@ -86,7 +86,5 @@ interact={
 [rendering]
 
 renderer/rendering_method="mobile"
-renderer/rendering_method.mobile="gl_compatibility"
 global_illumination/gi/use_half_resolution=true
-lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=3
-lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=3
+occlusion_culling/use_occlusion_culling=true

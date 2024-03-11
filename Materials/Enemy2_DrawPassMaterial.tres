@@ -7,6 +7,7 @@ resource_local_to_scene = true
 transparency = 1
 blend_mode = 1
 shading_mode = 0
+disable_fog = true
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.203922, 0.396078, 0.176471, 1)
 albedo_texture = ExtResource("1_n41mp")

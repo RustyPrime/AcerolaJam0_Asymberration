@@ -1,10 +1,4 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://d3fw7o5esja6u"]
-
-[sub_resource type="Gradient" id="Gradient_0v4yg"]
-colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_4rxg1"]
-gradient = SubResource("Gradient_0v4yg")
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://d3fw7o5esja6u"]
 
 [sub_resource type="Curve" id="Curve_pq1hs"]
 max_value = 3.0
@@ -23,9 +17,8 @@ spread = 180.0
 initial_velocity_min = 2.0
 initial_velocity_max = 2.0
 gravity = Vector3(0, 44, 0)
-damping_min = 44.0
-damping_max = 44.0
+damping_min = 45.0
+damping_max = 45.0
 scale_over_velocity_min = 5.0
 scale_over_velocity_max = 20.0
 scale_over_velocity_curve = SubResource("CurveTexture_25i4n")
-color_ramp = SubResource("GradientTexture1D_4rxg1")
