@@ -487,7 +487,7 @@ spot_attenuation = 1.68179
 spot_angle = 70.0
 
 [node name="Light5" type="MeshInstance3D" parent="Lights"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -4.61924, 4.24464, -2.53223)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -4.07606, 4.24464, -2.53223)
 material_override = SubResource("StandardMaterial3D_sq8fk")
 mesh = SubResource("CylinderMesh_fx0j7")
 
@@ -536,6 +536,40 @@ distance_fade_enabled = true
 spot_range = 3.5
 spot_attenuation = 1.68179
 spot_angle = 70.0
+
+[node name="Light8" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3.85303, 4.24464, 7.83832)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light8"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.189648, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 10.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 3.5
+spot_attenuation = 1.68179
+spot_angle = 53.6842
+
+[node name="Light9" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3.85303, 4.24464, -10.2439)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light9"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.189648, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 10.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 3.5
+spot_attenuation = 1.68179
+spot_angle = 53.6842
 
 [node name="Multiplayer" type="Node3D" parent="."]
 
