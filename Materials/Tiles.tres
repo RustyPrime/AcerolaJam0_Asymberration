@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d1c22k0bwt15l"]
+
+[ext_resource type="Texture2D" uid="uid://bthwvufdv24mx" path="res://Textures/tile.png" id="1_1yqem"]
+
+[resource]
+resource_name = "Tiles"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_1yqem")
+roughness = 0.5
+uv1_scale = Vector3(1.5, 1.5, 1.5)
+uv1_triplanar = true

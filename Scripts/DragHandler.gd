@@ -6,7 +6,7 @@ var spaceState : PhysicsDirectSpaceState3D
 var currentDraggable : Draggable
 var mousePosition
 
-@onready var level = get_node("/root/Level")
+@onready var level = get_node_or_null("/root/Level")
 
 
 func _ready():

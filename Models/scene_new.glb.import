@@ -35,6 +35,10 @@ _subresources={
 "use_external/enabled": true,
 "use_external/path": "res://Materials/Floor.tres"
 },
+"Tiles": {
+"use_external/enabled": true,
+"use_external/path": "res://Materials/Tiles.tres"
+},
 "Walls": {
 "use_external/enabled": true,
 "use_external/path": "res://Materials/Walls.tres"

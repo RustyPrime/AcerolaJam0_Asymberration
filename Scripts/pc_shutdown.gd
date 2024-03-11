@@ -1,5 +1,6 @@
 extends Node3D
 
+signal interacted
 
 @onready var screen : Screen = $Screen
 @onready var interactSound : AudioStreamPlayer3D = $InteractSound
@@ -23,6 +24,8 @@ func _process(_delta):
 			if !screen.IsInProgress() and !screen.HasFinished():
 				screen.StartProgess()
 				interactSound.play()
+				interacted.emit()
+
 
 
 

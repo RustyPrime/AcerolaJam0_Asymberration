@@ -2,12 +2,13 @@ extends CharacterBody3D
 class_name Enemy
 
 @export var particles : GPUParticles3D
+@export var movementSpeed = 2
 
 @onready var multiplayerSynchronizer : MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var navMesh: NavigationAgent3D = $NavigationAgent3D
 @onready var destroyTimer : Timer = $Timer
 
-var movementSpeed = 2
+
 var acceleration = 10
 var health = 2
 var playerToChase : Player1
@@ -29,7 +30,7 @@ func _ready():
 
 
 func SetPlayer(player):
-	playerToChase = player.get_node("Player1")
+	playerToChase = player.get_node_or_null("Player1")
 
 func SetHealth(enemyPower):
 	health *= enemyPower

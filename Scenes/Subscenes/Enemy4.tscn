@@ -4,14 +4,12 @@
 [ext_resource type="AudioStream" uid="uid://bs43x7vs0qcu1" path="res://Sounds/enemy4.ogg" id="2_7lqsv"]
 [ext_resource type="Texture2D" uid="uid://f6odbc0mmdqa" path="res://Textures/star.png" id="2_qpeuk"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
-radius = 0.808719
-height = 2.66799
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fc5cu"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wr406"]
 spread = 180.0
-initial_velocity_min = 10.0
-initial_velocity_max = 10.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
 gravity = Vector3(0, 0, 0)
 damping_min = 50.0
 damping_max = 50.0
@@ -44,7 +42,7 @@ particles = NodePath("Red")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
-shape = SubResource("CapsuleShape3D_7kgye")
+shape = SubResource("CapsuleShape3D_fc5cu")
 
 [node name="Red" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912851, 0)

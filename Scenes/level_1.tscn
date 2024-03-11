@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=41 format=3 uid="uid://cdvveg0cf4cjl"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="2_qdp4c"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="4_ax3pg"]
 [ext_resource type="PackedScene" uid="uid://dowwehwb4hrru" path="res://Scenes/Subscenes/sat_dish.tscn" id="5_u62ow"]
 [ext_resource type="PackedScene" uid="uid://25go8fwr32gk" path="res://Scenes/Subscenes/scene.tscn" id="6_mfcu6"]
+[ext_resource type="PackedScene" uid="uid://bm41bnlkj7584" path="res://Scenes/Subscenes/extra_enemy_spawner.tscn" id="8_w7lm4"]
 [ext_resource type="PackedScene" uid="uid://bwq7222k3oykc" path="res://Scenes/Subscenes/button.tscn" id="9_j6vnj"]
 [ext_resource type="PackedScene" uid="uid://rcwel0qojivr" path="res://Scenes/Subscenes/tube.tscn" id="10_xno10"]
 [ext_resource type="PackedScene" uid="uid://twovw0gd6t2n" path="res://Scenes/Subscenes/full_pc_setup.tscn" id="11_u8702"]
@@ -27,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://0muyqqf6udf" path="res://Models/flask2.glb" id="25_ffm21"]
 [ext_resource type="PackedScene" uid="uid://cujjlpeskaoa5" path="res://Models/gloves.glb" id="26_0kowq"]
 [ext_resource type="PackedScene" uid="uid://c8dm15jr820sr" path="res://Models/clipBoard.glb" id="27_5urn0"]
+[ext_resource type="PackedScene" uid="uid://c6aidn8i3npcu" path="res://Scenes/Subscenes/button_without_screen.tscn" id="28_f76i8"]
 
 [sub_resource type="Environment" id="Environment_3v1yv"]
 background_mode = 1
@@ -142,8 +144,14 @@ shape = SubResource("BoxShape3D_ex4g5")
 transform = Transform3D(0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.5, -0.742755, 0.809814, -1.17181)
 shape = SubResource("BoxShape3D_fj04l")
 
+[node name="ExtraEnemySpawner" parent="World/NavigationRegion3D/Objects/SatDish" node_paths=PackedStringArray("extraEnemySpawn") instance=ExtResource("8_w7lm4")]
+extraEnemySpawn = NodePath("../../../../../EnemySpawns/Spawn8")
+
 [node name="Button" parent="World/NavigationRegion3D/Objects" instance=ExtResource("9_j6vnj")]
 transform = Transform3D(-0.0255489, 0, 0.999674, -8.73942e-08, -1, -2.23355e-09, 0.999674, -8.74228e-08, 0.0255489, -10.0668, 4.25141, 12.6587)
+
+[node name="ExtraEnemySpawner" parent="World/NavigationRegion3D/Objects/Button" node_paths=PackedStringArray("extraEnemySpawn") instance=ExtResource("8_w7lm4")]
+extraEnemySpawn = NodePath("../../../../../EnemySpawns/Spawn5")
 
 [node name="Tube" parent="World/NavigationRegion3D/Objects" instance=ExtResource("10_xno10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3363, 0.97296, 2.7871)
@@ -168,6 +176,9 @@ shape = SubResource("SphereShape3D_jlkph")
 
 [node name="InteractSound" type="AudioStreamPlayer3D" parent="World/NavigationRegion3D/Objects/FullPC Setup9"]
 stream = ExtResource("14_bbqaj")
+
+[node name="ExtraEnemySpawner" parent="World/NavigationRegion3D/Objects/FullPC Setup9" node_paths=PackedStringArray("extraEnemySpawn") instance=ExtResource("8_w7lm4")]
+extraEnemySpawn = NodePath("../../../../../EnemySpawns/Spawn7")
 
 [node name="FullPC Setup11" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -21.0582, 1.00012, -15.2167)
@@ -379,6 +390,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7813, 1.70148, 4.46406)
 
 [node name="Door" parent="World/Decorations" instance=ExtResource("20_l8kbw")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.70419, 1.00474, 15.3658)
+
+[node name="ButtonWithoutScreen" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5531, 1, 13.1141)
+
+[node name="ButtonWithoutScreen2" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8405, 1, 13.3364)
+
+[node name="ButtonWithoutScreen3" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.9084, 1, 13.2682)
+
+[node name="ButtonWithoutScreen4" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 0.169642, 0.985506, 0, -0.985506, 0.169642, -19.9038, 2.33731, 15.2034)
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -686,6 +709,9 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Back to the main menu"
 
+[connection signal="interacted" from="World/NavigationRegion3D/Objects/SatDish" to="World/NavigationRegion3D/Objects/SatDish/ExtraEnemySpawner" method="_on_interacted"]
+[connection signal="interacted" from="World/NavigationRegion3D/Objects/Button" to="World/NavigationRegion3D/Objects/Button/ExtraEnemySpawner" method="_on_interacted"]
+[connection signal="interacted" from="World/NavigationRegion3D/Objects/FullPC Setup9" to="World/NavigationRegion3D/Objects/FullPC Setup9/ExtraEnemySpawner" method="_on_interacted"]
 [connection signal="body_entered" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_exited"]
 [connection signal="pressed" from="GameEndUI/WinScreen/BackToMain" to="." method="_on_back_to_main_pressed"]

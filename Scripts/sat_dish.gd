@@ -1,5 +1,7 @@
 extends Node3D
 
+signal interacted
+
 @onready var animTree : AnimationTree = $AnimationTree
 @onready var screen : Screen = $Screen
 @onready var interactSound : AudioStreamPlayer3D = $InteractSound
@@ -39,6 +41,7 @@ func _process(_delta):
 	if playerInRange:
 		if Input.is_action_just_pressed("interact"):
 			play()
+			interacted.emit()
 
 func _on_area_3d_body_exited(body:Node3D):
 	if GameManager.isLAN() and get_multiplayer_authority() != multiplayer.get_unique_id():

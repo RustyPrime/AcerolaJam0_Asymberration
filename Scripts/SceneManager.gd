@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name SceneManager
 
 @export var player1_scene : PackedScene
 @export var player1_remote_scene : PackedScene
@@ -47,7 +47,7 @@ func _ready():
 					var player2 = spawn_player("player2", player2_scene, player2_spawnPoint)
 					# spawn remote player 1
 					var remotePlayer1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
-					player2.remotePlayer1 = remotePlayer1.get_node("Player1")
+					player2.remotePlayer1 = remotePlayer1.get_node_or_null("Player1")
 					# make ceiling invisible
 					%World/Ceiling.queue_free()
 	else:
@@ -61,16 +61,19 @@ func _ready():
 		tier1timer.start()
 		tier2timer.start()
 		tier3timer.start()
-		#tier4timer.start()
+		tier4timer.start()
 				
 func _spawntimer_timeout(tier):
 
 	var randomIndex = rng.randi_range(0, enemySpawnPoints.size()-1)
 	var randomSpawn = enemySpawnPoints[randomIndex]
-	if player1.get_node("Player1").IntersectsSafeZone(randomSpawn.global_position):
+	if player1.get_node_or_null("Player1").IntersectsSafeZone(randomSpawn.global_position):
 		# if the randomly selected spawn point is inside the safe zone of the player skip it instead of re-roll to add randomness
 		return
 
+	SpawnEnemyAtPosition(tier, randomSpawn)
+
+func SpawnEnemyAtPosition(tier, spawnNode):
 	var powerRequirement = 20
 	var enemyPath = "res://Scenes/Subscenes/Enemy1.tscn"
 	match tier:
@@ -89,12 +92,11 @@ func _spawntimer_timeout(tier):
 		_:
 			pass
 	
-	var enemyData = EnemyData.new("", powerRequirement, enemyPath, randomSpawn.global_position)
+	var enemyData = EnemyData.new("", powerRequirement, enemyPath, spawnNode.global_position)
 	var spawned_enemey = spawn_enemy_function(enemyData)
 	enemySpawn.add_child(spawned_enemey)
 	setup_enemy(spawned_enemey, enemyData)
 	spawned_enemey.SetPlayer(player1)
-
 
 
 func spawn_player(player_name, player_scene, player_spawn : Node3D):

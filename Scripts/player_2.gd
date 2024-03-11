@@ -5,8 +5,8 @@ extends Node3D
 @onready var dragHandler : Control = $UI/Panel/DragHandler
 @onready var spawnSound : AudioStreamPlayer3D = $SpawnSound
 @onready var noSpawnSound : AudioStreamPlayer3D = $NoSpawnSound
-@onready var level = get_node("/root/Level")
-@onready var navigationRegion3D : NavigationRegion3D = get_node("/root/Level/World/NavigationRegion3D")
+@onready var level = get_node_or_null("/root/Level")
+@onready var navigationRegion3D : NavigationRegion3D = get_node_or_null("/root/Level/World/NavigationRegion3D")
 
 @export var rechargeSpeed : float = 5.0
 var charge : float = 0.0

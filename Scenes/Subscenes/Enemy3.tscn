@@ -4,9 +4,7 @@
 [ext_resource type="QuadMesh" uid="uid://fxlilocbpmm0" path="res://Models/Enemy3_DrawPassQuad.tres" id="2_8mgjw"]
 [ext_resource type="AudioStream" uid="uid://tlo7ki1rj3d0" path="res://Sounds/enemy3.ogg" id="3_dpndo"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
-radius = 1.19681
-height = 3.06644
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0skio"]
 
 [sub_resource type="Gradient" id="Gradient_vep5i"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
@@ -57,10 +55,11 @@ properties/1/replication_mode = 1
 collision_mask = 7
 script = ExtResource("1_owhqi")
 particles = NodePath("Spikes")
+movementSpeed = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
-shape = SubResource("CapsuleShape3D_7kgye")
+shape = SubResource("CapsuleShape3D_0skio")
 
 [node name="Spikes" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40177, 0)
