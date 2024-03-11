@@ -13,7 +13,7 @@ config_version=5
 config/name="Asymberration"
 run/main_scene="res://Scenes/pre_main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Textures/shotgun_icon.png"
 
 [autoload]
 
@@ -23,12 +23,10 @@ GameManager="*res://Scripts/GameManager.gd"
 
 window/size/viewport_width=800
 window/size/viewport_height=600
-window/size/mode=3
-window/size/borderless=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/cyclops_level_builder/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

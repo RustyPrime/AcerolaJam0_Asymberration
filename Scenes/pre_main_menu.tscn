@@ -60,6 +60,15 @@ label_settings = SubResource("LabelSettings_4jawt")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LoadingLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 109.0
+offset_top = 459.0
+offset_right = 288.0
+offset_bottom = 482.0
+text = "Loading... Please wait..."
+
 [connection signal="pressed" from="LAN" to="." method="_on_lan_pressed"]
 [connection signal="pressed" from="Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

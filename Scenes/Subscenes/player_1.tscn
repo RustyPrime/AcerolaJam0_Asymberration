@@ -15,9 +15,9 @@ script = ExtResource("1_w1bki")
 [node name="Player1" parent="." instance=ExtResource("1_ge8cf")]
 
 [node name="Shotgun" parent="Player1/Head" index="0"]
-transform = Transform3D(0.046317, 0.294889, 0.0299197, 0.00286706, 0.0298356, -0.298499, -0.296389, 0.0463712, 0.00178811, 0.271841, -0.299433, -0.477805)
+transform = Transform3D(0.0261839, 0.298855, -1.31033e-08, -1.62981e-09, -1.30094e-08, -0.3, -0.298855, 0.026184, 2.32831e-10, 0.271841, -0.299433, -0.477805)
 
-[node name="Camera3D" type="Camera3D" parent="Player1/Head" index="2"]
+[node name="Camera3D" type="Camera3D" parent="Player1/Head" index="1"]
 current = true
 near = 0.01
 

@@ -15,7 +15,7 @@ const JUMP_VELOCITY = 4.5
 var original_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@onready var bullet : PackedScene = load("res://Scenes/Subscenes/bullet.tscn")
+@onready var bullet : PackedScene = preload("res://Scenes/Subscenes/bullet.tscn")
 @onready var muzzle : Node3D = %Muzzle
 @onready var shotgun : Shotgun = $Head/Shotgun
 @onready var collisionShape : CollisionShape3D = $CollisionShape3D
@@ -24,6 +24,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var safeZone : CollisionShape3D = $SafeZone/Area3D/CollisionShape3D
 @onready var hitTimer : Timer = $HitZone/HitTimer
 @onready var hitSound : AudioStreamPlayer3D = $HitZone/HitSound
+@onready var gravityInvertSound : AudioStreamPlayer3D = $GravityInvertSound
 @onready var camera : Node3D = $Head
 
 var spaceState : PhysicsDirectSpaceState3D
@@ -68,7 +69,9 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	if !GameManager.isLAN():
-		$MultiplayerSynchronizer.queue_free()
+		var mpSynch = get_node_or_null("MultiplayerSynchronizer")
+		if mpSynch != null:
+			mpSynch.queue_free()
 
 
 func IntersectsSafeZone(potentialEnemySpawnPosition):
@@ -176,14 +179,18 @@ func handle_movement():
 func handle_camera_rotation(delta):
 	if camera == null:	
 		return
+	
+		
 
 	camera.rotation.x = lerp_angle(camera.rotation.x, rotation_target.x, delta * 25)
+	
+
 	if camera.rotation_degrees.x >= 360:
 		camera.rotation_degrees.x -= 360
 	if camera.rotation_degrees.x <= -360:
 		camera.rotation_degrees.x += 360
 
-	if camera.rotation_degrees.x > 90 or camera.rotation_degrees.x < -90:
+	if !isFacingUpwards():
 		rotation.y = lerp_angle(rotation.y, rotation_target.y * -1, delta * 25)
 		rotation_degrees.z = 180
 		camera.rotation_degrees.z = 180
@@ -192,6 +199,7 @@ func handle_camera_rotation(delta):
 		up_direction = Vector3.UP * -1
 		gravity = original_gravity * -1
 		if wasInverted != isInverted:
+			gravityInvertSound.play()
 			global_position.y = global_position.y + playerHeight + (playerHeight * 0.1)
 			wasInverted = isInverted
 
@@ -203,8 +211,19 @@ func handle_camera_rotation(delta):
 		up_direction = Vector3.UP
 		gravity = original_gravity
 		if wasInverted != isInverted:
+			gravityInvertSound.play()
 			global_position.y = global_position.y - playerHeight - (playerHeight * 0.1)
 			wasInverted = isInverted
+
+func isFacingUpwards():
+	if camera == null:	
+		return true
+
+	return (rad_to_deg(camera.global_basis.y.angle_to(Vector3.UP))) <= 80
+	
+
+	
+	
 
 func handle_mouse_capture():
 	if !isMouseCaptured() and Input.is_action_just_pressed("mouse_capture"):
@@ -215,8 +234,11 @@ func handle_mouse_capture():
 
 func hasAuthority():
 	if GameManager.isLAN():
-		var mpSynch = $MultiplayerSynchronizer
-		return mpSynch.get_multiplayer_authority() == multiplayer.get_unique_id()
+		var mpSynch = get_node_or_null("MultiplayerSynchronizer")
+		if mpSynch != null:
+			return mpSynch.get_multiplayer_authority() == multiplayer.get_unique_id()
+		else:
+			return false
 	return true
 
 func _shotgun_timer_timeout():

@@ -1,23 +1,24 @@
 extends Control
 
-func _ready():
-	pass
+@onready var loadingLabel : Label = $LoadingLabel
 
+func _ready():
+	loadingLabel.hide()
 
 func _on_lan_pressed():
 	if OS.get_name() == "Web":
 		return
 	GameManager.selectedMode = GameManager.PlayMode.LAN
-	var gameScene = load("res://Scenes/main_menu.tscn").instantiate()
+	var gameScene = preload("res://Scenes/main_menu.tscn").instantiate()
 	gameScene.prevMenu = self
 	get_tree().root.add_child(gameScene)
 	self.hide()
 
 
 func _on_singleplayer_pressed():
-
+	loadingLabel.show()
 	GameManager.selectedMode = GameManager.PlayMode.Singleplayer
-	var gameScene = load("res://Scenes/level_1.tscn").instantiate()
+	var gameScene = preload("res://Scenes/level_1.tscn").instantiate()
 	get_tree().root.add_child(gameScene)
 	self.hide()
 

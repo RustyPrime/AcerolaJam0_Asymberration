@@ -86,7 +86,7 @@ func _on_start_pressed():
 	
 @rpc("any_peer", "call_local")
 func StartGame():
-	var gameScene = load("res://Scenes/level_1.tscn").instantiate()
+	var gameScene = preload("res://Scenes/level_1.tscn").instantiate()
 	get_tree().root.add_child(gameScene)
 	self.hide()
 

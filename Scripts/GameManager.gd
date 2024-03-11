@@ -34,6 +34,7 @@ func reset():
     
     var preMain = get_node_or_null("/root/PreMainMenu")
     preMain.show()
+    preMain.loadingLabel.hide()
 
     selectedMode = PlayMode.UnInit
     Players.clear()

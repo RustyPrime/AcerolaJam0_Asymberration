@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/vfx_texture_grabber.gd" id="1_7ke2c"]
 [ext_resource type="Material" uid="uid://d3fw7o5esja6u" path="res://Materials/Enemy1_ParticleMaterial.tres" id="2_chqwm"]
-[ext_resource type="Material" path="res://Materials/Enemy2_ParticleMaterial.tres" id="2_nastk"]
+[ext_resource type="Material" uid="uid://dkg52uc1jbrgf" path="res://Materials/Enemy2_ParticleMaterial.tres" id="2_nastk"]
 [ext_resource type="Texture2D" uid="uid://dqrebhpfrthb4" path="res://Textures/fresnel_texture.tres" id="3_1q7p0"]
 [ext_resource type="Texture2D" uid="uid://2o6fxcfniiv5" path="res://Textures/ring_texture.tres" id="3_eiuia"]
 [ext_resource type="Texture2D" uid="uid://cskk4richv1rg" path="res://Textures/fresnel_texture_2.tres" id="4_5tj32"]
@@ -113,9 +113,8 @@ material = SubResource("StandardMaterial3D_fdnqw")
 [sub_resource type="Environment" id="Environment_2arfi"]
 background_mode = 1
 
-[node name="VFX_TextureGrabber" type="Node3D" node_paths=PackedStringArray("vfx")]
+[node name="VFX_TextureGrabber" type="Node3D"]
 script = ExtResource("1_7ke2c")
-vfx = NodePath("Shotgun")
 
 [node name="GreenMist" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0152204, 0.907412, 0)
@@ -148,13 +147,14 @@ process_material = ExtResource("2_chqwm")
 draw_pass_1 = SubResource("QuadMesh_rk1bt")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.630925, 1.44319, 1.55861)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0669481, 1.18207, 1.55861)
+fov = 55.4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2arfi")
 
 [node name="Shotgun" parent="." instance=ExtResource("8_24rvq")]
-transform = Transform3D(0.414006, -0.444471, 0.216955, 0.445705, 0.212622, -0.414926, 0.214408, 0.416248, 0.443612, 0, 1.11882, 0)
+transform = Transform3D(0.445246, -0.288013, 0.367191, 0.43918, 0.0869949, -0.464303, 0.157801, 0.570531, 0.256161, 0, 1.11882, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.687633, -0.12337, -0.715501, 0.505856, 0.788322, 0.350227, 0.520837, -0.602768, 0.604483, 0, 0, 0)
