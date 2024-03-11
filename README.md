@@ -31,7 +31,8 @@ a departure from what is normal, usual, or expected, typically one that is unwel
 - Notepad++
 
 ## Concept
-[Concept Art](.docs/conceptArt.png)
+![Concept Art](https://github.com/RustyPrime/AcerolaGameJam0_Aberration_Asymmetric/blob/main/.docs/conceptArt.png)
+
 
 
 
