@@ -28,6 +28,7 @@ shape = SubResource("CapsuleShape3D_7tfq3")
 [node name="GreenMist" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0152204, 0.907412, 0)
 amount = 100
+preprocess = 5.0
 process_material = ExtResource("3_tuxdb")
 draw_pass_1 = ExtResource("3_aijlk")
 
