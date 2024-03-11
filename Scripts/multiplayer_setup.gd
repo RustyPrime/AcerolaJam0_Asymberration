@@ -69,14 +69,9 @@ func _on_join_pressed():
 	if error != OK:
 		debugLog("Error: Could not join. Error Code: " + str(error))
 		return
-		
 	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
 
-	hostButton.hide()
-	startButton.hide()
-	joining.hide()
-	debugLog("Join successful, waiting for the host to start the game")
 
 func _on_start_pressed():
 	if hasOtherPlayerJoined:
@@ -113,11 +108,19 @@ func peer_disconnected(id):
 	hasOtherPlayerJoined = false
 	
 func connected_to_server():
-	debugLog("connected to host")
+	debugLog("Connected to host")
 	SendPlayerInformation.rpc_id(1, "", multiplayer.get_unique_id(), false)
+	
+
+	hostButton.hide()
+	startButton.hide()
+	joining.hide()
+	debugLog("Join successful, waiting for the host to start the game")
+
+
 
 func connection_failed():
-	debugLog("connection failed")
+	debugLog("Connection to host failed")
 	
 
 func debugLog(text):

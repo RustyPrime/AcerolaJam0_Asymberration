@@ -1,6 +1,8 @@
 extends Node3D
 class_name Screen
 
+signal has_started
+signal has_interupted
 signal has_finished
 
 @export var initialText : String
@@ -46,7 +48,7 @@ func IsInProgress():
 func ResetProgress():
 	if HasFinished():
 		return
-
+	has_interupted.emit()
 	screenView.SetProgress(0)
 	progress = 0
 	SetInitialText()
@@ -62,12 +64,16 @@ func _process(delta):
 		SetInitialText()
 		screenView.SetProgress(0)
 	if currentState == state.inProgress:
+		if previousState != currentState:
+			has_started.emit()
+			
 		SetInProgressText()
 		progress = progress + (10 * delta)
 		if progress > 100:
 			progress = 100
 			currentState = state.finished
 		screenView.SetProgress(progress)
+		
 
 	if previousState != currentState and currentState == state.finished:
 		SetFinishedText()

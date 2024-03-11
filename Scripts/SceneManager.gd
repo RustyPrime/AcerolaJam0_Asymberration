@@ -27,6 +27,7 @@ class_name SceneManager
 
 var playerID = -1
 var player1
+var player2
 
 var enemyID = 1
 var enemies = {}
@@ -49,7 +50,7 @@ func _ready():
 					multiplayerSpawner.set_multiplayer_authority(id)
 					#$WorldEnvironment/WorldEnvironment/DirectionalLight3D.
 				else:
-					var player2 = spawn_player("player2", player2_scene, player2_spawnPoint)
+					player2 = spawn_player("player2", player2_scene, player2_spawnPoint)
 					# spawn remote player 1
 					player1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
 					player2.remotePlayer1 = player1.get_node_or_null("Player1")
@@ -221,4 +222,18 @@ func ChallangeCompleted():
 func _on_back_to_main_pressed():
 	GameManager.reset()
 
+@rpc("any_peer", "call_remote")
+func setChargeSpeed(speed):
+	if player2 != null:
+		player2.rechargeSpeed = speed
 
+func _on_screen_has_started():
+	setChargeSpeed.rpc(4)
+
+
+func _on_screen_has_interupted():
+	setChargeSpeed.rpc(2)
+
+
+func _on_screen_has_finished():
+	setChargeSpeed.rpc(2)

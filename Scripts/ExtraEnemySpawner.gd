@@ -11,7 +11,6 @@ func _ready():
 	rng.randomize()
 
 func _on_interacted():
-	print("extra spawner triggered")
 	if !GameManager.isLAN() and hasSpawnedExtraEnemies == false:
 		SpawnRandomEnemies()
 		hasSpawnedExtraEnemies = true

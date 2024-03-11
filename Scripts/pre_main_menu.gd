@@ -17,6 +17,8 @@ func _on_lan_pressed():
 
 func _on_singleplayer_pressed():
 	loadingLabel.show()
+	await get_tree().create_timer(0.1).timeout
+	
 	GameManager.selectedMode = GameManager.PlayMode.Singleplayer
 	var gameScene = preload("res://Scenes/level_1.tscn").instantiate()
 	get_tree().root.add_child(gameScene)
