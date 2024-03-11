@@ -48,7 +48,6 @@ shape = SubResource("CapsuleShape3D_fc5cu")
 [node name="Red" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912851, 0)
 amount = 400
-lifetime = 5.0
 preprocess = 5.0
 process_material = SubResource("ParticleProcessMaterial_wr406")
 draw_pass_1 = SubResource("QuadMesh_0egaw")
