@@ -46,8 +46,8 @@ func _ready():
 				else:
 					var player2 = spawn_player("player2", player2_scene, player2_spawnPoint)
 					# spawn remote player 1
-					var remotePlayer1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
-					player2.remotePlayer1 = remotePlayer1.get_node_or_null("Player1")
+					player1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
+					player2.remotePlayer1 = player1.get_node_or_null("Player1")
 					# make ceiling invisible
 					%World/Ceiling.queue_free()
 	else:
@@ -207,6 +207,7 @@ func PlayerOneWon():
 func ChallangeCompleted():
 	completedChallangesCounter += 1
 	if completedChallangesCounter >= 4:
+		await get_tree().create_timer(1).timeout
 		PlayerOneWon.rpc()
 
 

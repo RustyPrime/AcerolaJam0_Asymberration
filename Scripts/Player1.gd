@@ -86,6 +86,7 @@ func _process(_delta):
 		return
 
 	if isDead:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		return
 
 	mouse_input = get_viewport().get_mouse_position()

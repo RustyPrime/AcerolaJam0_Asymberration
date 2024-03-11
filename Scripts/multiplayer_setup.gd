@@ -59,6 +59,9 @@ func _on_host_pressed():
 
 func _on_join_pressed():
 	ip_adress = ipField.text
+	if ip_adress == "" or ip_adress == null:
+		debugLog("Please enter a valid ip.")
+		return
 	port = int(portField.text)
 
 	peer = ENetMultiplayerPeer.new()
