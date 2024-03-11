@@ -1,13 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhxlmgc3clgt0"]
+[gd_scene load_steps=5 format=3 uid="uid://bhxlmgc3clgt0"]
 
-[ext_resource type="PackedScene" uid="uid://cx4n3fgv54r1a" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_ge8cf"]
+[ext_resource type="PackedScene" uid="uid://uav3p52crhhs" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_ge8cf"]
+[ext_resource type="Script" path="res://Scripts/PlayerRig.gd" id="1_w1bki"]
+[ext_resource type="Shader" path="res://Materials/pixelate_material.gdshader" id="2_hb7fs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkyim"]
+shader = ExtResource("2_hb7fs")
+shader_parameter/pixel_size = 225
 
 [node name="PlayerRig" type="Node3D"]
 top_level = true
+script = ExtResource("1_w1bki")
 
 [node name="Player1" parent="." instance=ExtResource("1_ge8cf")]
 
-[node name="Camera3D" type="Camera3D" parent="Player1/Head" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00965285, 0)
+[node name="Shotgun" parent="Player1/Head" index="0"]
+transform = Transform3D(0.046317, 0.294889, 0.0299197, 0.00286706, 0.0298356, -0.298499, -0.296389, 0.0463712, 0.00178811, 0.271841, -0.299433, -0.477805)
+
+[node name="Camera3D" type="Camera3D" parent="Player1/Head" index="2"]
+current = true
+near = 0.01
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player1/Head/Camera3D"]
+
+[node name="ColorRect" type="ColorRect" parent="Player1/Head/Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_fkyim")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [editable path="Player1"]

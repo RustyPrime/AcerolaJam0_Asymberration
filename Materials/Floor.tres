@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dp5leg57aious"]
+
+[resource]
+resource_name = "Floor"
+vertex_color_use_as_albedo = true
+metallic = 0.25
+roughness = 0.4
+normal_enabled = true
+uv1_scale = Vector3(1.5, 1.5, 1.5)
+uv1_triplanar = true

@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6ajubr60hrsa"]
+
+[ext_resource type="Script" path="res://Scripts/special_target.gd" id="1_7jirj"]
+[ext_resource type="PackedScene" uid="uid://djolw8digd37k" path="res://Scenes/Subscenes/target.tscn" id="1_i0e0e"]
+[ext_resource type="Texture2D" uid="uid://f6odbc0mmdqa" path="res://Textures/star.png" id="2_0f0b0"]
+[ext_resource type="AudioStream" uid="uid://dflcg1p5ncrs0" path="res://Sounds/success.ogg" id="4_lhfp7"]
+[ext_resource type="AudioStream" uid="uid://d23v25bihiw14" path="res://Sounds/specialEnemy.ogg" id="4_snatn"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_76a71"]
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -4, 0)
+damping_min = 40.0
+damping_max = 40.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrhrc"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.584314, 1, 1, 1)
+albedo_texture = ExtResource("2_0f0b0")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_3ba43"]
+material = SubResource("StandardMaterial3D_qrhrc")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oy6by"]
+
+[node name="SpecialTarget" type="Node3D"]
+script = ExtResource("1_7jirj")
+
+[node name="Target" parent="." instance=ExtResource("1_i0e0e")]
+script = null
+
+[node name="Area3D" parent="Target" index="3"]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" parent="Target/Area3D" index="0"]
+disabled = true
+
+[node name="Impostor" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Impostor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37478, 0)
+amount = 100
+lifetime = 0.5
+preprocess = 1.0
+explosiveness = 0.25
+process_material = SubResource("ParticleProcessMaterial_76a71")
+draw_pass_1 = SubResource("QuadMesh_3ba43")
+
+[node name="Area3D" type="StaticBody3D" parent="Impostor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32167, 0)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Impostor/Area3D"]
+shape = SubResource("SphereShape3D_oy6by")
+
+[node name="SpecialEnemySound" type="AudioStreamPlayer3D" parent="Impostor"]
+stream = ExtResource("4_snatn")
+
+[node name="SuccessSound" type="AudioStreamPlayer3D" parent="Impostor"]
+stream = ExtResource("4_lhfp7")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Target"]

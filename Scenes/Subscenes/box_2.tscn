@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpf5tnalkkwxo"]
+
+[ext_resource type="PackedScene" uid="uid://cbl5jk7uirv0l" path="res://Models/militaryBox2.glb" id="1_87mug"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22pvr"]
+size = Vector3(0.685608, 0.693344, 0.721924)
+
+[node name="Box2" type="Node3D"]
+
+[node name="militaryBox2" parent="." instance=ExtResource("1_87mug")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00576782, 0.388329, 0.00109863)
+shape = SubResource("BoxShape3D_22pvr")

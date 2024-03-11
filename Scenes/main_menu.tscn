@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://tcaf37rxrs7o"]
+[gd_scene load_steps=3 format=3 uid="uid://tcaf37rxrs7o"]
 
 [ext_resource type="Script" path="res://Scripts/multiplayer_setup.gd" id="1_ogsnv"]
+[ext_resource type="Texture2D" uid="uid://dh21tbn6hxth6" path="res://Textures/Shotgun.png" id="2_ib6bs"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,54 +12,119 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ogsnv")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ib6bs")
+
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
-offset_left = 96.0
-offset_top = 126.0
-offset_right = 161.0
-offset_bottom = 152.0
+offset_left = 100.0
+offset_top = 75.0
+offset_right = 175.0
+offset_bottom = 110.0
 text = "HOST"
 
-[node name="Join" type="Button" parent="."]
+[node name="Joining" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Join" type="Button" parent="Joining"]
 layout_mode = 0
-offset_left = 98.0
-offset_top = 167.0
-offset_right = 161.0
-offset_bottom = 198.0
+offset_left = 100.0
+offset_top = 210.0
+offset_right = 175.0
+offset_bottom = 245.0
 text = "JOIN"
+
+[node name="IpLabel" type="Label" parent="Joining"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 125.0
+offset_right = 163.0
+offset_bottom = 156.0
+text = "IP:"
+vertical_alignment = 1
+
+[node name="IpToJoin" type="LineEdit" parent="Joining"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 125.0
+offset_right = 445.0
+offset_bottom = 160.0
+placeholder_text = "Example: 192.168.0.56"
+
+[node name="PortLabel" type="Label" parent="Joining"]
+offset_left = 100.0
+offset_top = 160.0
+offset_right = 163.0
+offset_bottom = 191.0
+text = "Port:"
+vertical_alignment = 1
+
+[node name="Port" type="LineEdit" parent="Joining"]
+offset_left = 175.0
+offset_top = 160.0
+offset_right = 445.0
+offset_bottom = 195.0
+text = "27015"
+placeholder_text = "Example: 27015"
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
-offset_left = 97.0
-offset_top = 205.0
-offset_right = 170.0
-offset_bottom = 236.0
+offset_left = 100.0
+offset_top = 260.0
+offset_right = 175.0
+offset_bottom = 295.0
 text = "START"
 
-[node name="Offline" type="Button" parent="."]
+[node name="Back" type="Button" parent="."]
 layout_mode = 0
-offset_left = 98.0
-offset_top = 245.0
-offset_right = 171.0
-offset_bottom = 276.0
-text = "OFFLINE"
+offset_left = 100.0
+offset_top = 310.0
+offset_right = 175.0
+offset_bottom = 345.0
+text = "BACK
+"
 
-[node name="Username" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 170.0
-offset_top = 81.0
-offset_right = 440.0
-offset_bottom = 112.0
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -451.0
+offset_top = -196.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0.0588235, 0.0588235, 0.0588235, 0.603922)
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 97.0
-offset_top = 82.0
-offset_right = 160.0
-offset_bottom = 113.0
-text = "Name:"
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = -9.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/ScrollContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Joining/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Offline" to="." method="_on_offline_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

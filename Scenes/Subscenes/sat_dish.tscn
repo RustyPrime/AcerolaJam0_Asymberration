@@ -1,0 +1,118 @@
+[gd_scene load_steps=17 format=3 uid="uid://dowwehwb4hrru"]
+
+[ext_resource type="PackedScene" uid="uid://cuagvafhouylk" path="res://Models/satDish.glb" id="1_nt8ja"]
+[ext_resource type="Script" path="res://Scripts/sat_dish.gd" id="1_qb5tm"]
+[ext_resource type="PackedScene" uid="uid://ujd8ht56ocro" path="res://Scenes/Subscenes/screen.tscn" id="3_x7myi"]
+[ext_resource type="AudioStream" uid="uid://df3fkbpc1pjyq" path="res://Sounds/interact.ogg" id="4_nbruj"]
+
+[sub_resource type="Animation" id="Animation_mgmx8"]
+resource_name = "Idle"
+length = 1.66667
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pole")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ug116"]
+resource_name = "Spinning"
+length = 1.66667
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pole")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.8, 1, 0, 0.998027, 0, 0.0627905, 0.833333, 1, 0, -1, 0, 4.37114e-08, 1.63333, 1, 0, -0.0627905, 0, 0.998027, 1.66667, 1, 0, 8.74228e-08, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_562xv"]
+_data = {
+"Idle": SubResource("Animation_mgmx8"),
+"Spinning": SubResource("Animation_ug116")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i4uge"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pwy6l"]
+animation = &"Spinning"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wmor7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x2kin"]
+advance_mode = 2
+advance_condition = &"spinning"
+
+[sub_resource type="Curve" id="Curve_0mjie"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pb3dr"]
+xfade_time = 1.0
+xfade_curve = SubResource("Curve_0mjie")
+advance_mode = 2
+advance_condition = &"stop"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y2ohr"]
+states/Idle/node = SubResource("AnimationNodeAnimation_i4uge")
+states/Idle/position = Vector2(363, 89)
+states/Spinning/node = SubResource("AnimationNodeAnimation_pwy6l")
+states/Spinning/position = Vector2(624, 83)
+states/Start/position = Vector2(165, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_wmor7"), "Idle", "Spinning", SubResource("AnimationNodeStateMachineTransition_x2kin"), "Spinning", "Idle", SubResource("AnimationNodeStateMachineTransition_pb3dr")]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ip142"]
+size = Vector3(0.467529, 0.978333, 0.518005)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gk55s"]
+radius = 2.64182
+
+[node name="SatDish" type="Node3D"]
+script = ExtResource("1_qb5tm")
+
+[node name="satDish" parent="." instance=ExtResource("1_nt8ja")]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../satDish")
+libraries = {
+"": SubResource("AnimationLibrary_562xv")
+}
+tree_root = SubResource("AnimationNodeStateMachine_y2ohr")
+anim_player = NodePath("../satDish/AnimationPlayer")
+parameters/conditions/spinning = false
+parameters/conditions/stop = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472168, 0)
+shape = SubResource("BoxShape3D_ip142")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0252686, 1.4216, -0.00521851)
+shape = SubResource("BoxShape3D_ip142")
+
+[node name="Screen" parent="." instance=ExtResource("3_x7myi")]
+transform = Transform3D(0.5, 0, 0, 0, 0.304616, -0.396496, 0, 0.396496, 0.304616, 0, 0.735005, 0.662377)
+initialText = "Ready for uplink"
+interactText = "Establishing uplink..."
+doneText = "Uplink successfull"
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700495, 0, 1.46199)
+shape = SubResource("SphereShape3D_gk55s")
+
+[node name="InteractSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_nbruj")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+
+[editable path="satDish"]

@@ -1,8 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2cb13c6yvri5"]
+[gd_scene load_steps=21 format=3 uid="uid://c2cb13c6yvri5"]
 
 [ext_resource type="Script" path="res://Scripts/player_2.gd" id="1_pgitl"]
-[ext_resource type="Texture2D" uid="uid://mk0vqvaoio6r" path="res://icon.svg" id="1_qb6dv"]
+[ext_resource type="Script" path="res://Scripts/DragHandler.gd" id="2_3pwg3"]
 [ext_resource type="PackedScene" uid="uid://c1rx6o2kylhf3" path="res://Scenes/Subscenes/draggable.tscn" id="2_onjjd"]
+[ext_resource type="Shader" path="res://Materials/pixelate_material.gdshader" id="2_x215u"]
+[ext_resource type="Texture2D" uid="uid://didbkkpb6l6vk" path="res://Textures/PurpleMist.png" id="4_liiph"]
+[ext_resource type="PackedScene" uid="uid://w28x28vm3pcb" path="res://Scenes/Subscenes/Enemy2.tscn" id="4_rc4i1"]
+[ext_resource type="Texture2D" uid="uid://bir546si22r1t" path="res://Textures/GreenMist.png" id="5_trjsv"]
+[ext_resource type="PackedScene" uid="uid://4unlgiu32n5u" path="res://Scenes/Subscenes/Enemy3.tscn" id="5_xri61"]
+[ext_resource type="PackedScene" uid="uid://b2a50r17u8cgw" path="res://Scenes/Subscenes/Enemy4.tscn" id="6_ebsqj"]
+[ext_resource type="Texture2D" uid="uid://ckj85qwsorniw" path="res://Textures/Spikes.png" id="7_tb5me"]
+[ext_resource type="Texture2D" uid="uid://b7mel3dhrdhwd" path="res://Textures/Red.png" id="9_v4fyo"]
+[ext_resource type="AudioStream" uid="uid://hq125mc730ae" path="res://Sounds/spawn.ogg" id="11_7cqaq"]
+[ext_resource type="AudioStream" uid="uid://gvtultv3c6rp" path="res://Sounds/noSpawn.ogg" id="11_dxovi"]
 
 [sub_resource type="Theme" id="Theme_112o8"]
 
@@ -20,48 +30,43 @@ thickness = 10
 color = Color(0, 1, 0, 1)
 thickness = 10
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_haoh8"]
+shader = ExtResource("2_x215u")
+shader_parameter/pixel_size = 300
+
 [node name="Player2" type="Node3D"]
 script = ExtResource("1_pgitl")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 0, 0)
-
-[node name="UI" type="Node2D" parent="."]
-
-[node name="Panel" type="Sprite2D" parent="UI"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-position = Vector2(607, 537.5)
-scale = Vector2(2.9375, 0.882812)
-texture = ExtResource("1_qb6dv")
-
-[node name="Draggable" parent="UI" groups=["draggable"] instance=ExtResource("2_onjjd")]
-position = Vector2(493, 524)
-
-[node name="Draggable2" parent="UI" groups=["draggable"] instance=ExtResource("2_onjjd")]
-position = Vector2(568, 524)
-powerRequirement = 20.0
-
-[node name="Draggable3" parent="UI" groups=["draggable"] instance=ExtResource("2_onjjd")]
-position = Vector2(643, 524)
-powerRequirement = 30.0
-
-[node name="Draggable4" parent="UI" groups=["draggable"] instance=ExtResource("2_onjjd")]
-position = Vector2(713, 524)
-powerRequirement = 50.0
-
-[node name="Control" type="Control" parent="UI"]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="HSlider" type="HSlider" parent="UI/Control"]
+[node name="Panel" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -356.0
+offset_top = -128.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.380392, 0.376471, 0.392157, 1)
+
+[node name="HSlider" type="HSlider" parent="UI/Panel"]
 layout_mode = 0
-offset_left = 450.0
-offset_top = 563.0
-offset_right = 761.0
-offset_bottom = 577.0
+offset_left = 24.0
+offset_top = 98.0
+offset_right = 335.0
+offset_bottom = 112.0
+mouse_filter = 2
 theme = SubResource("Theme_112o8")
 theme_override_icons/grabber = SubResource("ImageTexture_cb71c")
 theme_override_icons/grabber_highlight = SubResource("ImageTexture_7mjrk")
@@ -71,3 +76,81 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_p0e4k")
 step = 0.1
 editable = false
 scrollable = false
+
+[node name="DragHandler" type="Control" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_3pwg3")
+
+[node name="Enemy1_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 40.0
+offset_top = 25.0
+offset_right = 92.0
+offset_bottom = 77.0
+grow_horizontal = 1
+grow_vertical = 1
+texture_normal = ExtResource("4_liiph")
+stretch_mode = 6
+
+[node name="Enemy2_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+layout_mode = 1
+offset_left = -61.0
+offset_top = -38.0
+offset_right = -11.0
+offset_bottom = 13.0
+texture_normal = ExtResource("5_trjsv")
+stretch_mode = 6
+enemy = ExtResource("4_rc4i1")
+powerRequirement = 20.0
+
+[node name="Enemy3_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+layout_mode = 1
+offset_left = 14.0
+offset_top = -38.0
+offset_right = 66.0
+offset_bottom = 14.0
+texture_normal = ExtResource("7_tb5me")
+stretch_mode = 6
+enemy = ExtResource("5_xri61")
+powerRequirement = 30.0
+
+[node name="Enemy4_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
+layout_mode = 1
+offset_left = 89.0
+offset_top = -38.0
+offset_right = 140.0
+offset_bottom = 13.0
+texture_normal = ExtResource("9_v4fyo")
+stretch_mode = 6
+enemy = ExtResource("6_ebsqj")
+powerRequirement = 50.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.11822e-08, -3.24377e-08, 0, 0.371044, 0.928616, 8.74228e-08, 0.928616, -0.371044, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_haoh8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_7cqaq")
+
+[node name="NoSpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_dxovi")

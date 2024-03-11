@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://djolw8digd37k"]
+
+[ext_resource type="Script" path="res://Scripts/target.gd" id="1_ap4ri"]
+[ext_resource type="PackedScene" uid="uid://cl8cw0xaq25no" path="res://Models/easel.glb" id="1_epqim"]
+[ext_resource type="PackedScene" uid="uid://di58vs7x3pqa7" path="res://Models/target.glb" id="1_rmduy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qwhqs"]
+size = Vector3(2, 0.515006, 1.4126)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_he1uq"]
+height = 0.0634319
+
+[node name="Target" type="Node3D"]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_ap4ri")
+
+[node name="easel" parent="." instance=ExtResource("1_epqim")]
+transform = Transform3D(1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, -1.31651, 2.51544e-15, 5.75466e-08)
+
+[node name="target" parent="." instance=ExtResource("1_rmduy")]
+transform = Transform3D(0.99744, -0.0715149, 3.23793e-09, 0.0715149, 0.99744, -3.01409e-09, -3.01409e-09, 3.23793e-09, 1, -1.31651, 2.51544e-15, 5.75466e-08)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, -2.57868, 4.92705e-15, 1.12718e-07)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, 1.56787, -0.285053, 0.0129394)
+shape = SubResource("BoxShape3D_qwhqs")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(0.997917, -0.0645149, 2.9111e-09, 0.0645149, 0.997917, -2.72897e-09, -2.72897e-09, 2.9111e-09, 1, -1.30683, 0.0387864, 5.54281e-08)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_he1uq")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

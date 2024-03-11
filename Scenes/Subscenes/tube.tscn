@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://rcwel0qojivr"]
+
+[ext_resource type="PackedScene" uid="uid://dlxglgrgkwq2c" path="res://Models/researchTube.glb" id="1_akd0u"]
+[ext_resource type="Texture2D" uid="uid://cskk4richv1rg" path="res://Textures/fresnel_texture_2.tres" id="2_dkf2h"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jfq5p"]
+emission_shape_scale = Vector3(0.1, 0.1, 0.1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+gravity = Vector3(0, 9.8, 0)
+damping_min = 8.9
+damping_max = 8.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2wm4"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.862745, 0.8, 0.992157, 1)
+albedo_texture = ExtResource("2_dkf2h")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_oetg8"]
+material = SubResource("StandardMaterial3D_a2wm4")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ibld"]
+size = Vector3(1.17346, 2.29224, 1.08984)
+
+[node name="Tube" type="Node3D"]
+
+[node name="researchTube" parent="." instance=ExtResource("1_akd0u")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.023855, 1.09864, 0)
+visibility_aabb = AABB(-0.528287, -0.778379, -0.449918, 1.05657, 1.55676, 0.899837)
+process_material = SubResource("ParticleProcessMaterial_jfq5p")
+draw_pass_1 = SubResource("QuadMesh_oetg8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00567627, 1.16101, 0.0449219)
+shape = SubResource("BoxShape3D_1ibld")

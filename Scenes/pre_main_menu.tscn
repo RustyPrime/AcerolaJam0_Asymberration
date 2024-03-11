@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://bny2sl6ckhxx8"]
+
+[ext_resource type="Script" path="res://Scripts/pre_main_menu.gd" id="1_is2wy"]
+[ext_resource type="Texture2D" uid="uid://dh21tbn6hxth6" path="res://Textures/Shotgun.png" id="2_w0q56"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jawt"]
+font_size = 91
+
+[node name="PreMainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_is2wy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_w0q56")
+
+[node name="LAN" type="Button" parent="."]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 248.0
+offset_right = 412.0
+offset_bottom = 290.0
+text = "LAN-Multiplayer (Windows client only)"
+
+[node name="Singleplayer" type="Button" parent="."]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 313.0
+offset_right = 316.0
+offset_bottom = 355.0
+text = "Singleplayer"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 174.0
+grow_horizontal = 2
+text = "Asymberration"
+label_settings = SubResource("LabelSettings_4jawt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="LAN" to="." method="_on_lan_pressed"]
+[connection signal="pressed" from="Singleplayer" to="." method="_on_singleplayer_pressed"]

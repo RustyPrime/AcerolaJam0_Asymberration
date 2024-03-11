@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx4n3fgv54r1a"]
+[gd_scene load_steps=10 format=3 uid="uid://uav3p52crhhs"]
 
 [ext_resource type="Script" path="res://Scripts/Player1.gd" id="1_rdjtu"]
 [ext_resource type="Material" uid="uid://b3aluapbncj1v" path="res://Materials/player1_material.tres" id="2_sjo4x"]
+[ext_resource type="PackedScene" uid="uid://cn2b14d7jn165" path="res://Scenes/Subscenes/Shotgun2.tscn" id="3_6t18h"]
+[ext_resource type="AudioStream" uid="uid://6y6ow58771kx" path="res://Sounds/playerHit.ogg" id="4_y0vfs"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pxubv"]
+radius = 0.4
+height = 1.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nwete"]
+radius = 0.41
+height = 1.5
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_14xoj"]
 properties/0/path = NodePath(".:position")
@@ -18,41 +24,43 @@ properties/2/path = NodePath("Head:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[sub_resource type="BoxMesh" id="BoxMesh_46vpf"]
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wts2o"]
 height = 0.1
-radius = 15.0
+radius = 10.0
 
-[node name="Player1" type="CharacterBody3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_252dh"]
+radius = 0.646605
+height = 1.79654
+
+[node name="Player1" type="CharacterBody3D" groups=["player1"]]
+transform = Transform3D(1, 0, 0, 0, 0.999952, 0.0098435, 0, -0.0098435, 0.999952, 0, 0.01548, 0)
 script = ExtResource("1_rdjtu")
+BULLET_SPEED = 300.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997871, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740655, 1.74623e-10)
 mesh = SubResource("CapsuleMesh_pxubv")
 surface_material_override/0 = ExtResource("2_sjo4x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997871, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740655, 1.74623e-10)
 shape = SubResource("CapsuleShape3D_nwete")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_14xoj")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70855, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1943, 1.10595e-09)
 
-[node name="Shotgun" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(0.131105, 0, 0.125299, 0, 0.194929, 0, -0.0165578, 0, 0.992119, 0.429216, -0.527787, -1.02108)
-material_override = ExtResource("2_sjo4x")
-mesh = SubResource("BoxMesh_46vpf")
-skeleton = NodePath("")
+[node name="Shotgun" parent="Head" instance=ExtResource("3_6t18h")]
+transform = Transform3D(-0.0147379, 0.299638, -1.30976e-08, 0, -1.31134e-08, -0.3, -0.299638, -0.0147379, 6.44214e-10, 0.295, -0.298, -0.626)
 
 [node name="Muzzle" type="Node3D" parent="Head/Shotgun"]
-transform = Transform3D(-7.56314, 0, -0.245321, 0, 5.13007, 0, 0.0931199, 0, -0.997539, 0.00585461, 0.116965, -0.594902)
+unique_name_in_owner = true
+transform = Transform3D(-0.000194836, 0.00559246, 0.999984, -0.00249023, 0.999981, -0.00559292, -0.999997, -0.0024914, -0.000180906, 0.600301, 0.00433353, -0.227042)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Head/Shotgun/Muzzle"]
-transform = Transform3D(-0.998176, 0, 0.0603692, 0, 1, 0, -0.0603692, 0, -0.998176, 0, 0, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="Head"]
+transform = Transform3D(0.999976, 2.20883e-17, -0.00686962, -2.30379e-17, 1, -1.38158e-16, 0.00686962, 1.38313e-16, 0.999976, -0.455009, -0.244651, -1.24168)
 shadow_enabled = true
 spot_range = 26.1329
 spot_angle = 13.642
@@ -68,3 +76,20 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeZone/Area3D"]
 shape = SubResource("CylinderShape3D_wts2o")
+
+[node name="HitZone" type="Node3D" parent="."]
+
+[node name="HitTimer" type="Timer" parent="HitZone"]
+wait_time = 0.7
+
+[node name="HitArea3D" type="Area3D" parent="HitZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832981, 1.74623e-10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitZone/HitArea3D"]
+shape = SubResource("CapsuleShape3D_252dh")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="HitZone"]
+stream = ExtResource("4_y0vfs")
+
+[connection signal="body_entered" from="HitZone/HitArea3D" to="." method="_on_hit_area_3d_body_entered"]
+[connection signal="body_exited" from="HitZone/HitArea3D" to="." method="_on_hit_area_3d_body_exited"]

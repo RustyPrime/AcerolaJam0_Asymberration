@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bk0y6w3ru8xui"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_j1m51"]
+[ext_resource type="Material" uid="uid://d3fw7o5esja6u" path="res://Materials/Enemy1_ParticleMaterial.tres" id="2_t8epx"]
+[ext_resource type="QuadMesh" uid="uid://b7sa14lu7j3av" path="res://Models/Enemy1_DrawPassQuad.tres" id="3_0b3ds"]
+[ext_resource type="AudioStream" uid="uid://b46alegcv2sxi" path="res://Sounds/enemy1.ogg" id="4_833io"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7kgye"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_37vlw"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Enemy1" type="CharacterBody3D" node_paths=PackedStringArray("particles") groups=["enemy"]]
+collision_mask = 7
+script = ExtResource("1_j1m51")
+particles = NodePath("PurpleMist")
+movementSpeed = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02644, 0)
+shape = SubResource("CapsuleShape3D_7kgye")
+
+[node name="PurpleMist" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.734458, -3.21042e-08)
+amount = 200
+visibility_aabb = AABB(-3.10917, -4, -4, 6.21835, 8, 8)
+process_material = ExtResource("2_t8epx")
+draw_pass_1 = ExtResource("3_0b3ds")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_37vlw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_833io")
+volume_db = -10.0
+autoplay = true
+max_distance = 20.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

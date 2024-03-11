@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://ujd8ht56ocro"]
+
+[ext_resource type="PackedScene" uid="uid://x5fskgvvs42p" path="res://Models/screen.glb" id="1_akis4"]
+[ext_resource type="Script" path="res://Scripts/screen.gd" id="1_yynd6"]
+[ext_resource type="PackedScene" uid="uid://brkarq6ipr2ay" path="res://Scenes/Subscenes/screen_view.tscn" id="2_n1nat"]
+[ext_resource type="AudioStream" uid="uid://dflcg1p5ncrs0" path="res://Sounds/success.ogg" id="4_jt8c3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_id0r1"]
+viewport_path = NodePath("screen/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmw1i"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_id0r1")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7cj7s"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_hmw1i")
+add_uv2 = true
+
+[node name="Screen" type="Node3D" groups=["screen"]]
+script = ExtResource("1_yynd6")
+
+[node name="screen" parent="." instance=ExtResource("1_akis4")]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="screen"]
+transform = Transform3D(0.818635, 0, 0, 0, 0.459577, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("QuadMesh_7cj7s")
+
+[node name="SubViewport" type="SubViewport" parent="screen"]
+handle_input_locally = false
+size = Vector2i(527, 217)
+
+[node name="ScreenView" parent="screen/SubViewport" instance=ExtResource("2_n1nat")]
+
+[node name="SuccessSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_jt8c3")

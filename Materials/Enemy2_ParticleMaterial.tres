@@ -1,0 +1,12 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://dkg52uc1jbrgf"]
+
+[resource]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 10.0
+tangential_accel_max = 15.0
+damping_min = 20.0
+damping_max = 20.0

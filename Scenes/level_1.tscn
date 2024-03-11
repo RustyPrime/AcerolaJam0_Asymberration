@@ -1,609 +1,721 @@
-[gd_scene load_steps=30 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=41 format=3 uid="uid://cdvveg0cf4cjl"]
 
-[ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_xg1sp"]
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
-[ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_1yba8"]
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="2_qdp4c"]
-[ext_resource type="Script" path="res://Scripts/DeathZone.gd" id="3_6307p"]
 [ext_resource type="PackedScene" uid="uid://c5c08p1yp1ah" path="res://Scenes/Subscenes/player_1_remote.tscn" id="3_fbsae"]
 [ext_resource type="PackedScene" uid="uid://c2cb13c6yvri5" path="res://Scenes/Subscenes/player_2.tscn" id="4_ax3pg"]
+[ext_resource type="PackedScene" uid="uid://dowwehwb4hrru" path="res://Scenes/Subscenes/sat_dish.tscn" id="5_u62ow"]
+[ext_resource type="PackedScene" uid="uid://25go8fwr32gk" path="res://Scenes/Subscenes/scene.tscn" id="6_mfcu6"]
+[ext_resource type="PackedScene" uid="uid://bm41bnlkj7584" path="res://Scenes/Subscenes/extra_enemy_spawner.tscn" id="8_w7lm4"]
+[ext_resource type="PackedScene" uid="uid://bwq7222k3oykc" path="res://Scenes/Subscenes/button.tscn" id="9_j6vnj"]
+[ext_resource type="PackedScene" uid="uid://rcwel0qojivr" path="res://Scenes/Subscenes/tube.tscn" id="10_xno10"]
+[ext_resource type="PackedScene" uid="uid://twovw0gd6t2n" path="res://Scenes/Subscenes/full_pc_setup.tscn" id="11_u8702"]
+[ext_resource type="Script" path="res://Scripts/pc_shutdown.gd" id="12_i57al"]
+[ext_resource type="PackedScene" uid="uid://ujd8ht56ocro" path="res://Scenes/Subscenes/screen.tscn" id="12_vcqxt"]
+[ext_resource type="AudioStream" uid="uid://df3fkbpc1pjyq" path="res://Sounds/interact.ogg" id="14_bbqaj"]
+[ext_resource type="PackedScene" uid="uid://boh0wmluaijpl" path="res://Scenes/Subscenes/lockers.tscn" id="15_6f0qg"]
+[ext_resource type="PackedScene" uid="uid://cslly3ej65hy1" path="res://Scenes/Subscenes/box_1.tscn" id="16_l83o0"]
+[ext_resource type="PackedScene" uid="uid://bb7q0lqo238ss" path="res://Scenes/Subscenes/ceiling.tscn" id="17_dcbj3"]
+[ext_resource type="PackedScene" uid="uid://dpf5tnalkkwxo" path="res://Scenes/Subscenes/box_2.tscn" id="17_wq4il"]
+[ext_resource type="PackedScene" uid="uid://djolw8digd37k" path="res://Scenes/Subscenes/target.tscn" id="18_a5bna"]
+[ext_resource type="PackedScene" uid="uid://c8e1vucnxd3ax" path="res://Scenes/Subscenes/box_3.tscn" id="18_oy27w"]
+[ext_resource type="PackedScene" uid="uid://c6ajubr60hrsa" path="res://Scenes/Subscenes/special_target.tscn" id="19_ovy8o"]
+[ext_resource type="PackedScene" uid="uid://b3d1trmqvre3r" path="res://Scenes/Subscenes/door.tscn" id="20_l8kbw"]
+[ext_resource type="PackedScene" uid="uid://ost5ittn3qme" path="res://Scenes/Subscenes/door_on_rails.tscn" id="21_2lr3a"]
+[ext_resource type="PackedScene" uid="uid://lepxspy1aid0" path="res://Scenes/Subscenes/door_on_rails_mirrored.tscn" id="22_wckc8"]
+[ext_resource type="PackedScene" uid="uid://bmxb56i1p76d4" path="res://Scenes/Subscenes/table.tscn" id="23_04wrc"]
+[ext_resource type="PackedScene" uid="uid://25rjk71u02hk" path="res://Models/flask.glb" id="24_yoypp"]
+[ext_resource type="PackedScene" uid="uid://0muyqqf6udf" path="res://Models/flask2.glb" id="25_ffm21"]
+[ext_resource type="PackedScene" uid="uid://cujjlpeskaoa5" path="res://Models/gloves.glb" id="26_0kowq"]
+[ext_resource type="PackedScene" uid="uid://c8dm15jr820sr" path="res://Models/clipBoard.glb" id="27_5urn0"]
+[ext_resource type="PackedScene" uid="uid://c6aidn8i3npcu" path="res://Scenes/Subscenes/button_without_screen.tscn" id="28_f76i8"]
 
-[sub_resource type="Resource" id="Resource_kk63r"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 1, 0, 0, 1, 46, 0, 0, 46, 0, 0, 0, 62, 1, 0, 62, 1, 46, 62, 0, 46, 62, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="Environment" id="Environment_3v1yv"]
+background_mode = 1
+background_color = Color(0.207843, 0.207843, 0.207843, 1)
+glow_enabled = true
+fog_enabled = true
+fog_light_energy = 1.55
+fog_density = 0.02
+adjustment_enabled = true
+adjustment_saturation = 0.75
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_njxch"]
-vertices = PackedVector3Array(-10.5, 1.5, -17.5, -10.5, 1.5, -19.25, -11.5, 1.5, -19.5, -36.25, 1.5, -24.25, -36.25, 1.5, -11.5, -11.5, 1.5, -17.25, -36.25, 1.5, -11.5, -11.5, 1.5, -11.5, -11.5, 1.5, -17.25, -11.5, 1.5, -19.5, -11.5, 1.5, -24.25, -36.25, 1.5, -24.25, -1.5, 1.5, -17.25, -0.25, 1.5, -17.5, -0.5, 1.5, -19.25, -1.5, 1.5, -19.5, -9.25, 1.5, -17.25, -9.25, 1.5, -15.5, -1.5, 1.5, -15.5, -1.5, 1.5, -17.25, -10.5, 1.5, -19.25, -10.5, 1.5, -17.5, -9.25, 1.5, -17.25, -1.5, 1.5, -17.25, -1.5, 1.5, -19.5, -9.25, 1.5, -19.75, -1.5, 1.5, -24.25, -9.25, 1.5, -24.25, -9.25, 1.5, -19.75, -1.5, 1.5, -19.5, -0.5, 1.5, -19.25, -0.25, 1.5, -17.5, 0.75, 1.5, -17.25, 0.75, 1.5, -19.75, -0.5, 1.5, -19.25, 0.75, 1.5, -17.25, 22.5, 1.5, -11.5, 22.5, 1.5, -24.25, 22.5, 1.5, -24.25, 0.75, 1.5, -24.25, 0.75, 1.5, -19.75, 0.75, 1.5, -17.25, 0.75, 1.5, -11.5, 22.5, 1.5, -11.5, -9.25, 1.5, -11.5, -1.5, 1.5, -11.25, -1.5, 1.5, -15.5, -9.25, 1.5, -15.5, -8.25, 1.5, 0.75, -8.25, 1.5, 2.5, -1.5, 1.5, 2.5, -1.25, 1.5, 0.5, -9.25, 1.5, 0.5, -8.25, 1.5, 0.75, -1.25, 1.5, 0.5, -1.25, 1.5, -9.25, -1.5, 1.5, -11.25, -9.25, 1.5, -9.75, -1.5, 1.5, -11.25, -9.25, 1.5, -11.5, -9.25, 1.5, -9.75, -31.25, 1.5, 1.5, -29.5, 1.5, 1.75, -29.25, 1.5, 0.5, -31.5, 1.5, 0.5, -29.25, 1.5, 0.5, -9.25, 1.5, 0.5, -9.75, 1.5, -9.25, -36.25, 1.5, -9.25, -9.25, 1.5, 0.5, -9.25, 1.5, -9.75, -9.75, 1.5, -9.25, -36.25, 1.5, -9.25, -36.25, 1.5, 0.5, -31.5, 1.5, 0.5, -36.25, 1.5, -9.25, -31.5, 1.5, 0.5, -29.25, 1.5, 0.5, 16.75, 1.5, 1.5, 18.5, 1.5, 1.75, 18.75, 1.5, 0.5, 16.5, 1.5, 0.5, 16.75, 1.5, 1.5, 18.75, 1.5, 0.5, 22.5, 1.5, -9.25, 18.75, 1.5, 0.5, 22.5, 1.5, 0.5, 22.5, 1.5, -9.25, 16.5, 1.5, 0.5, 22.5, 1.5, -9.25, -1.25, 1.5, -9.25, -1.25, 1.5, 0.5, -29.25, 1.5, 2.75, -29.5, 1.5, 1.75, -31.25, 1.5, 1.5, -31.75, 1.5, 2.75, -36.25, 1.5, 18.5, -10.5, 1.5, 18.5, -10.5, 1.5, 2.75, -29.25, 1.5, 2.75, -36.25, 1.5, 18.5, -31.75, 1.5, 2.75, -36.25, 1.5, 2.75, -36.25, 1.5, 18.5, 18.75, 1.5, 2.75, 18.5, 1.5, 1.75, 16.75, 1.5, 1.5, 16.25, 1.5, 2.75, 22.5, 1.5, 18.5, 16.25, 1.5, 2.75, 0.75, 1.5, 2.75, 0.75, 1.5, 18.5, 22.5, 1.5, 18.5, 22.5, 1.5, 18.5, 22.5, 1.5, 2.75, 18.75, 1.5, 2.75, -1.5, 1.5, 2.5, -8.25, 1.5, 2.5, -8.25, 1.5, 18.5, -1.5, 1.5, 18.5)
-polygons = [PackedInt32Array(0, 5, 1), PackedInt32Array(1, 5, 2), PackedInt32Array(2, 5, 3), PackedInt32Array(3, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(14, 13, 15), PackedInt32Array(15, 13, 12), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 25), PackedInt32Array(22, 25, 24), PackedInt32Array(22, 24, 23), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(32, 31, 30), PackedInt32Array(34, 33, 35), PackedInt32Array(35, 33, 37), PackedInt32Array(35, 37, 36), PackedInt32Array(40, 39, 38), PackedInt32Array(43, 42, 41), PackedInt32Array(47, 46, 44), PackedInt32Array(44, 46, 45), PackedInt32Array(49, 48, 50), PackedInt32Array(50, 48, 51), PackedInt32Array(53, 52, 54), PackedInt32Array(54, 52, 55), PackedInt32Array(55, 52, 56), PackedInt32Array(56, 52, 57), PackedInt32Array(60, 59, 58), PackedInt32Array(61, 64, 62), PackedInt32Array(62, 64, 63), PackedInt32Array(66, 65, 67), PackedInt32Array(67, 65, 68), PackedInt32Array(71, 70, 69), PackedInt32Array(74, 73, 72), PackedInt32Array(77, 76, 75), PackedInt32Array(80, 79, 78), PackedInt32Array(82, 81, 83), PackedInt32Array(83, 81, 84), PackedInt32Array(87, 86, 85), PackedInt32Array(91, 90, 88), PackedInt32Array(88, 90, 89), PackedInt32Array(93, 92, 94), PackedInt32Array(94, 92, 95), PackedInt32Array(95, 92, 96), PackedInt32Array(98, 97, 99), PackedInt32Array(99, 97, 100), PackedInt32Array(103, 102, 101), PackedInt32Array(105, 104, 106), PackedInt32Array(106, 104, 107), PackedInt32Array(107, 104, 108), PackedInt32Array(110, 109, 111), PackedInt32Array(111, 109, 112), PackedInt32Array(115, 114, 113), PackedInt32Array(119, 118, 116), PackedInt32Array(116, 118, 117)]
+vertices = PackedVector3Array(-13.5694, 1.5, -13.275, -12.5694, 1.5, -13.525, -12.8194, 1.5, -14.025, -13.5694, 1.5, -14.275, -16.8194, 1.5, -14.025, -19.0694, 1.5, -14.275, -19.5694, 1.5, -13.525, -19.0694, 1.5, -12.275, -17.0694, 1.5, -12.275, -16.8194, 1.5, -13.525, -24.5694, 1.5, -14.025, -26.0694, 1.5, -14.025, -26.0694, 1.5, -13.525, -24.5694, 1.5, -13.525, -21.8194, 1.5, -16.025, -24.0694, 1.5, -16.025, -23.8194, 1.5, -14.775, -23.8194, 1.5, -14.775, -24.5694, 1.5, -14.025, -24.5694, 1.5, -13.525, -15.0694, 1.5, -13.525, -14.3194, 1.5, -11.525, -13.8194, 1.5, -11.775, -13.5694, 1.5, -13.275, -13.5694, 1.5, -14.275, -14.5694, 1.5, -14.275, -21.8194, 1.5, -11.775, -21.3194, 1.5, -13.525, -21.3194, 1.5, -14.025, -17.0694, 1.5, -16.025, -19.0694, 1.5, -16.025, -19.0694, 1.5, -14.275, -16.8194, 1.5, -14.025, -13.8194, 1.5, -16.025, -14.5694, 1.5, -16.025, -14.5694, 1.5, -14.275, -13.5694, 1.5, -14.275, -19.5694, 1.5, -13.525, -19.0694, 1.5, -14.275, -21.3194, 1.5, -14.025, -21.3194, 1.5, -13.525, -21.3194, 1.5, -14.025, -21.8194, 1.5, -16.025, -23.8194, 1.5, -14.775, -24.5694, 1.5, -13.525, -23.8194, 1.5, -11.775, -21.8194, 1.5, -11.775, -15.0694, 1.5, -13.525, -14.5694, 1.5, -14.275, -16.8194, 1.5, -14.025, -16.8194, 1.5, -13.525, -12.3194, 1.75, -10.275, -12.3194, 1.5, -10.025, -11.3194, 1.5, -9.77502, -10.8194, 1.5, -10.775, -8.31939, 1.5, -10.775, -10.8194, 1.5, -10.775, -11.3194, 1.5, -9.77502, -10.8194, 1.5, -7.52502, -8.31939, 1.5, -7.52502, -12.8194, 1.5, -14.025, -12.5694, 1.5, -13.525, -11.5694, 1.5, -13.525, -10.8194, 1.5, -14.525, -8.31939, 1.5, -16.025, -11.0694, 1.5, -16.025, -10.8194, 1.5, -14.525, -8.31939, 1.5, -13.025, -11.5694, 1.5, -13.525, -11.3194, 1.5, -12.275, -10.8194, 1.5, -12.025, -8.31939, 1.5, -13.025, -10.8194, 1.5, -14.525, -8.31939, 1.5, -10.775, -7.06939, 1.5, -11.025, -7.06939, 1.5, -12.775, -8.31939, 1.5, -13.025, -10.8194, 1.5, -12.025, -10.8194, 1.5, -10.775, -7.06939, 1.5, -12.775, -7.06939, 1.5, -11.025, -6.06939, 1.5, -10.775, -1.56939, 1.5, -10.775, -1.56939, 1.5, -13.025, -6.06939, 1.5, -13.025, -1.56939, 1.5, -13.025, -1.56939, 1.5, -16.025, -6.06939, 1.5, -16.025, -6.06939, 1.5, -13.025, -1.56939, 1.5, -10.775, -0.319386, 1.5, -11.025, -0.319386, 1.5, -12.775, -1.56939, 1.5, -13.025, -6.06939, 1.5, -10.775, -6.06939, 1.5, -7.52502, -1.56939, 1.5, -7.52502, -1.56939, 1.5, -10.775, -0.319386, 1.5, -12.775, -0.319386, 1.5, -11.025, 0.680614, 1.5, -10.775, 18.1806, 1.5, -7.52502, 18.1806, 1.5, -16.025, 0.680614, 1.5, -13.025, 0.680614, 1.5, -10.775, 0.680614, 1.5, -7.52502, 18.1806, 1.5, -7.52502, 18.1806, 1.5, -16.025, 0.680614, 1.5, -16.025, 0.680614, 1.5, -13.025, -24.5694, 1.5, -10.275, -26.0694, 1.5, -10.275, -24.3194, 1.5, -9.77502, -13.3194, 1.5, -10.025, -12.3194, 1.5, -10.025, -12.3194, 1.75, -10.275, -13.5694, 1.5, -10.525, -21.3194, 1.5, -10.025, -19.5694, 1.5, -10.025, -20.3194, 1.75, -10.275, -21.5694, 1.5, -10.525, -13.5694, 1.5, -10.525, -13.8194, 1.5, -11.775, -14.3194, 1.5, -11.525, -14.5694, 1.5, -10.525, -21.5694, 1.5, -10.525, -21.8194, 1.5, -9.27502, -21.3194, 1.5, -10.025, -13.8194, 1.5, -9.27502, -13.3194, 1.5, -10.025, -13.5694, 1.5, -10.525, -14.5694, 1.5, -10.525, -15.0694, 1.5, -10.025, -23.8194, 1.5, -11.025, -24.5694, 1.5, -10.275, -24.3194, 1.5, -9.77502, -21.8194, 1.5, -9.27502, -21.5694, 1.5, -10.525, -21.8194, 1.5, -11.775, -23.8194, 1.5, -7.52502, -21.5694, 1.5, -7.52502, -21.8194, 1.5, -9.27502, -24.3194, 1.5, -9.77502, -14.3194, 1.5, -7.52502, -13.5694, 1.5, -7.52502, -13.8194, 1.5, -9.27502, -15.0694, 1.5, -10.025, -18.8194, 1.5, -10.775, -20.3194, 1.75, -10.275, -19.5694, 1.5, -10.025, -19.5694, 1.5, -10.025, -18.8194, 1.5, -7.52502, -17.0694, 1.5, -7.52502, -17.0694, 1.5, -9.77502, -18.8194, 1.5, -10.775, -15.0694, 1.5, -10.025, -14.5694, 1.5, -10.525, -16.8194, 1.5, -10.275, -17.0694, 1.5, -9.77502, -16.8194, 1.5, -10.275, -17.0694, 1.5, -12.275, -19.0694, 1.5, -12.275, -18.8194, 1.5, -10.775, -17.0694, 1.5, -9.77502, -21.8194, 1.5, -11.775, -23.8194, 1.5, -11.775, -23.8194, 1.5, -11.025, -1.56939, 1.5, -7.52502, -6.06939, 1.5, -7.52502, -6.06939, 1.5, -5.52502, -1.56939, 1.5, -5.02502, -6.56939, 1.5, -4.77502, -8.81939, 1.5, -4.77502, -9.06939, 1.5, -0.0250225, -6.31939, 1.5, 0.474977, -1.56939, 1.5, -5.02502, -6.06939, 1.5, -5.52502, -6.56939, 1.5, -4.77502, -6.31939, 1.5, 0.474977, -6.06939, 1.5, 2.72498, -1.56939, 1.5, 2.72498, -1.31939, 1.5, 0.474977, -1.31939, 1.5, 0.474977, 1.43061, 1.5, -0.0250225, 1.18061, 1.5, -4.77502, -1.56939, 1.5, -5.02502, -6.56939, 1.5, -4.77502, -6.31939, 1.5, 0.474977, -21.0694, 1.5, 1.72498, -19.3194, 1.5, 1.72498, -19.0694, 1.5, 0.474977, -21.3194, 1.5, 0.474977, -21.3194, 1.5, 0.474977, -16.5694, 1.5, -0.0250225, -16.8194, 1.5, -4.77502, -26.0694, 1.5, -4.77502, -26.0694, 1.5, 0.474977, -21.3194, 1.5, 0.474977, -19.0694, 1.5, 0.474977, -16.5694, 1.5, -0.0250225, -16.5694, 1.5, -0.0250225, -9.06939, 1.5, -0.0250225, -8.81939, 1.5, -4.77502, -16.8194, 1.5, -4.77502, 1.43061, 1.5, -0.0250225, 8.93061, 1.5, -0.0250225, 9.18061, 1.5, -4.77502, 1.18061, 1.5, -4.77502, 12.1806, 1.5, 0.474977, 12.4306, 1.5, 1.72498, 14.1806, 1.5, 1.72498, 14.4306, 1.5, 0.474977, 14.4306, 1.5, 0.474977, 18.1806, 1.5, 0.474977, 18.1806, 1.5, -4.77502, 9.18061, 1.5, -4.77502, 8.93061, 1.5, -0.0250225, 8.93061, 1.5, -0.0250225, 12.1806, 1.5, 0.474977, 14.4306, 1.5, 0.474977, -26.0694, 1.5, 2.72498, -26.0694, 1.5, 3.72498, -24.8194, 1.5, 3.97498, -21.3194, 1.5, 2.72498, -19.0694, 1.5, 2.72498, -19.3194, 1.5, 1.72498, -21.0694, 1.5, 1.72498, -21.3194, 1.5, 2.72498, -15.8194, 1.5, 3.97498, -19.0694, 1.5, 2.72498, -21.3194, 1.5, 2.72498, -24.8194, 1.5, 3.97498, -24.8194, 1.5, 14.725, -15.8194, 1.5, 14.725, -15.8194, 1.5, 3.97498, -16.3194, 1.5, 2.72498, -19.0694, 1.5, 2.72498, 3.43061, 1.5, 3.47498, 3.18061, 1.5, 2.72498, 1.68061, 1.5, 2.72498, 1.43061, 1.5, 5.47498, 14.1806, 1.5, 1.72498, 12.4306, 1.5, 1.72498, 12.1806, 1.5, 2.72498, 14.4306, 1.5, 2.72498, 18.1806, 1.5, 2.72498, 14.4306, 1.5, 2.72498, 9.93061, 1.5, 3.47498, 2.93061, 1.5, 12.475, 3.18061, 1.5, 13.975, 18.1806, 1.5, 14.725, 12.1806, 1.5, 2.72498, 10.1806, 1.5, 2.72498, 9.93061, 1.5, 3.47498, 1.43061, 1.5, 5.47498, 1.43061, 1.5, 12.225, 2.93061, 1.5, 12.475, 9.93061, 1.5, 3.47498, 3.43061, 1.5, 3.47498, 14.4306, 1.5, 2.72498, 12.1806, 1.5, 2.72498, 9.93061, 1.5, 3.47498, 0.680614, 1.5, 5.72498, 0.680614, 1.5, 12.725, 1.43061, 1.5, 12.225, 1.43061, 1.5, 5.47498, 3.18061, 1.5, 13.975, 2.43061, 1.5, 14.725, 18.1806, 1.5, 14.725, -11.5694, 1.5, 3.97498, -14.0694, 1.5, 3.72498, -14.3194, 1.5, 4.47498, -15.8194, 1.5, 14.725, -8.31939, 1.5, 14.725, -8.31939, 1.5, 2.72498, -11.0694, 1.5, 2.72498, -11.5694, 1.5, 3.97498, -8.31939, 1.5, 14.725, -14.3194, 1.5, 4.47498, -15.8194, 1.5, 3.97498, -15.8194, 1.5, 14.725, -1.56939, 1.5, 2.72498, -6.06939, 1.5, 2.72498, -6.06939, 1.5, 14.725, -1.56939, 1.5, 14.725)
+polygons = [PackedInt32Array(2, 1, 3), PackedInt32Array(3, 1, 0), PackedInt32Array(9, 8, 4), PackedInt32Array(4, 8, 7), PackedInt32Array(4, 7, 6), PackedInt32Array(4, 6, 5), PackedInt32Array(13, 12, 10), PackedInt32Array(10, 12, 11), PackedInt32Array(16, 15, 14), PackedInt32Array(19, 18, 17), PackedInt32Array(24, 23, 25), PackedInt32Array(25, 23, 20), PackedInt32Array(20, 23, 22), PackedInt32Array(20, 22, 21), PackedInt32Array(27, 26, 28), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 32), PackedInt32Array(34, 33, 35), PackedInt32Array(35, 33, 36), PackedInt32Array(40, 39, 37), PackedInt32Array(37, 39, 38), PackedInt32Array(44, 43, 45), PackedInt32Array(45, 43, 46), PackedInt32Array(46, 43, 41), PackedInt32Array(41, 43, 42), PackedInt32Array(50, 49, 47), PackedInt32Array(47, 49, 48), PackedInt32Array(52, 51, 53), PackedInt32Array(53, 51, 54), PackedInt32Array(57, 56, 58), PackedInt32Array(58, 56, 55), PackedInt32Array(58, 55, 59), PackedInt32Array(61, 60, 62), PackedInt32Array(62, 60, 63), PackedInt32Array(65, 64, 66), PackedInt32Array(66, 64, 67), PackedInt32Array(69, 68, 70), PackedInt32Array(70, 68, 72), PackedInt32Array(70, 72, 71), PackedInt32Array(74, 73, 75), PackedInt32Array(75, 73, 76), PackedInt32Array(76, 73, 77), PackedInt32Array(77, 73, 78), PackedInt32Array(79, 84, 80), PackedInt32Array(80, 84, 81), PackedInt32Array(81, 84, 83), PackedInt32Array(81, 83, 82), PackedInt32Array(88, 87, 85), PackedInt32Array(85, 87, 86), PackedInt32Array(90, 89, 91), PackedInt32Array(91, 89, 92), PackedInt32Array(96, 95, 93), PackedInt32Array(93, 95, 94), PackedInt32Array(97, 102, 98), PackedInt32Array(98, 102, 99), PackedInt32Array(99, 102, 101), PackedInt32Array(99, 101, 100), PackedInt32Array(105, 104, 103), PackedInt32Array(108, 107, 106), PackedInt32Array(110, 109, 111), PackedInt32Array(113, 112, 114), PackedInt32Array(114, 112, 115), PackedInt32Array(119, 118, 116), PackedInt32Array(116, 118, 117), PackedInt32Array(122, 121, 123), PackedInt32Array(123, 121, 120), PackedInt32Array(125, 124, 126), PackedInt32Array(128, 127, 129), PackedInt32Array(129, 127, 130), PackedInt32Array(130, 127, 131), PackedInt32Array(133, 132, 134), PackedInt32Array(134, 132, 135), PackedInt32Array(135, 132, 136), PackedInt32Array(136, 132, 137), PackedInt32Array(139, 138, 140), PackedInt32Array(140, 138, 141), PackedInt32Array(143, 142, 144), PackedInt32Array(144, 142, 145), PackedInt32Array(148, 147, 146), PackedInt32Array(153, 152, 149), PackedInt32Array(149, 152, 150), PackedInt32Array(150, 152, 151), PackedInt32Array(157, 156, 154), PackedInt32Array(154, 156, 155), PackedInt32Array(162, 161, 158), PackedInt32Array(158, 161, 159), PackedInt32Array(159, 161, 160), PackedInt32Array(165, 164, 163), PackedInt32Array(167, 166, 168), PackedInt32Array(168, 166, 169), PackedInt32Array(171, 170, 172), PackedInt32Array(172, 170, 173), PackedInt32Array(176, 175, 174), PackedInt32Array(178, 177, 179), PackedInt32Array(179, 177, 180), PackedInt32Array(183, 182, 184), PackedInt32Array(184, 182, 181), PackedInt32Array(184, 181, 186), PackedInt32Array(184, 186, 185), PackedInt32Array(187, 190, 188), PackedInt32Array(188, 190, 189), PackedInt32Array(192, 191, 193), PackedInt32Array(193, 191, 195), PackedInt32Array(193, 195, 194), PackedInt32Array(198, 197, 196), PackedInt32Array(199, 202, 200), PackedInt32Array(200, 202, 201), PackedInt32Array(203, 206, 204), PackedInt32Array(204, 206, 205), PackedInt32Array(208, 207, 209), PackedInt32Array(209, 207, 210), PackedInt32Array(212, 211, 213), PackedInt32Array(213, 211, 215), PackedInt32Array(213, 215, 214), PackedInt32Array(218, 217, 216), PackedInt32Array(220, 219, 221), PackedInt32Array(221, 219, 222), PackedInt32Array(224, 223, 225), PackedInt32Array(225, 223, 226), PackedInt32Array(228, 227, 229), PackedInt32Array(229, 227, 230), PackedInt32Array(230, 227, 232), PackedInt32Array(230, 232, 231), PackedInt32Array(235, 234, 233), PackedInt32Array(237, 236, 238), PackedInt32Array(238, 236, 239), PackedInt32Array(240, 243, 241), PackedInt32Array(241, 243, 242), PackedInt32Array(245, 244, 246), PackedInt32Array(246, 244, 249), PackedInt32Array(246, 249, 247), PackedInt32Array(247, 249, 248), PackedInt32Array(250, 252, 251), PackedInt32Array(254, 253, 255), PackedInt32Array(255, 253, 257), PackedInt32Array(255, 257, 256), PackedInt32Array(260, 259, 258), PackedInt32Array(264, 263, 261), PackedInt32Array(261, 263, 262), PackedInt32Array(267, 266, 265), PackedInt32Array(269, 268, 270), PackedInt32Array(270, 268, 271), PackedInt32Array(271, 268, 272), PackedInt32Array(274, 273, 275), PackedInt32Array(275, 273, 276), PackedInt32Array(279, 278, 277), PackedInt32Array(283, 282, 280), PackedInt32Array(280, 282, 281)]
+region_min_size = 30.0
 
-[sub_resource type="Resource" id="Resource_00h46"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(63, 0, 48, 63, 1, 48, 63, 1, 2, 63, 0, 2, 1, 1, 2, 1, 0, 2, 1, 1, 48, 1, 0, 48)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="Animation" id="Animation_mgmx8"]
+resource_name = "Idle"
+length = 1.66667
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pole")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Resource" id="Resource_5c42k"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 1, 0, 0, 1, 0, 0, 0, 62, 5, 0, 62, 5, 1, 62, 0, 1, 62, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="Animation" id="Animation_ug116"]
+resource_name = "Spinning"
+length = 1.66667
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pole")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.8, 1, 0, 0.998027, 0, 0.0627905, 0.833333, 1, 0, -1, 0, 4.37114e-08, 1.63333, 1, 0, -0.0627905, 0, 0.998027, 1.66667, 1, 0, 8.74228e-08, 0, 1)
 
-[sub_resource type="Resource" id="Resource_nix5j"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 45, 0, 0, 45, 0, 0, 0, 1, 5, 0, 1, 5, 45, 1, 0, 45, 1, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_562xv"]
+_data = {
+"Idle": SubResource("Animation_mgmx8"),
+"Spinning": SubResource("Animation_ug116")
+}
 
-[sub_resource type="Resource" id="Resource_80owt"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 0, 1, 0, 0, 0, 0, 5, 0, 0, 5, 1, 60, 5, 0, 60, 5, 1, 60, 0, 0, 60, 0, 1)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ex4g5"]
+size = Vector3(2.53406, 4.58398, 1.62732)
 
-[sub_resource type="Resource" id="Resource_te2mf"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 44, 0, 0, 44, 0, 0, 0, 1, 5, 0, 1, 5, 44, 1, 0, 44, 1, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fj04l"]
+size = Vector3(1.54567, 6.20361, 1.62732)
 
-[sub_resource type="Resource" id="Resource_kt236"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 1, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1, 5, 1, 1, 0, 1, 1, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="SphereShape3D" id="SphereShape3D_jlkph"]
+radius = 2.98095
 
-[sub_resource type="Resource" id="Resource_nhd1j"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(28, 0, 0, 28, 0, 1, 28, 5, 1, 28, 5, 0, 8, 5, 1, 8, 5, 0, 8, 0, 1, 8, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sq8fk"]
+emission_enabled = true
+emission = Color(0.313726, 1, 1, 1)
+emission_energy_multiplier = 10.0
 
-[sub_resource type="Resource" id="Resource_i20nx"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 1, 0, 0, 1, 0, 0, 0, 27, 5, 0, 27, 5, 1, 27, 0, 1, 27, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="CylinderMesh" id="CylinderMesh_fx0j7"]
+top_radius = 0.02
+bottom_radius = 0.02
 
-[sub_resource type="Resource" id="Resource_bohgi"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 1, 0, 0, 1, 0, 0, 0, 24, 5, 0, 24, 5, 1, 24, 0, 1, 24, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
+[sub_resource type="LabelSettings" id="LabelSettings_wyy65"]
+font_size = 76
 
-[sub_resource type="Resource" id="Resource_sb68g"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(24, 5, 1, 20, 5, 1, 20, 5, 0, 24, 5, 0, 20, 0, 0, 24, 0, 0, 20, 0, 1, 24, 0, 1)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_t54ed"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 18, 0, 0, 18, 0, 0, 0, 1, 5, 0, 1, 5, 18, 1, 0, 18, 1, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_ur66p"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 18, 0, 0, 18, 0, 0, 0, 1, 5, 0, 1, 5, 18, 1, 0, 18, 1, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 7, 6, 6, 5, 5, 4, 4, 7, 0, 4, 5, 1, 6, 2, 7, 3)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 2, 0, 3, 0, 4, 0, 5, 1, 4, 1, 3, 1, 2, 1, 5, 2, 5, 2, 3, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 7, 6, 5, 4, 1, 0, 4, 5, 2, 1, 5, 6, 3, 2, 6, 7, 0, 3, 7, 4)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_an6ju"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(1, 5, 0, 0, 5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 5, 0, 5, 5, 1, 0, 5, 1, 5, 5)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 2, 1, 5, 5, 4, 6, 3, 4, 6, 7, 5, 0, 7, 7, 6)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 3, 0, 1, 0, 2, 0, 5, 1, 2, 1, 3, 1, 4, 2, 5, 2, 4, 3, 4, 3, 5, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 2, 1, 5, 6, 3, 2, 4, 7, 5, 1, 0, 7, 6, 4, 5, 7, 0, 3, 6)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_ijk2d"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(1, 0, 0, 1, 5, 0, 0, 5, 0, 0, 0, 0, 0, 5, 5, 0, 0, 5, 1, 5, 5, 1, 0, 5)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_n3suy"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(1, 5, 14, 1, 0, 14, 0, 0, 14, 0, 5, 14, 0, 0, 8, 0, 5, 8, 1, 0, 8, 1, 5, 8)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_is233"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(1, 5, 14, 1, 0, 14, 0, 0, 14, 0, 5, 14, 0, 0, 8, 0, 5, 8, 1, 0, 8, 1, 5, 8)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_ojwpo"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 5, 5, 0, 5, 5, 1, 0, 5, 1, 5, 0, 1, 0, 0, 1, 5, 0, 0, 0, 0, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 3, 2, 4, 6, 4, 1, 6, 7, 0, 5, 7, 6, 7)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 5, 0, 2, 0, 1, 0, 3, 1, 4, 1, 3, 1, 2, 2, 4, 2, 5, 3, 5, 3, 4, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 2, 6, 4, 2, 1, 7, 0, 3, 5, 7, 5, 4, 6, 7, 6, 1, 0)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Resource" id="Resource_5y4oe"]
-script = ExtResource("2_1yba8")
-selected = false
-active = false
-collsion = true
-physics_layer = 0
-physics_mask = 0
-vertex_points = PackedVector3Array(0, 5, 0, 0, 5, 1, 0, 0, 1, 0, 0, 0, 17, 0, 1, 17, 5, 1, 17, 0, 0, 17, 5, 0)
-vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
-active_vertex = -1
-edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 2, 1, 5, 5, 4, 6, 3, 4, 6, 7, 5, 0, 7, 7, 6)
-edge_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-active_edge = -1
-edge_face_indices = PackedInt32Array(0, 3, 0, 1, 0, 2, 0, 5, 1, 2, 1, 3, 1, 4, 2, 5, 2, 4, 3, 4, 3, 5, 4, 5)
-face_vertex_count = PackedInt32Array(4, 4, 4, 4, 4, 4)
-face_vertex_indices = PackedInt32Array(0, 1, 2, 3, 4, 2, 1, 5, 6, 3, 2, 4, 7, 5, 1, 0, 7, 6, 4, 5, 7, 0, 3, 6)
-face_material_indices = PackedInt32Array(-1, -1, -1, -1, -1, -1)
-face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
-face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
-face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
-active_face = -1
-face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
-
-[sub_resource type="Environment" id="Environment_it6eh"]
-background_mode = 1
-background_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_131qf"]
-size = Vector3(123.241, 2.24133, 131.497)
-
-[node name="Level" type="Node3D" node_paths=PackedStringArray("player1_spawnPoint", "player2_spawnPoint")]
+[node name="Level" type="Node3D" node_paths=PackedStringArray("player1_spawnPoint", "player2_spawnPoint", "enemySpawnPoints")]
 script = ExtResource("1_y2gin")
 player1_scene = ExtResource("2_qdp4c")
 player1_remote_scene = ExtResource("3_fbsae")
 player2_scene = ExtResource("4_ax3pg")
 player1_spawnPoint = NodePath("Multiplayer/SpawnPoint1")
 player2_spawnPoint = NodePath("Multiplayer/SpawnPoint2")
+enemySpawnPoints = [NodePath("EnemySpawns/Spawn1"), NodePath("EnemySpawns/Spawn2"), NodePath("EnemySpawns/Spawn3"), NodePath("EnemySpawns/Spawn4"), NodePath("EnemySpawns/Spawn5"), NodePath("EnemySpawns/Spawn6"), NodePath("EnemySpawns/Spawn7"), NodePath("EnemySpawns/Spawn8"), NodePath("EnemySpawns/Spawn9")]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_3v1yv")
+
+[node name="LightmapGI" type="LightmapGI" parent="Environment"]
+quality = 0
+interior = true
 
 [node name="World" type="Node3D" parent="."]
-
-[node name="Ceiling" type="Node3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 6, -26)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_kk63r")
+unique_name_in_owner = true
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="World"]
+unique_name_in_owner = true
 navigation_mesh = SubResource("NavigationMesh_njxch")
 
-[node name="Block_0" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 0, -28)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_00h46")
+[node name="Scene" parent="World/NavigationRegion3D" instance=ExtResource("6_mfcu6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.16671, 0, -1.6844)
 
-[node name="Block_1" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 1, 19)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_5c42k")
+[node name="Objects" type="Node3D" parent="World/NavigationRegion3D"]
 
-[node name="Block_2" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 1, -26)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_nix5j")
+[node name="SatDish" parent="World/NavigationRegion3D/Objects" instance=ExtResource("5_u62ow")]
+transform = Transform3D(-0.584505, 0, 0.81139, 0, 1, 0, -0.81139, 0, -0.584505, 1.63738, 0.995981, 13.6232)
 
-[node name="Block_3" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 1, -26)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_80owt")
+[node name="AnimationTree" parent="World/NavigationRegion3D/Objects/SatDish" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_562xv")
+}
 
-[node name="Block_4" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 1, -25)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_te2mf")
+[node name="StaticBody3D2" type="StaticBody3D" parent="World/NavigationRegion3D/Objects/SatDish"]
 
-[node name="Block_5" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 1, -26)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_kt236")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/NavigationRegion3D/Objects/SatDish/StaticBody3D2"]
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, -0.178773, 1.79199, -1.49902)
+shape = SubResource("BoxShape3D_ex4g5")
 
-[node name="Block_6" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 1, 1)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_nhd1j")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="World/NavigationRegion3D/Objects/SatDish/StaticBody3D2"]
+transform = Transform3D(0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.5, -0.742755, 0.809814, -1.17181)
+shape = SubResource("BoxShape3D_fj04l")
 
-[node name="Block_7" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 1, -11)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_i20nx")
+[node name="ExtraEnemySpawner" parent="World/NavigationRegion3D/Objects/SatDish" node_paths=PackedStringArray("extraEnemySpawn") instance=ExtResource("8_w7lm4")]
+extraEnemySpawn = NodePath("../../../../../EnemySpawns/Spawn8")
 
-[node name="Block_9" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -11)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_bohgi")
+[node name="Button" parent="World/NavigationRegion3D/Objects" instance=ExtResource("9_j6vnj")]
+transform = Transform3D(-0.0255489, 0, 0.999674, -8.73942e-08, -1, -2.23355e-09, 0.999674, -8.74228e-08, 0.0255489, -10.0668, 4.25141, 12.6587)
 
-[node name="Block_10" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_sb68g")
+[node name="ExtraEnemySpawner" parent="World/NavigationRegion3D/Objects/Button" node_paths=PackedStringArray("extraEnemySpawn") instance=ExtResource("8_w7lm4")]
+extraEnemySpawn = NodePath("../../../../../EnemySpawns/Spawn5")
 
-[node name="Block_8" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 2)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_t54ed")
+[node name="Tube" parent="World/NavigationRegion3D/Objects" instance=ExtResource("10_xno10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3363, 0.97296, 2.7871)
 
-[node name="Block_11" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 2)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_ur66p")
+[node name="FullPC Setup" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9661, 0.928381, 2.14578)
 
-[node name="Block_12" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -25)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_an6ju")
+[node name="FullPC Setup9" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26.0802, 1.00012, -15.2167)
+script = ExtResource("12_i57al")
 
-[node name="Block_13" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, -25)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_ijk2d")
+[node name="Screen" parent="World/NavigationRegion3D/Objects/FullPC Setup9" instance=ExtResource("12_vcqxt")]
+transform = Transform3D(0.299566, -3.42714e-09, 1.96873e-08, 1.30944e-08, -3.42714e-09, -0.450393, 1.30944e-08, 0.0784037, -1.96873e-08, 0.33816, 1.15578, 0.518345)
+initialText = "Shutdown required"
+interactText = "Shutting down..."
 
-[node name="Block_14" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -25)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_n3suy")
+[node name="Area3D" type="Area3D" parent="World/NavigationRegion3D/Objects/FullPC Setup9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406885, 1.02309, 0.165051)
 
-[node name="Block_17" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, -25)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_is233")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D"]
+shape = SubResource("SphereShape3D_jlkph")
 
-[node name="Block_15" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 1, 1)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_ojwpo")
+[node name="InteractSound" type="AudioStreamPlayer3D" parent="World/NavigationRegion3D/Objects/FullPC Setup9"]
+stream = ExtResource("14_bbqaj")
 
-[node name="Block_16" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
-script = ExtResource("1_xg1sp")
-block_data = SubResource("Resource_5y4oe")
+[node name="ExtraEnemySpawner" parent="World/NavigationRegion3D/Objects/FullPC Setup9" node_paths=PackedStringArray("extraEnemySpawn") instance=ExtResource("8_w7lm4")]
+extraEnemySpawn = NodePath("../../../../../EnemySpawns/Spawn7")
 
-[node name="Block_19" type="Node3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 1, -26)
-script = ExtResource("1_xg1sp")
+[node name="FullPC Setup11" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -21.0582, 1.00012, -15.2167)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_it6eh")
+[node name="FullPC Setup12" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16.426, 1.00012, -15.2167)
+
+[node name="FullPC Setup13" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.0439, 1.00012, -15.2167)
+
+[node name="FullPC Setup16" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26.0802, 1.00012, -11.4508)
+
+[node name="FullPC Setup18" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -21.0582, 1.00012, -11.4508)
+
+[node name="FullPC Setup19" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16.426, 1.00012, -11.4508)
+
+[node name="FullPC Setup20" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.0439, 1.00012, -11.4508)
+
+[node name="FullPC Setup23" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26.0802, 1.00012, -8.05066)
+
+[node name="FullPC Setup25" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -21.0582, 1.00012, -8.05066)
+
+[node name="FullPC Setup26" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16.426, 1.00012, -8.05066)
+
+[node name="FullPC Setup27" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.0439, 1.00012, -8.05066)
+
+[node name="Lockers" type="Node3D" parent="World/NavigationRegion3D"]
+
+[node name="Lockers" parent="World/NavigationRegion3D/Lockers" instance=ExtResource("15_6f0qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.646188, 1.00683, 0.746146)
+
+[node name="Lockers2" parent="World/NavigationRegion3D/Lockers" instance=ExtResource("15_6f0qg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.49622, 1.00683, -5.73203)
+
+[node name="Lockers3" parent="World/NavigationRegion3D/Lockers" instance=ExtResource("15_6f0qg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 18.4025, 1.00411, -5.76501)
+
+[node name="Lockers4" parent="World/NavigationRegion3D/Lockers" instance=ExtResource("15_6f0qg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -17.3395, 1.00683, -5.69933)
+
+[node name="Lockers5" parent="World/NavigationRegion3D/Lockers" instance=ExtResource("15_6f0qg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.38926, 1.00683, -5.69933)
+
+[node name="Lockers6" parent="World/NavigationRegion3D/Lockers" instance=ExtResource("15_6f0qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3264, 1.00683, 0.820819)
+
+[node name="MilitaryBoxes" type="Node3D" parent="World/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99064, 1.09624, 4.23777)
+
+[node name="Box1_1" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("16_l83o0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50695, -0.0993768, -0.25336)
+
+[node name="Box2_1" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("17_wq4il")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24004, 0, -1.70361)
+
+[node name="Box1_2" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("16_l83o0")]
+transform = Transform3D(0.999567, 0, -0.029422, 0, 1, 0, 0.029422, 0, 0.999567, -2.52688, 0.150815, -0.25336)
+
+[node name="Box1_3" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("16_l83o0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50695, 0.404813, -0.25336)
+
+[node name="Box1_4" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("16_l83o0")]
+transform = Transform3D(0.81308, 0, -0.582151, 0, 1, 0, 0.582151, 0, 0.81308, -1.01844, -0.0993768, -0.476312)
+
+[node name="Box3_1" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("18_oy27w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.76325, -0.0961146, -1.80903)
+
+[node name="Box3_2" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("18_oy27w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.6718, -0.0961146, -1.80903)
+
+[node name="Box3_3" parent="World/NavigationRegion3D/MilitaryBoxes" instance=ExtResource("18_oy27w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.58033, -0.0961146, -1.80903)
+
+[node name="Table" parent="World/NavigationRegion3D" instance=ExtResource("23_04wrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8352, 1, 5.26097)
+
+[node name="Table2" parent="World/NavigationRegion3D" instance=ExtResource("23_04wrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8352, 1, 7.39159)
+
+[node name="Table3" parent="World/NavigationRegion3D" instance=ExtResource("23_04wrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8352, 1, 9.50294)
+
+[node name="Table4" parent="World/NavigationRegion3D" instance=ExtResource("23_04wrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8352, 1, 11.6984)
+
+[node name="Table5" parent="World/NavigationRegion3D" instance=ExtResource("23_04wrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8352, 1, 13.8122)
+
+[node name="Ceiling" parent="World" instance=ExtResource("17_dcbj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0977, 1.90735e-06, -1.59151)
+
+[node name="Targets" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83558, 0.804607, -12.1458)
+
+[node name="Target" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(-2.18557e-08, -0.866025, -0.5, -1, 1.91069e-15, 4.37114e-08, -3.78552e-08, 0.5, -0.866025, 9.15665, 0, -3.12814)
+
+[node name="Target2" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(3.17243e-09, -0.997363, 0.0725768, -1, 1.91069e-15, 4.37114e-08, -4.35961e-08, -0.0725768, -0.997363, 9.15665, 0, -1.32469)
+
+[node name="Target3" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(-5.37251e-09, -0.992418, -0.122909, -1, 1.91069e-15, 4.37114e-08, -4.338e-08, 0.122909, -0.992418, 9.15665, 0, 0.280461)
+
+[node name="SpecialTarget" parent="World/Targets" instance=ExtResource("19_ovy8o")]
+transform = Transform3D(-0.100726, 0, -0.994914, 0, 1, 0, 0.994914, 0, -0.100726, 9.15665, 0, 1.99471)
+
+[node name="Target5" parent="World/Targets" instance=ExtResource("18_a5bna")]
+transform = Transform3D(1.84034e-08, -0.907051, 0.42102, -1, 1.91069e-15, 4.37114e-08, -3.96485e-08, -0.42102, -0.907051, 9.15665, 0, 3.50359)
+
+[node name="Decorations" type="Node3D" parent="World"]
+
+[node name="DoorOnRails" parent="World/Decorations" instance=ExtResource("21_2lr3a")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16.1468, 1.13073, 2.09092)
+
+[node name="DoorOnRails2" parent="World/Decorations" instance=ExtResource("21_2lr3a")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.03211, 1.07085, -9.13991)
+
+[node name="DoorOnRailsMirrored" parent="World/Decorations" instance=ExtResource("22_wckc8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.61532, 1.04673, -9.10389)
+
+[node name="DoorOnRails3" parent="World/Decorations" instance=ExtResource("21_2lr3a")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -23.183, 1.07972, 0.965285)
+
+[node name="flask" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7757, 1.70148, 7.49089)
+
+[node name="flask2" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9208, 1.70148, 7.95141)
+
+[node name="flask3" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8899, 1.70148, 10.0937)
+
+[node name="flask4" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7328, 1.70148, 6.80373)
+
+[node name="flask5" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9284, 1.70148, 4.8027)
+
+[node name="flask6" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6527, 1.70148, 8.76646)
+
+[node name="flask7" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7589, 1.70148, 12.2289)
+
+[node name="flask8" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8649, 1.70148, 11.2332)
+
+[node name="flask9" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9119, 1.70148, 14.2253)
+
+[node name="flask10" parent="World/Decorations" instance=ExtResource("24_yoypp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9802, 1.70148, 13.2973)
+
+[node name="flask12" parent="World/Decorations" instance=ExtResource("25_ffm21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9495, 1.70148, 7.22076)
+
+[node name="flask11" parent="World/Decorations" instance=ExtResource("25_ffm21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6292, 1.70148, 7.54349)
+
+[node name="flask13" parent="World/Decorations" instance=ExtResource("25_ffm21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9777, 1.70148, 9.51444)
+
+[node name="flask14" parent="World/Decorations" instance=ExtResource("25_ffm21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9419, 1.70148, 12.2905)
+
+[node name="flask15" parent="World/Decorations" instance=ExtResource("25_ffm21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.631, 1.70148, 13.0741)
+
+[node name="flask16" parent="World/Decorations" instance=ExtResource("25_ffm21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8883, 1.70148, 4.78999)
+
+[node name="gloves" parent="World/Decorations" instance=ExtResource("26_0kowq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7139, 1.70148, 13.3526)
+
+[node name="gloves2" parent="World/Decorations" instance=ExtResource("26_0kowq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6595, 1.70148, 11.0808)
+
+[node name="gloves3" parent="World/Decorations" instance=ExtResource("26_0kowq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6396, 1.70148, 8.99617)
+
+[node name="gloves4" parent="World/Decorations" instance=ExtResource("26_0kowq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6618, 1.70148, 6.61324)
+
+[node name="gloves5" parent="World/Decorations" instance=ExtResource("26_0kowq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6969, 1.70148, 4.7585)
+
+[node name="clipBoard" parent="World/Decorations" instance=ExtResource("27_5urn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7944, 1.70148, 13.7846)
+
+[node name="clipBoard2" parent="World/Decorations" instance=ExtResource("27_5urn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6917, 1.70148, 11.5477)
+
+[node name="clipBoard3" parent="World/Decorations" instance=ExtResource("27_5urn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7065, 1.70148, 9.38356)
+
+[node name="clipBoard4" parent="World/Decorations" instance=ExtResource("27_5urn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6563, 1.70148, 7.02511)
+
+[node name="clipBoard5" parent="World/Decorations" instance=ExtResource("27_5urn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7813, 1.70148, 4.46406)
+
+[node name="Door" parent="World/Decorations" instance=ExtResource("20_l8kbw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.70419, 1.00474, 15.3658)
+
+[node name="ButtonWithoutScreen" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5531, 1, 13.1141)
+
+[node name="ButtonWithoutScreen2" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8405, 1, 13.3364)
+
+[node name="ButtonWithoutScreen3" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.9084, 1, 13.2682)
+
+[node name="ButtonWithoutScreen4" parent="World/Decorations" instance=ExtResource("28_f76i8")]
+transform = Transform3D(1, 0, 0, 0, 0.169642, 0.985506, 0, -0.985506, 0.169642, -19.9038, 2.33731, 15.2034)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="Light" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 9.26312, 4.24464, 8.09274)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 100.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 9.419
+spot_angle = 53.9618
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights/Light"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27522, -0.82664, -0.305124)
+light_color = Color(0.905882, 1, 1, 1)
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 25.038
+
+[node name="Light2" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10.4311, 4.24464, -11.5591)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 100.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 9.419
+spot_angle = 53.9618
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights/Light2"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27522, -0.82664, -0.305124)
+light_color = Color(0.905882, 1, 1, 1)
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 25.038
+
+[node name="Light3" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -17.2705, 4.24464, -11.1353)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 100.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 9.419
+spot_angle = 53.9618
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights/Light3"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27522, -0.826639, -0.305124)
+light_color = Color(0.905882, 1, 1, 1)
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 25.038
+
+[node name="Light4" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -17.8555, 4.24464, 7.43693)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 100.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 9.419
+spot_angle = 53.9618
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights/Light4"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27522, -0.826639, -0.305124)
+light_color = Color(0.905882, 1, 1, 1)
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 25.038
+
+[node name="Light5" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -4.61924, 4.24464, -2.53223)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light5"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 100.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 9.419
+spot_angle = 53.9618
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights/Light5"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27522, -0.82664, -0.305125)
+light_color = Color(0.905882, 1, 1, 1)
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 25.038
+
+[node name="Light6" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 8.82351, 4.24464, -2.53223)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light6"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 100.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 9.419
+spot_angle = 53.9618
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights/Light6"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27522, -0.826639, -0.305125)
+light_color = Color(0.905882, 1, 1, 1)
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 25.038
+
+[node name="Light7" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -17.4082, 4.24464, -2.53223)
+material_override = SubResource("StandardMaterial3D_sq8fk")
+mesh = SubResource("CylinderMesh_fx0j7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Light7"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.898039, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 100.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 9.419
+spot_angle = 53.9618
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights/Light7"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.27522, -0.826639, -0.305125)
+light_color = Color(0.905882, 1, 1, 1)
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 25.038
 
 [node name="Multiplayer" type="Node3D" parent="."]
 
 [node name="SpawnPoint1" type="Node3D" parent="Multiplayer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.78378, 1.58866, 17.0622)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95421, 1.58866, 11.1468)
 
 [node name="SpawnPoint2" type="Node3D" parent="Multiplayer"]
-transform = Transform3D(1, 0, 0, 0, 0.400461, -0.916314, 0, 0.916314, 0.400461, -6.40579, 44.5043, -24.0904)
+transform = Transform3D(1, 0, 0, 0, 0.305496, -0.952194, 0, 0.952194, 0.305496, -6.40579, 27.3088, -18.576)
 
-[node name="DeathZone" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.65203, 0)
-script = ExtResource("3_6307p")
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Subscenes/Enemy2.tscn")
+spawn_path = NodePath("../EnemySpawns")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6431, 0.620667, 1.79596)
-shape = SubResource("BoxShape3D_131qf")
+[node name="EnemySpawns" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80419, 2.72371, -5.19534)
 
-[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]
+[node name="Spawn1" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8131, -1.1686, 13.8189)
+
+[node name="Spawn2" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8131, -1.1686, -6.90716)
+
+[node name="Spawn3" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8347, -1.1686, 13.8189)
+
+[node name="Spawn4" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7087, -1.1686, -6.84206)
+
+[node name="Spawn5" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.7667, -1.1686, 2.87881)
+
+[node name="Spawn6" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3977, -1.1686, 2.87881)
+
+[node name="Spawn7" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04098, -1.1686, 2.87881)
+
+[node name="Spawn8" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3556, -1.1686, 2.87881)
+
+[node name="Spawn9" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.542813, -1.1686, -8.05114)
+
+[node name="AutoSpawner" type="Node3D" parent="."]
+
+[node name="Tier1EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 10.0
+
+[node name="Tier2EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 30.0
+
+[node name="Tier3EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 60.0
+
+[node name="Tier4EnemyTimer" type="Timer" parent="AutoSpawner"]
+wait_time = 120.0
+
+[node name="GameEndUI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="WinScreen" type="Control" parent="GameEndUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameEndUI/WinScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12549, 0.12549, 0.12549, 1)
+
+[node name="Label" type="Label" parent="GameEndUI/WinScreen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 235.0
+grow_horizontal = 2
+text = "You won!"
+label_settings = SubResource("LabelSettings_wyy65")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMain" type="Button" parent="GameEndUI/WinScreen"]
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -20.0
+offset_right = 125.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back to the main menu"
+
+[node name="LoseScreen" type="Control" parent="GameEndUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameEndUI/LoseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12549, 0.12549, 0.12549, 1)
+
+[node name="Label" type="Label" parent="GameEndUI/LoseScreen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 235.0
+grow_horizontal = 2
+text = "You lost."
+label_settings = SubResource("LabelSettings_wyy65")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMain" type="Button" parent="GameEndUI/LoseScreen"]
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -20.0
+offset_right = 125.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back to the main menu"
+
+[connection signal="interacted" from="World/NavigationRegion3D/Objects/SatDish" to="World/NavigationRegion3D/Objects/SatDish/ExtraEnemySpawner" method="_on_interacted"]
+[connection signal="interacted" from="World/NavigationRegion3D/Objects/Button" to="World/NavigationRegion3D/Objects/Button/ExtraEnemySpawner" method="_on_interacted"]
+[connection signal="interacted" from="World/NavigationRegion3D/Objects/FullPC Setup9" to="World/NavigationRegion3D/Objects/FullPC Setup9/ExtraEnemySpawner" method="_on_interacted"]
+[connection signal="body_entered" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="World/NavigationRegion3D/Objects/FullPC Setup9/Area3D" to="World/NavigationRegion3D/Objects/FullPC Setup9" method="_on_area_3d_body_exited"]
+[connection signal="pressed" from="GameEndUI/WinScreen/BackToMain" to="." method="_on_back_to_main_pressed"]
+[connection signal="pressed" from="GameEndUI/LoseScreen/BackToMain" to="." method="_on_back_to_main_pressed"]
+
+[editable path="World/NavigationRegion3D/Objects/SatDish"]
+[editable path="World/NavigationRegion3D/Objects/SatDish/satDish"]
