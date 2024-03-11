@@ -5,13 +5,15 @@ extends Control
 @onready var hostButton : Button = $Host
 @onready var startButton : Button = $Start
 @onready var ipField : LineEdit = $Joining/IpToJoin
+@onready var portField : LineEdit = $Joining/Port
 
 var peer : ENetMultiplayerPeer
 var prevMenu : Control
 
+var hasOtherPlayerJoined = false
 
 var ip_adress = "127.0.0.1"
-var port = 19101
+var port = 27015
 var compression : ENetConnection.CompressionMode = ENetConnection.COMPRESS_RANGE_CODER
 
 func _ready():
@@ -31,9 +33,12 @@ func _ready():
 
 	# todo: maybe remove this
 	ipField.text = ip_adress
+	portField.text = str(port)
 
 
 func _on_host_pressed():
+	port = int(portField.text)
+
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(port)
 	if error != OK:
@@ -42,7 +47,7 @@ func _on_host_pressed():
 
 	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
-	debugLog("Host succesful on local ip: " + ip_adress)
+	debugLog("Host succesful on local ip: " + ip_adress + " on Port: " + str(port))
 	debugLog("Give this ip to another player in your local network.")
 	debugLog("Waiting for another player!")
 	SendPlayerInformation("", multiplayer.get_unique_id(), true)
@@ -54,6 +59,7 @@ func _on_host_pressed():
 
 func _on_join_pressed():
 	ip_adress = ipField.text
+	port = int(portField.text)
 
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(ip_adress, port)
@@ -67,10 +73,13 @@ func _on_join_pressed():
 	hostButton.hide()
 	startButton.hide()
 	joining.hide()
-	debugLog("Join successful, waiting for host to start the game")
+	debugLog("Join successful, waiting for the host to start the game")
 
 func _on_start_pressed():
-	StartGame.rpc()
+	if hasOtherPlayerJoined:
+		StartGame.rpc()
+	else:
+		debugLog("Waiting for another player!")
 	
 @rpc("any_peer", "call_local")
 func StartGame():
@@ -94,17 +103,19 @@ func SendPlayerInformation(player_name, id, isGroundPlayer):
 
 func peer_connected(id):
 	debugLog("player connected" + str(id))
-	pass
+	hasOtherPlayerJoined = true
+	
 func peer_disconnected(id):
 	debugLog("player disconnected" + str(id))
-	pass
+	hasOtherPlayerJoined = false
+	
 func connected_to_server():
-	debugLog("connected to server")
+	debugLog("connected to host")
 	SendPlayerInformation.rpc_id(1, "", multiplayer.get_unique_id(), false)
 
 func connection_failed():
 	debugLog("connection failed")
-	pass
+	
 
 func debugLog(text):
 	var label = Label.new()

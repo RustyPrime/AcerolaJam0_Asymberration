@@ -1,7 +1,7 @@
 extends RigidBody3D
 class_name Bullet
 
-var damage = 5
+var damage = 3
 var destroying = false
 @onready var destroyTimer : Timer = $Timer
 

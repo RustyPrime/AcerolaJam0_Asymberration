@@ -32,7 +32,7 @@ thickness = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haoh8"]
 shader = ExtResource("2_x215u")
-shader_parameter/pixel_size = 250
+shader_parameter/pixel_size = 300
 
 [node name="Player2" type="Node3D"]
 script = ExtResource("1_pgitl")
@@ -139,7 +139,6 @@ powerRequirement = 50.0
 transform = Transform3D(-1, 8.11822e-08, -3.24377e-08, 0, 0.371044, 0.928616, 8.74228e-08, 0.928616, -0.371044, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
 material = SubResource("ShaderMaterial_haoh8")

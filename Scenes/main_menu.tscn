@@ -41,12 +41,12 @@ mouse_filter = 2
 [node name="Join" type="Button" parent="Joining"]
 layout_mode = 0
 offset_left = 100.0
-offset_top = 175.0
+offset_top = 210.0
 offset_right = 175.0
-offset_bottom = 210.0
+offset_bottom = 245.0
 text = "JOIN"
 
-[node name="Label" type="Label" parent="Joining"]
+[node name="IpLabel" type="Label" parent="Joining"]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 125.0
@@ -63,20 +63,36 @@ offset_right = 445.0
 offset_bottom = 160.0
 placeholder_text = "Example: 192.168.0.56"
 
+[node name="PortLabel" type="Label" parent="Joining"]
+offset_left = 100.0
+offset_top = 160.0
+offset_right = 163.0
+offset_bottom = 191.0
+text = "Port:"
+vertical_alignment = 1
+
+[node name="Port" type="LineEdit" parent="Joining"]
+offset_left = 175.0
+offset_top = 160.0
+offset_right = 445.0
+offset_bottom = 195.0
+text = "27015"
+placeholder_text = "Example: 27015"
+
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
 offset_left = 100.0
-offset_top = 225.0
+offset_top = 260.0
 offset_right = 175.0
-offset_bottom = 260.0
+offset_bottom = 295.0
 text = "START"
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 0
 offset_left = 100.0
-offset_top = 275.0
+offset_top = 310.0
 offset_right = 175.0
-offset_bottom = 310.0
+offset_bottom = 345.0
 text = "BACK
 "
 

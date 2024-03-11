@@ -74,27 +74,27 @@ func _spawntimer_timeout(tier):
 	SpawnEnemyAtPosition(tier, randomSpawn)
 
 func SpawnEnemyAtPosition(tier, spawnNode):
-	var powerRequirement = 20
+	var powerRequirement = 10
 	var enemyPath = "res://Scenes/Subscenes/Enemy1.tscn"
 	match tier:
 		1:
-			powerRequirement = 20
+			powerRequirement = 10
 			enemyPath = "res://Scenes/Subscenes/Enemy1.tscn"
 		2: 
-			powerRequirement = 40
+			powerRequirement = 20
 			enemyPath = "res://Scenes/Subscenes/Enemy2.tscn"
 		3:
-			powerRequirement = 60
+			powerRequirement = 30
 			enemyPath = "res://Scenes/Subscenes/Enemy3.tscn"
 		4:
-			powerRequirement = 100
+			powerRequirement = 50
 			enemyPath = "res://Scenes/Subscenes/Enemy4.tscn"
 		_:
 			pass
 	
 	var enemyData = EnemyData.new("", powerRequirement, enemyPath, spawnNode.global_position)
 	var spawned_enemey = spawn_enemy_function(enemyData)
-	enemySpawn.add_child(spawned_enemey)
+	enemySpawn.add_child(spawned_enemey, true)
 	setup_enemy(spawned_enemey, enemyData)
 	spawned_enemey.SetPlayer(player1)
 
@@ -182,7 +182,7 @@ func PlayerOneDied():
 
 @rpc("any_peer", "call_local")
 func PlayerOneWon():
-	player1.isDead = true
+	player1.get_node_or_null("Player1").isDead = true
 	if !GameManager.isLAN():
 		winScreen.show()
 
