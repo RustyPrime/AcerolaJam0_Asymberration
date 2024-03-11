@@ -11,8 +11,11 @@ Read more here: https://itch.io/jam/acerola-jam-0
 
 ## Theme
 Aberration
+
 ab·er·ra·tion
+
 /ˌabəˈrāSH(ə)n/
+
 a departure from what is normal, usual, or expected, typically one that is unwelcome. 
 
 
