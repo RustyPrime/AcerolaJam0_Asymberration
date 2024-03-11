@@ -35,7 +35,7 @@ var initialShotgunRotation : Vector3
 var mouse_input : Vector2
 var rotation_target: Vector3
 
-var isMouseCaptured = true
+
 var isInverted = false
 var wasInverted = false
 var canShoot = true
@@ -47,6 +47,8 @@ var shotID : int = 0
 
 var health = 100
 
+func isMouseCaptured():
+	return Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 
 func _ready():
 	safeZoneRadius = safeZone.shape.radius
@@ -150,7 +152,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _input(event):
-	if event is InputEventMouseMotion and isMouseCaptured:
+	if event is InputEventMouseMotion and isMouseCaptured():
 		mouse_input = event.relative / sensitivity
 		rotation_target.y -= event.relative.x / sensitivity
 		rotation_target.x -= event.relative.y / sensitivity
@@ -205,13 +207,11 @@ func handle_camera_rotation(delta):
 			wasInverted = isInverted
 
 func handle_mouse_capture():
-	if !isMouseCaptured and Input.is_action_just_pressed("mouse_capture"):
+	if !isMouseCaptured() and Input.is_action_just_pressed("mouse_capture"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		isMouseCaptured = true
 	if Input.is_action_just_pressed("mouse_capture_exit"):
 		mouse_input = Vector2.ZERO
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		isMouseCaptured = false
 
 func hasAuthority():
 	if GameManager.isLAN():

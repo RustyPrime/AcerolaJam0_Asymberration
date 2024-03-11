@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6tas7kg5ufwu"]
+
+[ext_resource type="PackedScene" uid="uid://27nvcnsbf1ce" path="res://Models/gravityHint.glb" id="1_7fb1h"]
+
+[node name="GravityHint" type="Node3D"]
+
+[node name="gravityHint" parent="." instance=ExtResource("1_7fb1h")]

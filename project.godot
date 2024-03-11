@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Acerola GameJam0 Aberration Asymmetric"
+config/name="Asymberration"
 run/main_scene="res://Scenes/pre_main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -23,6 +23,8 @@ GameManager="*res://Scripts/GameManager.gd"
 
 window/size/viewport_width=800
 window/size/viewport_height=600
+window/size/mode=3
+window/size/borderless=true
 
 [editor_plugins]
 

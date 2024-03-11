@@ -20,6 +20,11 @@ class_name SceneManager
 @onready var winScreen : Control = $GameEndUI/WinScreen
 @onready var loseScreen : Control = $GameEndUI/LoseScreen
 
+@onready var preLoadEnemy1 = preload("res://Scenes/Subscenes/Enemy1.tscn")
+@onready var preLoadEnemy2 = preload("res://Scenes/Subscenes/Enemy2.tscn")
+@onready var preLoadEnemy3 = preload("res://Scenes/Subscenes/Enemy3.tscn")
+@onready var preLoadEnemy4 = preload("res://Scenes/Subscenes/Enemy4.tscn")
+
 var playerID = -1
 var player1
 
@@ -74,30 +79,32 @@ func _spawntimer_timeout(tier):
 	SpawnEnemyAtPosition(tier, randomSpawn)
 
 func SpawnEnemyAtPosition(tier, spawnNode):
-	var powerRequirement = 10
-	var enemyPath = "res://Scenes/Subscenes/Enemy1.tscn"
-	match tier:
-		1:
-			powerRequirement = 10
-			enemyPath = "res://Scenes/Subscenes/Enemy1.tscn"
-		2: 
-			powerRequirement = 20
-			enemyPath = "res://Scenes/Subscenes/Enemy2.tscn"
-		3:
-			powerRequirement = 30
-			enemyPath = "res://Scenes/Subscenes/Enemy3.tscn"
-		4:
-			powerRequirement = 50
-			enemyPath = "res://Scenes/Subscenes/Enemy4.tscn"
-		_:
-			pass
-	
-	var enemyData = EnemyData.new("", powerRequirement, enemyPath, spawnNode.global_position)
+	var powerRequirement = tierToPower(tier)
+	var enemyData = EnemyData.new("", powerRequirement, tier, spawnNode.global_position)
 	var spawned_enemey = spawn_enemy_function(enemyData)
 	enemySpawn.add_child(spawned_enemey, true)
 	setup_enemy(spawned_enemey, enemyData)
 	spawned_enemey.SetPlayer(player1)
 
+
+func tierToPower(tier):
+	if tier < 4:
+		return tier * 10
+	if tier >= 4:
+		return 50
+	
+func tierToScene(tier) -> PackedScene:
+	match tier:
+		1:
+			return preLoadEnemy1
+		2: 
+			return preLoadEnemy2
+		3: 
+			return preLoadEnemy3
+		4: 
+			return preLoadEnemy4
+		_:
+			return preLoadEnemy1
 
 func spawn_player(player_name, player_scene, player_spawn : Node3D):
 	var player = player_scene.instantiate()
@@ -119,7 +126,7 @@ func spawn_enemy_function(enemyDataJSON):
 		enemyData = EnemyData.FromJSON(enemyDataJSON)
 	else:
 		enemyData = enemyDataJSON
-	var spawned_enemy = load(enemyData.path).instantiate()
+	var spawned_enemy = tierToScene(enemyData.tier).instantiate()
 
 	enemies[str(enemyID)] = {"enemy": spawned_enemy, "data": enemyData}
 	enemyID += 1

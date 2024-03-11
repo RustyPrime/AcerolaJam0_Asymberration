@@ -40,6 +40,15 @@ offset_right = 316.0
 offset_bottom = 355.0
 text = "Singleplayer"
 
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 382.0
+offset_right = 316.0
+offset_bottom = 424.0
+text = "Exit
+"
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
@@ -53,3 +62,4 @@ vertical_alignment = 1
 
 [connection signal="pressed" from="LAN" to="." method="_on_lan_pressed"]
 [connection signal="pressed" from="Singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

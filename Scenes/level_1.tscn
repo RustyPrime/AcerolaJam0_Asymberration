@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cdvveg0cf4cjl"]
+[gd_scene load_steps=43 format=3 uid="uid://cdvveg0cf4cjl"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.gd" id="1_y2gin"]
 [ext_resource type="PackedScene" uid="uid://bhxlmgc3clgt0" path="res://Scenes/Subscenes/player_1.tscn" id="2_qdp4c"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/pc_shutdown.gd" id="12_i57al"]
 [ext_resource type="PackedScene" uid="uid://ujd8ht56ocro" path="res://Scenes/Subscenes/screen.tscn" id="12_vcqxt"]
 [ext_resource type="AudioStream" uid="uid://df3fkbpc1pjyq" path="res://Sounds/interact.ogg" id="14_bbqaj"]
+[ext_resource type="PackedScene" uid="uid://bx17bqjtuunis" path="res://Scenes/Subscenes/whiteboard.tscn" id="14_u1jb8"]
 [ext_resource type="PackedScene" uid="uid://boh0wmluaijpl" path="res://Scenes/Subscenes/lockers.tscn" id="15_6f0qg"]
 [ext_resource type="PackedScene" uid="uid://cslly3ej65hy1" path="res://Scenes/Subscenes/box_1.tscn" id="16_l83o0"]
 [ext_resource type="PackedScene" uid="uid://bb7q0lqo238ss" path="res://Scenes/Subscenes/ceiling.tscn" id="17_dcbj3"]
@@ -29,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://cujjlpeskaoa5" path="res://Models/gloves.glb" id="26_0kowq"]
 [ext_resource type="PackedScene" uid="uid://c8dm15jr820sr" path="res://Models/clipBoard.glb" id="27_5urn0"]
 [ext_resource type="PackedScene" uid="uid://c6aidn8i3npcu" path="res://Scenes/Subscenes/button_without_screen.tscn" id="28_f76i8"]
+[ext_resource type="PackedScene" uid="uid://c6tas7kg5ufwu" path="res://Scenes/Subscenes/gravity_hint.tscn" id="30_ede5a"]
 
 [sub_resource type="Environment" id="Environment_3v1yv"]
 background_mode = 1
@@ -152,6 +154,7 @@ transform = Transform3D(-0.0255489, 0, 0.999674, -8.73942e-08, -1, -2.23355e-09,
 
 [node name="ExtraEnemySpawner" parent="World/NavigationRegion3D/Objects/Button" node_paths=PackedStringArray("extraEnemySpawn") instance=ExtResource("8_w7lm4")]
 extraEnemySpawn = NodePath("../../../../../EnemySpawns/Spawn5")
+extraEnemyCount = 3
 
 [node name="Tube" parent="World/NavigationRegion3D/Objects" instance=ExtResource("10_xno10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3363, 0.97296, 2.7871)
@@ -212,6 +215,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16.42
 
 [node name="FullPC Setup27" parent="World/NavigationRegion3D/Objects" instance=ExtResource("11_u8702")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.0439, 1.00012, -8.05066)
+
+[node name="Whiteboard" parent="World/NavigationRegion3D/Objects" instance=ExtResource("14_u1jb8")]
+transform = Transform3D(0.603528, 0, -0.797342, 0, 1, 0, 0.797342, 0, 0.603528, -20.2756, 1.01345, 6.85868)
 
 [node name="Lockers" type="Node3D" parent="World/NavigationRegion3D"]
 
@@ -402,6 +408,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.9084, 1, 13.2682)
 
 [node name="ButtonWithoutScreen4" parent="World/Decorations" instance=ExtResource("28_f76i8")]
 transform = Transform3D(1, 0, 0, 0, 0.169642, 0.985506, 0, -0.985506, 0.169642, -19.9038, 2.33731, 15.2034)
+
+[node name="GravityHint" parent="World" instance=ExtResource("30_ede5a")]
+transform = Transform3D(-6.55671e-08, -1.5, 6.55671e-08, 0, -6.55671e-08, -1.5, 1.5, -6.55671e-08, 2.86603e-15, -7.71962, 2.76267, 9.99053)
 
 [node name="Lights" type="Node3D" parent="."]
 

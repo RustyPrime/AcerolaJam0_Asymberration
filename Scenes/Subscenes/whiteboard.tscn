@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx17bqjtuunis"]
+
+[ext_resource type="PackedScene" uid="uid://c6vfdxlrbkjyl" path="res://Models/whiteboard.glb" id="1_d4jdk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ls8wq"]
+size = Vector3(0.274475, 1.81006, 1.27271)
+
+[node name="Whiteboard" type="Node3D"]
+
+[node name="whiteboard" parent="." instance=ExtResource("1_d4jdk")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.836405, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000640869, 0.0881348, 0.00280762)
+shape = SubResource("BoxShape3D_ls8wq")

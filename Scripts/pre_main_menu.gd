@@ -21,3 +21,10 @@ func _on_singleplayer_pressed():
 	get_tree().root.add_child(gameScene)
 	self.hide()
 
+
+
+func _on_exit_pressed():
+	if OS.get_name() == "Web":
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		get_tree().quit()

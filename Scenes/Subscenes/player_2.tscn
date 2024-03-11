@@ -1,14 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://c2cb13c6yvri5"]
+[gd_scene load_steps=17 format=3 uid="uid://c2cb13c6yvri5"]
 
 [ext_resource type="Script" path="res://Scripts/player_2.gd" id="1_pgitl"]
 [ext_resource type="Script" path="res://Scripts/DragHandler.gd" id="2_3pwg3"]
 [ext_resource type="PackedScene" uid="uid://c1rx6o2kylhf3" path="res://Scenes/Subscenes/draggable.tscn" id="2_onjjd"]
 [ext_resource type="Shader" path="res://Materials/pixelate_material.gdshader" id="2_x215u"]
-[ext_resource type="Texture2D" uid="uid://didbkkpb6l6vk" path="res://Textures/PurpleMist.png" id="4_liiph"]
-[ext_resource type="PackedScene" uid="uid://w28x28vm3pcb" path="res://Scenes/Subscenes/Enemy2.tscn" id="4_rc4i1"]
 [ext_resource type="Texture2D" uid="uid://bir546si22r1t" path="res://Textures/GreenMist.png" id="5_trjsv"]
-[ext_resource type="PackedScene" uid="uid://4unlgiu32n5u" path="res://Scenes/Subscenes/Enemy3.tscn" id="5_xri61"]
-[ext_resource type="PackedScene" uid="uid://b2a50r17u8cgw" path="res://Scenes/Subscenes/Enemy4.tscn" id="6_ebsqj"]
 [ext_resource type="Texture2D" uid="uid://ckj85qwsorniw" path="res://Textures/Spikes.png" id="7_tb5me"]
 [ext_resource type="Texture2D" uid="uid://b7mel3dhrdhwd" path="res://Textures/Red.png" id="9_v4fyo"]
 [ext_resource type="AudioStream" uid="uid://hq125mc730ae" path="res://Sounds/spawn.ogg" id="11_7cqaq"]
@@ -36,6 +32,7 @@ shader_parameter/pixel_size = 300
 
 [node name="Player2" type="Node3D"]
 script = ExtResource("1_pgitl")
+rechargeSpeed = 2.0
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -95,11 +92,10 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 40.0
 offset_top = 25.0
-offset_right = 92.0
-offset_bottom = 77.0
+offset_right = 90.0
+offset_bottom = 75.0
 grow_horizontal = 1
 grow_vertical = 1
-texture_normal = ExtResource("4_liiph")
 stretch_mode = 6
 
 [node name="Enemy2_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
@@ -107,32 +103,32 @@ layout_mode = 1
 offset_left = -61.0
 offset_top = -38.0
 offset_right = -11.0
-offset_bottom = 13.0
+offset_bottom = 12.0
 texture_normal = ExtResource("5_trjsv")
 stretch_mode = 6
-enemy = ExtResource("4_rc4i1")
+enemyTier = 2
 powerRequirement = 20.0
 
 [node name="Enemy3_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
 layout_mode = 1
 offset_left = 14.0
 offset_top = -38.0
-offset_right = 66.0
-offset_bottom = 14.0
+offset_right = 64.0
+offset_bottom = 12.0
 texture_normal = ExtResource("7_tb5me")
 stretch_mode = 6
-enemy = ExtResource("5_xri61")
+enemyTier = 3
 powerRequirement = 30.0
 
 [node name="Enemy4_Draggable" parent="UI/Panel/DragHandler" groups=["draggable"] instance=ExtResource("2_onjjd")]
 layout_mode = 1
 offset_left = 89.0
 offset_top = -38.0
-offset_right = 140.0
-offset_bottom = 13.0
+offset_right = 139.0
+offset_bottom = 12.0
 texture_normal = ExtResource("9_v4fyo")
 stretch_mode = 6
-enemy = ExtResource("6_ebsqj")
+enemyTier = 4
 powerRequirement = 50.0
 
 [node name="Camera3D" type="Camera3D" parent="."]

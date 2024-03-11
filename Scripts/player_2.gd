@@ -18,6 +18,8 @@ func _ready():
 
 func _process(delta):
 	charge += (rechargeSpeed * delta)
+	if charge >= 100:
+		charge = 100
 	slider.value = charge
 
 
