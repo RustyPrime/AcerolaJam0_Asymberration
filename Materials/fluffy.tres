@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://j1qvuocf6r83"]
+
+[ext_resource type="Texture2D" uid="uid://xmybgcg7vkjb" path="res://Models/fluffyMat Base Color.png" id="1_d3jbc"]
+
+[resource]
+resource_name = "fluffy"
+cull_mode = 2
+albedo_texture = ExtResource("1_d3jbc")
+roughness = 0.5

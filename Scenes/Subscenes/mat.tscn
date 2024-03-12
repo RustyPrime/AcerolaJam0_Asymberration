@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlucjyrtmlr34"]
+
+[ext_resource type="PackedScene" uid="uid://lbmrrl6cgnqb" path="res://Models/mat.glb" id="1_3177p"]
+
+[node name="Mat" type="Node3D"]
+
+[node name="mat" parent="." instance=ExtResource("1_3177p")]

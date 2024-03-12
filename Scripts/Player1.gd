@@ -2,11 +2,14 @@ extends CharacterBody3D
 class_name Player1
 
 
-@onready var movementSpeed : int = walkSpeed
+
 const JUMP_VELOCITY = 4.5
 
+@export var movementSpeed : int = 5
 @export var walkSpeed : int = 5
 @export var runSpeed :int = 7
+
+
 @export var BULLET_SPEED = 150.0
 @export var sensitivity = 700.0
 @export var shotDelay = 0.7
@@ -84,6 +87,14 @@ func IntersectsSafeZone(potentialEnemySpawnPosition):
 
 
 func _process(_delta):
+	if movementSpeed == runSpeed:
+		shotgun.rotation_degrees = initialShotgunRotation
+		shotgun.rotation_degrees.z = -45.0
+		shotgun.position.x = initialShotgunPosition.x - 0.5
+	else:
+		shotgun.position = initialShotgunPosition
+		shotgun.rotation_degrees = initialShotgunRotation
+
 	if !hasAuthority():
 		return
 
@@ -113,13 +124,9 @@ func _process(_delta):
 
 	if Input.is_action_pressed("sprint"):
 		movementSpeed = runSpeed
-		shotgun.rotation_degrees = initialShotgunRotation
-		shotgun.rotation_degrees.z = -45.0
-		shotgun.position.x = initialShotgunPosition.x - 0.5
 	else:
 		movementSpeed = walkSpeed
-		shotgun.position = initialShotgunPosition
-		shotgun.rotation_degrees = initialShotgunRotation
+		
 
 
 func randomSpread():

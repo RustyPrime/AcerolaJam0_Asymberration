@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp1yqpsl2sj1p"]
+
+[ext_resource type="PackedScene" uid="uid://0qetbtl14oba" path="res://Models/bucket.glb" id="1_3ht5x"]
+[ext_resource type="PackedScene" uid="uid://dje3gs6s8ogs" path="res://Models/mop.glb" id="2_0voes"]
+
+[node name="BucketAndMop" type="Node3D"]
+
+[node name="bucket" parent="." instance=ExtResource("1_3ht5x")]
+
+[node name="mop" parent="." instance=ExtResource("2_0voes")]

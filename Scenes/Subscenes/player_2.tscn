@@ -136,6 +136,16 @@ transform = Transform3D(-1, 8.11822e-08, -3.24377e-08, 0, 0.371044, 0.928616, 8.
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
 
+[node name="Player1View" type="TextureRect" parent="Camera3D/CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -159.0
+offset_right = 197.0
+grow_vertical = 0
+expand_mode = 2
+stretch_mode = 6
+
 [node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
 material = SubResource("ShaderMaterial_haoh8")
 anchors_preset = 15

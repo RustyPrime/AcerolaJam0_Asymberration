@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb7q0lqo238ss"]
 
-[ext_resource type="PackedScene" uid="uid://trdqfm5ru13u" path="res://Models/ceiling.glb" id="1_1qe3o"]
+[ext_resource type="PackedScene" uid="uid://bb7rly3uj063u" path="res://Models/ceilingOneWay.glb" id="1_i3x73"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jwpah"]
 size = Vector3(47.6155, 38.5119, 34.1147)
 
 [node name="Ceiling" type="Node3D"]
 
-[node name="ceiling" parent="." instance=ExtResource("1_1qe3o")]
+[node name="ceilingOneWay" parent="." instance=ExtResource("1_i3x73")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.899712, 4.80962, 0.982029)

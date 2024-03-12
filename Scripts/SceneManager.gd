@@ -18,7 +18,11 @@ class_name SceneManager
 @onready var tier4timer : Timer = $AutoSpawner/Tier4EnemyTimer
 @onready var rng = RandomNumberGenerator.new()
 @onready var winScreen : Control = $GameEndUI/WinScreen
+@onready var winScreenSound : AudioStreamPlayer = $GameEndUI/WinScreen/WinSound
 @onready var loseScreen : Control = $GameEndUI/LoseScreen
+@onready var loseScreenSound : AudioStreamPlayer = $GameEndUI/LoseScreen/LoseSound
+@onready var navigationRegion3D : NavigationRegion3D = get_node_or_null("/root/Level/World/NavigationRegion3D")
+@onready var navMap = navigationRegion3D.get_navigation_map()
 
 @onready var preLoadEnemy1 = preload("res://Scenes/Subscenes/Enemy1.tscn")
 @onready var preLoadEnemy2 = preload("res://Scenes/Subscenes/Enemy2.tscn")
@@ -53,10 +57,12 @@ func _ready():
 					player2 = spawn_player("player2", player2_scene, player2_spawnPoint)
 					# spawn remote player 1
 					player1 = spawn_player("player1", player1_remote_scene, player1_spawnPoint)
-					player2.remotePlayer1 = player1.get_node_or_null("Player1")
+
+					player2.SetPlayerOne(player1.get_node_or_null("Player1"))
 					# make ceiling invisible
-					%World/Ceiling.queue_free()
+					%World/Ceiling/StaticBody3D.queue_free()
 	else:
+		# singleplayer
 		rng.randomize()
 		player1 = spawn_player("player1", player1_scene, player1_spawnPoint)
 		tier1timer.timeout.connect(_spawntimer_timeout.bind(1))
@@ -68,7 +74,9 @@ func _ready():
 		tier2timer.start()
 		tier3timer.start()
 		tier4timer.start()
+		
 				
+# singleplayer only
 func _spawntimer_timeout(tier):
 
 	var randomIndex = rng.randi_range(0, enemySpawnPoints.size()-1)
@@ -76,12 +84,12 @@ func _spawntimer_timeout(tier):
 	if player1.get_node_or_null("Player1").IntersectsSafeZone(randomSpawn.global_position):
 		# if the randomly selected spawn point is inside the safe zone of the player skip it instead of re-roll to add randomness
 		return
+	var spawnPosition = NavigationServer3D.map_get_closest_point(navMap, randomSpawn.global_position)
+	SpawnEnemyAtPosition(tier, spawnPosition)
 
-	SpawnEnemyAtPosition(tier, randomSpawn)
-
-func SpawnEnemyAtPosition(tier, spawnNode):
+func SpawnEnemyAtPosition(tier, spawnPosition):
 	var powerRequirement = tierToPower(tier)
-	var enemyData = EnemyData.new("", powerRequirement, tier, spawnNode.global_position)
+	var enemyData = EnemyData.new("", powerRequirement, tier, spawnPosition)
 	var spawned_enemey = spawn_enemy_function(enemyData)
 	enemySpawn.add_child(spawned_enemey, true)
 	setup_enemy(spawned_enemey, enemyData)
@@ -173,7 +181,7 @@ func ask_player1_to_spawn_enemy(enemyData):
 func PlayerOneDied():
 	if !GameManager.isLAN():
 		loseScreen.show()
-
+		loseScreenSound.play()
 		tier1timer.stop()
 		tier2timer.stop()
 		tier3timer.stop()
@@ -182,8 +190,10 @@ func PlayerOneDied():
 	else:
 		if multiplayer.get_unique_id() == GameManager.GetGroundPlayerID():
 			loseScreen.show()
+			loseScreenSound.play()
 		else:
 			winScreen.show()
+			winScreenSound.play()
 	
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 			enemy.queue_free()
@@ -193,6 +203,7 @@ func PlayerOneWon():
 	player1.get_node_or_null("Player1").isDead = true
 	if !GameManager.isLAN():
 		winScreen.show()
+		winScreenSound.play()
 
 		tier1timer.stop()
 		tier2timer.stop()
@@ -202,8 +213,10 @@ func PlayerOneWon():
 	else:
 		if multiplayer.get_unique_id() == GameManager.GetGroundPlayerID():
 			winScreen.show()
+			winScreenSound.play()
 		else:
 			loseScreen.show()
+			loseScreenSound.play()
 	
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 			enemy.queue_free()

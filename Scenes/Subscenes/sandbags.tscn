@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkjb444rjb6ui"]
+
+[ext_resource type="PackedScene" uid="uid://di8npfomkd71n" path="res://Models/sandbags.glb" id="1_bx4ep"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ck7d"]
+size = Vector3(0.284653, 0.689209, 3.35748)
+
+[node name="Sandbags" type="Node3D"]
+
+[node name="sandbags" parent="." instance=ExtResource("1_bx4ep")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00652313, 0.367798, -1.6066)
+shape = SubResource("BoxShape3D_0ck7d")

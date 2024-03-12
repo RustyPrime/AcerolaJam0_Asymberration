@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5c08p1yp1ah"]
+[gd_scene load_steps=4 format=3 uid="uid://c5c08p1yp1ah"]
 
 [ext_resource type="PackedScene" uid="uid://uav3p52crhhs" path="res://Scenes/Subscenes/player_1_base.tscn" id="1_13cwo"]
 [ext_resource type="Script" path="res://Scripts/PlayerRig.gd" id="1_l60q6"]
+[ext_resource type="Script" path="res://Scripts/RemoteHead.gd" id="3_nqmeg"]
 
 [node name="PlayerRig" type="Node3D"]
 script = ExtResource("1_l60q6")
 
 [node name="Player1" parent="." instance=ExtResource("1_13cwo")]
+
+[node name="Head" parent="Player1" index="3"]
+script = ExtResource("3_nqmeg")
+
+[node name="SubViewport" type="SubViewport" parent="Player1/Head" index="1"]
+handle_input_locally = false
+
+[node name="Camera3D" type="Camera3D" parent="Player1/Head/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.194, 0)
+fov = 45.0
+
+[editable path="Player1"]

@@ -5,6 +5,7 @@ extends Node3D
 @onready var dragHandler : Control = $UI/Panel/DragHandler
 @onready var spawnSound : AudioStreamPlayer3D = $SpawnSound
 @onready var noSpawnSound : AudioStreamPlayer3D = $NoSpawnSound
+@onready var player1view : TextureRect = $Camera3D/CanvasLayer/Player1View
 @onready var level = get_node_or_null("/root/Level")
 @onready var navigationRegion3D : NavigationRegion3D = get_node_or_null("/root/Level/World/NavigationRegion3D")
 
@@ -15,6 +16,13 @@ var remotePlayer1 : Player1
 
 func _ready():
 	dragHandler.try_spawn_enemy.connect(_try_spawn_enemy)
+
+func SetPlayerOne(player1):
+	remotePlayer1 = player1
+	var remotePlayer1View = remotePlayer1.get_node_or_null("Head/SubViewport/Camera3D")
+	if remotePlayer1View != null:
+		player1view.texture = remotePlayer1View.get_viewport().get_texture()
+
 
 func _process(delta):
 	charge += (rechargeSpeed * delta)

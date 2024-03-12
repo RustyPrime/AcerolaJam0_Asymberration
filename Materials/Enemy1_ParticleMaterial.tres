@@ -9,6 +9,7 @@ point_count = 2
 curve = SubResource("Curve_pq1hs")
 
 [resource]
+resource_local_to_scene = true
 lifetime_randomness = 0.2
 emission_shape = 1
 emission_sphere_radius = 1.0
