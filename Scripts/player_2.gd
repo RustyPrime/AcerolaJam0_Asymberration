@@ -29,6 +29,12 @@ func _process(delta):
 	if charge >= 100:
 		charge = 100
 	slider.value = charge
+	if rechargeSpeed == 2.0:
+		if slider.has_theme_stylebox_override("grabber_area"):
+			slider.get_theme_stylebox("grabber_area").color = Color.GREEN
+	else:
+		if slider.has_theme_stylebox_override("grabber_area"):
+			slider.get_theme_stylebox("grabber_area").color = Color.YELLOW
 
 
 func _try_spawn_enemy(enemyData):

@@ -23,6 +23,7 @@ color = Color(0.294118, 0.294118, 0.294118, 1)
 thickness = 10
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_p0e4k"]
+resource_local_to_scene = true
 color = Color(0, 1, 0, 1)
 thickness = 10
 
