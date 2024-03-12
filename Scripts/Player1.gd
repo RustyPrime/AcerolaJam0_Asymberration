@@ -109,14 +109,14 @@ func _process(_delta):
 	if Input.is_action_just_pressed("shoot"):
 		var spreadData : Dictionary = {	}
 		var index = 0
-		var shotCount = rng.randi_range(5, 10)
-		for shots in shotCount:
+		var pelletCount = rng.randi_range(5, 10)
+		for shots in pelletCount:
 			spreadData[index] = {
 				"angle" : rng.randi_range(0, 360), 
 				"spread": randomSpread()}
 			index += 1
 		spreadData["shotID"] = shotID
-		spreadData["shotCount"] = shotCount
+		spreadData["pelletCount"] = pelletCount
 		shoot.rpc(JSON.stringify(spreadData))
 		shotID += 1
 		canShoot = false
@@ -255,7 +255,7 @@ func _shotgun_timer_timeout():
 func shoot(spread_data):
 	shotgun.shoot()
 	var spreadData = JSON.parse_string(spread_data)
-	for index in spreadData["shotCount"]:
+	for index in spreadData["pelletCount"]:
 		var data = spreadData[str(index)]
 
 		var spawned_bullet = bullet.instantiate()
