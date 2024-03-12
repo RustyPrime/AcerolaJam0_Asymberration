@@ -64,6 +64,18 @@ Due to the time constrain i wasn't able to be build a fully fleshed out dedicate
 
 The host has to disable their windows firewall though.
 
+## Fun Fact
+The shotgun spray is not actually fully random. It is more likely that the pellets will launch towards the center than to spread out. 
+
+This is done by rotating the right vector around the forward vector by a random angle which has a uniform chance (every degree is equally likely). Then a random distance is calculated that determines the spread distance. To achieve the less randomness there is a 80% chance for the random distance to be rerolled into something smaller when the first roll was deamed to high.
+
+This can be seen here: [Calculating the angle](https://github.com/RustyPrime/AcerolaJam0_Asymberration/blob/main/Scripts/Player1.gd#L115-L116)
+
+here: [Calculating the spread](https://github.com/RustyPrime/AcerolaJam0_Asymberration/blob/main/Scripts/Player1.gd#L132-L137)
+
+and here: [Applying both to the shot](https://github.com/RustyPrime/AcerolaJam0_Asymberration/blob/main/Scripts/Player1.gd#L266-L271)
+
+
 ## HARD MODE
 While designed for 2 players, it is technically possible for more than 2 players to join a host, each additional player gets their own overview and can spawn aberrations separatly, quickly overrunning the ground player/host.
 
