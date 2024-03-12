@@ -112,9 +112,12 @@ material = SubResource("StandardMaterial3D_fdnqw")
 
 [sub_resource type="Environment" id="Environment_2arfi"]
 background_mode = 1
+background_color = Color(0, 1, 0, 1)
+ambient_light_source = 2
 
 [node name="VFX_TextureGrabber" type="Node3D"]
 script = ExtResource("1_7ke2c")
+fileName = "shotgun_greenscreen"
 
 [node name="GreenMist" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0152204, 0.907412, 0)
