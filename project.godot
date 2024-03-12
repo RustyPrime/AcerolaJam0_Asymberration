@@ -23,6 +23,7 @@ GameManager="*res://Scripts/GameManager.gd"
 
 window/size/viewport_width=800
 window/size/viewport_height=600
+window/size/mode=2
 
 [editor_plugins]
 
