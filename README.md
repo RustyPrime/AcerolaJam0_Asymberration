@@ -71,5 +71,4 @@ However errors/crashes might occur, as this is actually a bug but left in on pur
 
 
 ## Known issues
-- Some pcs display some of the VFX as white instead of its respective colors
-- Sometimes overview player can not see what they spawned (workaround: both players restart the game)
+- Sometimes overview player can not see what they spawned or the ground player is desyncing (workaround: both players restart the game)
