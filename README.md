@@ -60,9 +60,9 @@ a departure from what is normal, usual, or expected, typically one that is unwel
 Early concept art, illustrating that Player 1 gets to move around in some building while Player 2 has an overview of that space and able to drop in aberrations for the ground player to fight.
 
 ## Play via Internet
-Due to the time constrain i wasn't able to be build a fully fleshed out dedicated server (which would also allow web-users to use the multiplayer), however you can play together remotely using a service like Hamachi.
+Due to the time constrain i wasn't able to be build a fully fleshed out dedicated server (which would also allow web-users to use the multiplayer), however apart from playing in a LAN with the windows version you could also play together remotely using a service like Hamachi.
 
-The host has to disable their windows firewall though.
+The host has to disable their windows firewall though (or more appropriately allow the selected port, e.g. 27015).
 
 ## Fun Fact
 The shotgun spray is not actually fully random. It is more likely that the pellets will launch towards the center than to spread out. 
