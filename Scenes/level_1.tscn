@@ -168,7 +168,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26.08
 script = ExtResource("12_i57al")
 
 [node name="Screen" parent="World/NavigationRegion3D/Objects/FullPC Setup9" instance=ExtResource("12_vcqxt")]
-transform = Transform3D(0.299566, -3.42712e-09, 8.60556e-16, 0, -3.42713e-09, -0.450393, 1.30944e-08, 0.0784037, -1.96873e-08, 0.33816, 1.15578, 0.518345)
+transform = Transform3D(0.465, -4.37112e-09, 8.88466e-16, 0, -4.37114e-09, -0.465, 2.03257e-08, 0.1, -2.03258e-08, 0.33816, 1.15578, 0.534092)
 initialText = "Shutdown required"
 interactText = "Shutting down..."
 
