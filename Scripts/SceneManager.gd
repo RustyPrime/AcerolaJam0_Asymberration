@@ -84,10 +84,12 @@ func _spawntimer_timeout(tier):
 	if player1.get_node_or_null("Player1").IntersectsSafeZone(randomSpawn.global_position):
 		# if the randomly selected spawn point is inside the safe zone of the player skip it instead of re-roll to add randomness
 		return
-	var spawnPosition = NavigationServer3D.map_get_closest_point(navMap, randomSpawn.global_position)
-	SpawnEnemyAtPosition(tier, spawnPosition)
+	
+	SpawnEnemyAtPosition(tier, randomSpawn)
 
-func SpawnEnemyAtPosition(tier, spawnPosition):
+# singleplayer only: called by extra spawner and timeout
+func SpawnEnemyAtPosition(tier, spawnNode):
+	var spawnPosition = NavigationServer3D.map_get_closest_point(navMap, spawnNode.global_position)
 	var powerRequirement = tierToPower(tier)
 	var enemyData = EnemyData.new("", powerRequirement, tier, spawnPosition)
 	var spawned_enemey = spawn_enemy_function(enemyData)

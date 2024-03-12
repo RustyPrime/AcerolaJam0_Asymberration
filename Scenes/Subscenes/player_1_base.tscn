@@ -38,6 +38,7 @@ height = 1.79654
 
 [node name="Player1" type="CharacterBody3D" groups=["player1"]]
 transform = Transform3D(1, 0, 0, 0, 0.999952, 0.0098435, 0, -0.0098435, 0.999952, 0, 0.01548, 0)
+collision_mask = 9
 script = ExtResource("1_rdjtu")
 BULLET_SPEED = 300.0
 
