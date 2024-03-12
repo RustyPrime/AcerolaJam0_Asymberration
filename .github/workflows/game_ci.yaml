@@ -61,7 +61,7 @@ jobs:
         run: mkdir -v -p build/web
 
       - name: Build for Web
-        run: godot -v --export-release --headless "Web" --path . --output "build/web/${REPO_NAME}"
+        run: godot -v --export-release --headless "Web" --path . --output "build/web/index.html"
 
       - name: Zip Web artifacts
         run: zip -r game_web.zip build/web
