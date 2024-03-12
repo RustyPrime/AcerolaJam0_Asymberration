@@ -11,6 +11,7 @@ var peer : ENetMultiplayerPeer
 var prevMenu : Control
 
 var hasOtherPlayerJoined = false
+var isHosting = false
 
 var ip_adress = "127.0.0.1"
 var port = 27015
@@ -31,9 +32,8 @@ func _ready():
 		if OS.has_environment("HOSTNAME"):
 			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 
-	# todo: maybe remove this
-	ipField.text = ip_adress
 	portField.text = str(port)
+	startButton.hide()
 
 
 func _on_host_pressed():
@@ -54,7 +54,8 @@ func _on_host_pressed():
 
 	joining.hide()
 	hostButton.hide()
-	
+	startButton.show()
+	isHosting = true
 
 
 func _on_join_pressed():
@@ -77,7 +78,7 @@ func _on_start_pressed():
 	if hasOtherPlayerJoined:
 		StartGame.rpc()
 	else:
-		debugLog("Waiting for another player!")
+		debugLog("Cannot start yet, waiting for another player!")
 	
 @rpc("any_peer", "call_local")
 func StartGame():
@@ -100,27 +101,29 @@ func SendPlayerInformation(player_name, id, isGroundPlayer):
 
 
 func peer_connected(id):
-	debugLog("player connected" + str(id))
+	if isHosting:
+		debugLog("A player has connected with id: " + str(id))
+		debugLog("As the host you can now start the game.")
 	hasOtherPlayerJoined = true
 	
 func peer_disconnected(id):
-	debugLog("player disconnected" + str(id))
+	debugLog("A player has disconnected with id: " + str(id))
 	hasOtherPlayerJoined = false
 	
 func connected_to_server():
-	debugLog("Connected to host")
+	debugLog("Successfully connected to host!")
 	SendPlayerInformation.rpc_id(1, "", multiplayer.get_unique_id(), false)
 	
 
 	hostButton.hide()
 	startButton.hide()
 	joining.hide()
-	debugLog("Join successful, waiting for the host to start the game")
+	debugLog("Join successful, waiting for the host to start the game...")
 
 
 
 func connection_failed():
-	debugLog("Connection to host failed")
+	debugLog("Connection to host failed.")
 	
 
 func debugLog(text):
