@@ -69,6 +69,5 @@ While designed for 2 players, it is technically possible for more than 2 players
 
 However errors/crashes might occur, as this is actually a bug but left in on purpose for some shenanigans.
 
-
 ## Known issues
-- Sometimes overview player can not see what they spawned or the ground player is desyncing (workaround: both players restart the game)
+- Sometimes overview player can not see what they spawned or the ground player is desyncing (workaround: both players need to restart the game)
