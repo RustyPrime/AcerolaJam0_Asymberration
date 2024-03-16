@@ -1,34 +1,30 @@
 # Asymberration
 
 ## Description
-Fight your way through a limitless amount of aberrations while solving a series of mini-challanges.
-In the 2 person LAN-Multiplayer mode the adversary must strategically place enemies in your way and stop you from reaching your goal.
-
-The player that is hosting the game will be the player on the ground.
+Fight your way through a limitless amount of aberrations, strategically spawned by another player, while solving a series of mini-challanges.
+Very fun and intense when playing against a friend, but singleplayer is also an option.
 
 ## Controls
 ### Ground Player / Host
-W, A, S, D to move
-
-Mouse to look around
-
-Left-Click to shoot
-
-E or F to interact
-
-Shift to run
-
-ESC to release mouse
-
-Left or right click to capture mouse
-
-And an unspecified way to invert gravity
+- W, A, S, D to move
+- Mouse to look around
+- Left-click to shoot
+- E or F to interact
+- Shift to run
+- ESC to release mouse/exit fullscreen
+- Left or right-click to capture mouse
 
 ### Overview Player
 Hold left click to drag and drop enemies from the bottom right corner into the building
 
+## Notes
+- Browsers do not support LAN-based hosting, therefore the multiplayer is only available in the windows version.
+- The player that is hosting the game will be the player on the ground.
+
 ## Creation
-Entry for Acerola's Jam 0 
+Entry for Acerola's Jam 0.
+
+Every asset in this game was made by me using the tools listed below.
 
 Read more here: https://itch.io/jam/acerola-jam-0
 
@@ -51,8 +47,8 @@ a departure from what is normal, usual, or expected, typically one that is unwel
 - Gimp
 - Github & Fork
 - XMind
-- Paint
-- Pixelate Shader from https://godotshaders.com/shader/pixelate/
+- MS Paint
+- Modified version of Pixelate Shader from https://godotshaders.com/shader/pixelate/
 - Notepad++
 
 ## Concept
@@ -67,7 +63,7 @@ The host has to disable their windows firewall though (or more appropriately all
 ## Fun Fact
 The shotgun spray is not actually fully random. It is more likely that the pellets will launch towards the center than to spread out. 
 
-This is done by rotating the right vector around the forward vector by a random angle which has a uniform chance (every degree is equally likely). Then a random distance is calculated that determines the spread distance. To achieve the less randomness there is a 80% chance for the random distance to be rerolled into something smaller when the first roll was deamed to high.
+This is done by calculating a random angle from the center which has a uniform chance (every degree is equally likely). Followed by calculating a random distance that determines the spread distance. To achieve the less randomness there is a 80% chance for the random distance to be rerolled into something smaller when the first roll was deamed to high.
 
 This can be seen here: [Calculating the angle](https://github.com/RustyPrime/AcerolaJam0_Asymberration/blob/main/Scripts/Player1.gd#L115-L116)
 
@@ -83,3 +79,4 @@ However errors/crashes might occur, as this is actually a bug but left in on pur
 
 ## Known issues
 - Sometimes overview player can not see what they spawned or the ground player is desyncing (workaround: both players need to restart the game)
+- When playing the web version and your view keeps going to the right -> use the fullscreen button, that should fix it. This seems to be a bug in the Godot Engine.
