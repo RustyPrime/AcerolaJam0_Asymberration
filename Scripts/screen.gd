@@ -9,6 +9,9 @@ signal has_finished
 @export var interactText : String
 @export var doneText : String
 
+@onready var subviewPort : SubViewport = $screen/SubViewport
+@onready var screenMeshInstance : MeshInstance3D = $screen/MeshInstance3D
+
 @onready var screenView : ScreenView = $screen/SubViewport/ScreenView
 @onready var successSound : AudioStreamPlayer3D = $SuccessSound
 
@@ -28,7 +31,15 @@ var progress : float = 0
 func _ready():
 	SetInitialText()
 	currentState = state.ready
+	RenderingServer.frame_post_draw.connect(_on_frame_post_draw)
 
+func _on_frame_post_draw():
+	var viewPortTexture = subviewPort.get_texture()
+	var material : StandardMaterial3D = StandardMaterial3D.new()
+	material.albedo_texture = viewPortTexture
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	screenMeshInstance.set_surface_override_material(0, material)
+	RenderingServer.frame_post_draw.disconnect(_on_frame_post_draw)
 
 func SetInitialText():
 	screenView.SetLabelText(initialText)
