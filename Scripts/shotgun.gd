@@ -9,5 +9,8 @@ func shoot():
 	shotgunAudio.play()
 	shotgunAnimation.set("parameters/conditions/shot", true)
 	shotgunAnimation.call_deferred("set", "parameters/conditions/shot", false)
-	await get_tree().create_timer(0.4).timeout
+	get_tree().create_timer(0.4).timeout.connect(play_cocking_audio)
+	
+
+func play_cocking_audio():
 	cockingAudio.play()

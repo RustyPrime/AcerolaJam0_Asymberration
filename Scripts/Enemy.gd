@@ -61,13 +61,15 @@ func DoDamage(damage):
 	health -= damage
 
 	material.albedo_color = Color.WHITE
-	await get_tree().create_timer(0.1).timeout
-	material.albedo_color = originalMaterialColor
+	get_tree().create_timer(0.1).timeout.connect(_reset_color)
+	
 
 	if health <= 0:
 		health = 0
 		Die()
 	
+func _reset_color():
+	material.albedo_color = originalMaterialColor
 
 func Die():
 	if destroying: 

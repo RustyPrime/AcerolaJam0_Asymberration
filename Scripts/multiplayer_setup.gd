@@ -24,13 +24,13 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 	if OS.has_feature("windows"):
 		if OS.has_environment("COMPUTERNAME"):
-			ip_adress = IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)
+			ip_adress = IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),IP.TYPE_IPV4)
 	elif OS.has_feature("x11"):
 		if OS.has_environment("HOSTNAME"):
-			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),IP.TYPE_IPV4)
 	elif OS.has_feature("OSX"):
 		if OS.has_environment("HOSTNAME"):
-			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+			ip_adress = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),IP.TYPE_IPV4)
 
 	portField.text = str(port)
 	startButton.hide()

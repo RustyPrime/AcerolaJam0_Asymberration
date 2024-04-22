@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/pre_main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://Textures/shotgun_icon.png"
 
+[audio]
+
+driver/mix_rate.web=44100
+
 [autoload]
 
 GameManager="*res://Scripts/GameManager.gd"
@@ -86,6 +90,8 @@ interact={
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
 global_illumination/gi/use_half_resolution=true
 occlusion_culling/use_occlusion_culling=true
+lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=3
+lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=3

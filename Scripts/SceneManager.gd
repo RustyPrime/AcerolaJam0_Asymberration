@@ -69,11 +69,14 @@ func _ready():
 		tier2timer.timeout.connect(_spawntimer_timeout.bind(2))
 		tier3timer.timeout.connect(_spawntimer_timeout.bind(3))
 		tier4timer.timeout.connect(_spawntimer_timeout.bind(4))
-		await get_tree().create_timer(5).timeout
-		tier1timer.start()
-		tier2timer.start()
-		tier3timer.start()
-		tier4timer.start()
+		get_tree().create_timer(5).timeout.connect(_spawntimer_start)
+		
+
+func _spawntimer_start():
+	tier1timer.start()
+	tier2timer.start()
+	tier3timer.start()
+	tier4timer.start()
 		
 				
 # singleplayer only
@@ -230,9 +233,11 @@ func PlayerOneWon():
 func ChallangeCompleted():
 	completedChallangesCounter += 1
 	if completedChallangesCounter >= 4:
-		await get_tree().create_timer(1).timeout
-		PlayerOneWon.rpc()
+		get_tree().create_timer(1).timeout.connect(SendPlayerOneWonRPC)
+		
 
+func SendPlayerOneWonRPC():
+	PlayerOneWon.rpc()
 
 func _on_back_to_main_pressed():
 	GameManager.reset()

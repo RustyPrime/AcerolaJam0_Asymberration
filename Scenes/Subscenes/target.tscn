@@ -17,8 +17,14 @@ script = ExtResource("1_ap4ri")
 [node name="easel" parent="." instance=ExtResource("1_epqim")]
 transform = Transform3D(1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, -1.31651, 2.51544e-15, 5.75466e-08)
 
+[node name="Easel" parent="easel" index="0"]
+layers = 524288
+
 [node name="target" parent="." instance=ExtResource("1_rmduy")]
 transform = Transform3D(0.99744, -0.0715149, 3.23793e-09, 0.0715149, 0.99744, -3.01409e-09, -3.01409e-09, 3.23793e-09, 1, -1.31651, 2.51544e-15, 5.75466e-08)
+
+[node name="Target" parent="target" index="0"]
+layers = 524288
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, -2.57868, 4.92705e-15, 1.12718e-07)
@@ -39,3 +45,6 @@ shape = SubResource("CylinderShape3D_he1uq")
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="easel"]
+[editable path="target"]
